@@ -683,6 +683,58 @@ p:last-child { margin-bottom: 0; }
   transition: var(--transition);
 }
 .service-card-link:hover { gap: 0.6rem; color: var(--green-400); }
+a.service-card { text-decoration: none; color: inherit; }
+
+/* ---- Pillar process blocks ---- */
+.pillar-process {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.pillar-block {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+.pillar-num {
+  font-family: var(--font-serif);
+  font-size: 3.75rem;
+  font-weight: 700;
+  color: var(--green-100);
+  line-height: 1;
+  text-align: right;
+  padding-top: 0.125rem;
+  user-select: none;
+}
+.pillar-block-content h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--green-800);
+  margin-bottom: 0.75rem;
+  font-family: var(--font-serif);
+}
+.pillar-block-content p { color: var(--gray-600); line-height: 1.85; font-size: 0.9375rem; }
+.pillar-block-content p + p { margin-top: 0.7rem; }
+@media (max-width: 600px) {
+  .pillar-block { grid-template-columns: 1fr; gap: 0.5rem; }
+  .pillar-num { font-size: 2.5rem; text-align: left; }
+}
+
+/* ---- Pillar FAQ ---- */
+.pillar-faq { display: flex; flex-direction: column; max-width: 860px; margin: 0 auto; }
+.pillar-faq-item { border-bottom: 1px solid var(--border-light); padding: 1.75rem 0; }
+.pillar-faq-item:first-child { border-top: 1px solid var(--border-light); }
+.pillar-faq-q {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--green-800);
+  margin-bottom: 0.7rem;
+  font-family: var(--font-serif);
+}
+.pillar-faq-a { font-size: 0.9375rem; color: var(--gray-600); line-height: 1.8; }
 
 /* ---- Feature Block ---- */
 .feature-block {

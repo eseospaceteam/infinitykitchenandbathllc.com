@@ -736,6 +736,11 @@ a.service-card { text-decoration: none; color: inherit; }
 }
 .pillar-faq-a { font-size: 0.9375rem; color: var(--gray-600); line-height: 1.8; }
 
+/* ---- Universal design / bullet list ---- */
+.ud-list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-direction: column; gap: 0.9rem; }
+.ud-list li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.9375rem; color: var(--gray-600); line-height: 1.6; }
+.ud-list li::before { content: ''; display: block; width: 9px; height: 9px; min-width: 9px; border-radius: 50%; background: var(--gold); margin-top: 6px; }
+
 /* ---- Feature Block ---- */
 .feature-block {
   display: grid;

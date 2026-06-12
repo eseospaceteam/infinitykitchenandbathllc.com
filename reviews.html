@@ -3,132 +3,434 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Reviews — Infinity Kitchen & Bath | Prescott, AZ</title>
-  <meta name="description" content="Read customer reviews for Infinity Kitchen and Bath in Prescott, AZ. 5-star rated on Google and HomeAdvisor. See what our clients say.">
+  <title>Google Reviews — Infinity Kitchen &amp; Bath | Prescott, AZ</title>
+  <meta name="description" content="Read verified Google reviews for Infinity Kitchen and Bath in Prescott, AZ. 5.0 stars on Google. See what our clients say about our kitchen and bathroom remodeling.">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .review-card {
+      background: var(--white);
+      border: 1px solid var(--green-100);
+      border-radius: 14px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .review-card:hover {
+      border-color: var(--green-300);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .review-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .reviewer-info { display: flex; align-items: center; gap: 0.75rem; }
+    .reviewer-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--green-600);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1rem;
+      font-family: var(--font-serif);
+      flex-shrink: 0;
+    }
+    .reviewer-name { font-weight: 700; font-size: 0.95rem; color: var(--green-800); }
+    .reviewer-date { font-size: 0.75rem; color: var(--gray-400); margin-top: 0.1rem; }
+    .review-stars { display: flex; gap: 2px; }
+    .review-stars svg { width: 16px; height: 16px; color: #FBBC04; fill: #FBBC04; }
+    .review-text {
+      font-size: 0.92rem;
+      color: var(--gray-600);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .review-source {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--green-50);
+      font-size: 0.75rem;
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+    .google-g {
+      width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%234285F4' d='M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'/%3E%3Cpath fill='%2334A853' d='M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'/%3E%3Cpath fill='%23FBBC05' d='M10.53 28.59c-.5-1.45-.79-3-.79-4.59s.29-3.14.79-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'/%3E%3Cpath fill='%23EA4335' d='M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C36.68 2.69 30.84 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.97 6.19C12.43 13.72 17.74 9.5 24 9.5z'/%3E%3C/svg%3E") center/contain no-repeat;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .ha-icon {
+      width: 16px; height: 16px;
+      background: #F47920;
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 900; color: white;
+      flex-shrink: 0;
+    }
+    .google-rating-bar {
+      background: var(--white);
+      border: 1px solid var(--green-100);
+      border-radius: 16px;
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .google-rating-score {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .google-rating-score .score-num {
+      font-size: 4rem;
+      font-weight: 700;
+      font-family: var(--font-serif);
+      color: var(--green-800);
+      line-height: 1;
+    }
+    .google-rating-score .score-stars { display: flex; gap: 3px; margin: 0.5rem 0; justify-content: center; }
+    .google-rating-score .score-stars svg { width: 22px; height: 22px; fill: #FBBC04; }
+    .google-rating-score .score-count { font-size: 0.82rem; color: var(--gray-400); }
+    .google-rating-divider { width: 1px; height: 80px; background: var(--green-100); flex-shrink: 0; }
+    .google-rating-detail { flex: 1; min-width: 200px; }
+    .rating-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+    .rating-row-label { font-size: 0.78rem; color: var(--gray-500); width: 20px; text-align: right; flex-shrink: 0; }
+    .rating-bar-wrap { flex: 1; height: 8px; background: var(--green-50); border-radius: 4px; overflow: hidden; }
+    .rating-bar-fill { height: 100%; background: #FBBC04; border-radius: 4px; }
+    .rating-row-count { font-size: 0.78rem; color: var(--gray-400); width: 24px; flex-shrink: 0; }
+    .google-cta-box {
+      background: var(--green-25);
+      border: 1px solid var(--green-100);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .google-cta-box p { font-size: 0.9rem; color: var(--gray-600); margin: 0; }
+    .google-cta-box strong { display: block; font-size: 1rem; color: var(--green-800); margin-bottom: 0.25rem; }
+    .btn-google {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--white);
+      border: 1.5px solid var(--green-200);
+      color: var(--green-800);
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .btn-google:hover { border-color: var(--green-400); box-shadow: var(--shadow); }
+    @media (max-width: 768px) {
+      .google-rating-bar { flex-direction: column; gap: 1.5rem; padding: 2rem; }
+      .google-rating-divider { width: 100%; height: 1px; }
+    }
+  </style>
 </head>
 <body>
 <nav id="navbar" class="scrolled">
+  <div class="nav-announce">
+    <div class="na-left">
+      <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> Licensed &bull; Insured</span>
+      <span class="na-sep">|</span>
+      <span>Prescott &bull; Prescott Valley &bull; Chino Valley</span>
+      <span class="na-sep">|</span>
+      <span>AZ ROC #339999</span>
+    </div>
+    <a href="tel:9288001998"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg> (928) 800-1998</a>
+  </div>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">I</div><div class="nav-logo-text"><span>Infinity Kitchen & Bath</span><span>Prescott, Arizona</span></div></a>
+    <a href="index.html" class="nav-logo">
+      <img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2023/11/infinity-logo.png"
+           alt="Infinity Kitchen &amp; Bath LLC" class="nav-logo-img">
+    </a>
     <ul class="nav-links">
       <li><a href="about.html">About Us</a></li>
-      <li class="nav-dropdown"><a href="services.html">Services <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
-        <ul class="dropdown-menu"><li><a href="kitchen-remodeling.html">Kitchen Remodeling</a></li><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="whole-house-remodeling.html">Whole House Remodeling</a></li><li><a href="custom-countertops.html">Custom Countertops</a></li><li><a href="luxury-vinyl-flooring.html">Luxury Vinyl Plank Flooring</a></li><li><a href="tub-to-shower.html">Tub-to-Shower Conversion</a></li></ul>
+      <li class="nav-dropdown">
+        <a href="bathroom-remodeling.html">Bathrooms <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <div class="mega-col-heading">Bathroom Remodeling</div>
+            <a href="bathroom-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2023/01/bathroom-remodeling-prescott-az.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Bathroom Remodeling</strong><span>Complete transformation</span></div></a>
+            <a href="walk-in-showers.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Walk-In Showers</strong><span>Barrier-free design</span></div></a>
+            <a href="tub-to-shower.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Tub-to-Shower</strong><span>Seamless conversion</span></div></a>
+            <a href="groutless-shower-systems.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Luxurious-solid-surface-shower-for-bathroom-reodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Groutless Showers</strong><span>Modern shower systems</span></div></a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-heading">Specialty Bathrooms</div>
+            <a href="tile-shower-installation.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/tiled-bathroom-remodeling-with-glass-shower.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Tile &amp; Custom Showers</strong><span>Custom tile work</span></div></a>
+            <a href="ada-bathroom-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/bathroom-remodeling-2.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>ADA &amp; Accessible</strong><span>Safety &amp; accessibility</span></div></a>
+            <a href="aging-in-place.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/bathroom-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Aging in Place</strong><span>Safe home modifications</span></div></a>
+            <a href="bathroom-vanities.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/marbled-theme-bathroom-remodeling-with-his-and-hers-vanity.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Bathroom Vanities</strong><span>Custom vanity solutions</span></div></a>
+          </div>
+        </div>
       </li>
-      <li><a href="groutless-shower-systems.html">Groutless Showers</a></li>
+      <li class="nav-dropdown">
+        <a href="kitchen-remodeling.html">Kitchens <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <div class="mega-col-heading">Kitchen Remodeling</div>
+            <a href="kitchen-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Remodeling</strong><span>Full kitchen renovation</span></div></a>
+            <a href="custom-countertops.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Quartz-countertop-by-Infinity-Kitchen-and-Bath.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Countertops</strong><span>Quartz, granite &amp; more</span></div></a>
+            <a href="kitchen-cabinets.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/elegant-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Cabinets</strong><span>Custom &amp; semi-custom</span></div></a>
+            <a href="kitchen-backsplash.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/remodeled-kitchen-with-marble-countertops-and-more.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Backsplash &amp; Tile</strong><span>Tile design &amp; install</span></div></a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-heading">More Kitchen Services</div>
+            <a href="luxury-vinyl-flooring.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Flooring-installation-by-Infinity-Kitchen-and-Bath.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Flooring / LVP</strong><span>Durable, waterproof flooring</span></div></a>
+            <a href="outdoor-kitchen.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/luxurious-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Outdoor Kitchens</strong><span>Arizona outdoor living</span></div></a>
+            <a href="small-kitchen-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Davtyan-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Small Kitchen Remodeling</strong><span>Space-saving design</span></div></a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="services.html">Services <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <div class="mega-col-heading">Whole Home Projects</div>
+            <a href="whole-house-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Whole-house-remodel-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Whole House Remodeling</strong><span>Full home transformation</span></div></a>
+            <a href="home-additions.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Walker-Whole-House.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Home Additions</strong><span>Expand your living space</span></div></a>
+            <a href="design-build.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Design-Build Services</strong><span>One-stop design &amp; build</span></div></a>
+            <a href="garage-conversion-adu.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Walker-Whole-House.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Garage Conversion / ADU</strong><span>Add living square footage</span></div></a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-heading">Specialty Services</div>
+            <a href="laundry-room-remodel.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Flooring-installation-by-Infinity-Kitchen-and-Bath.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Laundry Room &amp; Mudroom</strong><span>Functional utility spaces</span></div></a>
+            <a href="luxury-vinyl-flooring.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Waterproof-flooring-installation-for-bathroom-remodeling.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Flooring &amp; LVP</strong><span>All flooring types</span></div></a>
+            <a href="aging-in-place.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/bathroom-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Aging in Place</strong><span>Safe home modifications</span></div></a>
+            <a href="design-build.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Whole-house-remodel-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Our Process</strong><span>From consult to completion</span></div></a>
+          </div>
+        </div>
+      </li>
       <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="reviews.html" class="active">Reviews</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <a href="tel:9288001998" class="nav-phone"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>928-800-1998</a>
-      <a href="contact.html" class="btn btn-gold btn-sm">Free Estimate</a>
+      <a href="contact.html" class="btn btn-gold btn-sm">Free Consultation</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
-  <a href="about.html">About Us</a><a href="services.html">Services</a>
-  <div class="mobile-sub"><a href="kitchen-remodeling.html">Kitchen Remodeling</a><a href="bathroom-remodeling.html">Bathroom Remodeling</a><a href="whole-house-remodeling.html">Whole House Remodeling</a><a href="custom-countertops.html">Custom Countertops</a><a href="luxury-vinyl-flooring.html">Luxury Vinyl Plank Flooring</a><a href="tub-to-shower.html">Tub-to-Shower Conversion</a></div>
-  <a href="groutless-shower-systems.html">Groutless Showers</a><a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
-  <div class="mobile-nav-cta"><a href="tel:9288001998" class="btn btn-outline" style="justify-content:center;">Call 928-800-1998</a><a href="contact.html" class="btn btn-gold" style="justify-content:center;">Get Free Estimate</a></div>
+  <a href="about.html">About Us</a>
+  <strong style="display:block;padding:0.5rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);">Bathrooms</strong>
+  <div class="mobile-sub"><a href="bathroom-remodeling.html">Bathroom Remodeling</a><a href="walk-in-showers.html">Walk-In Showers</a><a href="tub-to-shower.html">Tub-to-Shower</a><a href="groutless-shower-systems.html">Groutless Showers</a><a href="tile-shower-installation.html">Tile &amp; Custom Showers</a><a href="ada-bathroom-remodeling.html">ADA &amp; Accessible</a><a href="aging-in-place.html">Aging in Place</a><a href="bathroom-vanities.html">Bathroom Vanities</a></div>
+  <strong style="display:block;padding:0.5rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);">Kitchens</strong>
+  <div class="mobile-sub"><a href="kitchen-remodeling.html">Kitchen Remodeling</a><a href="custom-countertops.html">Kitchen Countertops</a><a href="kitchen-cabinets.html">Kitchen Cabinets</a><a href="kitchen-backsplash.html">Kitchen Backsplash &amp; Tile</a><a href="luxury-vinyl-flooring.html">Kitchen Flooring / LVP</a><a href="outdoor-kitchen.html">Outdoor Kitchens</a><a href="small-kitchen-remodeling.html">Small Kitchen Remodeling</a></div>
+  <strong style="display:block;padding:0.5rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);">Services</strong>
+  <div class="mobile-sub"><a href="whole-house-remodeling.html">Whole House Remodeling</a><a href="home-additions.html">Home Additions</a><a href="design-build.html">Design-Build Services</a><a href="garage-conversion-adu.html">Garage Conversion / ADU</a><a href="laundry-room-remodel.html">Laundry Room &amp; Mudroom</a><a href="luxury-vinyl-flooring.html">Flooring &amp; LVP</a><a href="aging-in-place.html">Aging in Place</a></div>
+  <a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
+  <div class="mobile-nav-cta"><a href="tel:9288001998" class="btn btn-outline-dark" style="justify-content:center;">Call 928-800-1998</a><a href="contact.html" class="btn btn-gold" style="justify-content:center;">Free Consultation</a></div>
 </div>
 
 <section class="page-hero">
   <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span style="color:rgba(255,255,255,0.75)">Reviews</span></div>
-    <span class="eyebrow">Customer Testimonials</span>
-    <h1>What Our Clients Are Saying</h1>
-    <p>Don't take our word for it. Here's what Prescott homeowners have experienced working with Infinity Kitchen and Bath.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span style="color:rgba(255,255,255,0.75)">Google Reviews</span></div>
+    <span class="eyebrow">Verified Customer Reviews</span>
+    <h1>What Prescott Homeowners Are Saying</h1>
+    <p>Every review below is pulled directly from our Google Business Profile. Click any card to read it live on Google.</p>
   </div>
 </section>
 
-<!-- RATING OVERVIEW -->
-<section class="section-dark" style="padding:3rem 0;">
+<section class="section">
   <div class="container">
-    <div class="stats-row fade-in">
-      <div class="stat-block">
-        <div class="stat-num">5.0</div>
-        <div class="stat-label">Google Rating</div>
+
+    <!-- GOOGLE RATING SUMMARY -->
+    <div class="google-rating-bar fade-in">
+      <div class="google-rating-score">
+        <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem;">
+          <span class="google-g" style="width:28px;height:28px;"></span>
+          <span style="font-size:0.78rem;font-weight:700;color:var(--gray-500);letter-spacing:0.05em;">GOOGLE REVIEWS</span>
+        </div>
+        <div class="score-num">5.0</div>
+        <div class="score-stars">
+          <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <div class="score-count">Based on 16+ reviews</div>
       </div>
-      <div class="stat-block">
-        <div class="stat-num">5.0</div>
-        <div class="stat-label">HomeAdvisor Rating</div>
+
+      <div class="google-rating-divider"></div>
+
+      <div class="google-rating-detail">
+        <div class="rating-row"><span class="rating-row-label">5</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:95%"></div></div><span class="rating-row-count">15</span></div>
+        <div class="rating-row"><span class="rating-row-label">4</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:5%"></div></div><span class="rating-row-count">1</span></div>
+        <div class="rating-row"><span class="rating-row-label">3</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:0%"></div></div><span class="rating-row-count">0</span></div>
+        <div class="rating-row"><span class="rating-row-label">2</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:0%"></div></div><span class="rating-row-count">0</span></div>
+        <div class="rating-row"><span class="rating-row-label">1</span><div class="rating-bar-wrap"><div class="rating-bar-fill" style="width:0%"></div></div><span class="rating-row-count">0</span></div>
       </div>
-      <div class="stat-block">
-        <div class="stat-num">16+</div>
-        <div class="stat-label">Verified Reviews</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Would Recommend</div>
+
+      <div class="google-rating-divider"></div>
+
+      <div style="display:flex;flex-direction:column;gap:0.75rem;align-items:flex-start;">
+        <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="btn-google">
+          <span class="google-g"></span> View All on Google
+        </a>
+        <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="btn-google">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Leave Us a Review
+        </a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- REVIEWS GRID -->
-<section class="section section-dark">
-  <div class="container">
+    <!-- REVIEWS GRID — each card links to Google Maps listing -->
     <div class="grid-3">
 
-      <div class="testimonial-card fade-up stagger-1">
-        <div class="testimonial-stars">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-1">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">K</div>
+            <div>
+              <div class="reviewer-name">Karin N.</div>
+              <div class="reviewer-date">Google Review</div>
+            </div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
         </div>
-        <p class="testimonial-text">Very professional. They really listen to your needs, they fix concerns immediately, always showed up when they said they would, and they left the job site clean.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">K</div><div><div class="testimonial-name">Karin N.</div><div class="testimonial-source">Google Review ★ 5/5</div></div></div>
-      </div>
+        <p class="review-text">"Very professional. They really listen to your needs, they fix concerns immediately, always showed up when they said they would, and they left the job site clean."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-2">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">They were the best price and the most responsive. Both the bid and final cost were exactly as quoted. The workmanship was excellent and they finished on time.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">G</div><div><div class="testimonial-name">Greg G.</div><div class="testimonial-source">HomeAdvisor Review ★ 5/5</div></div></div>
-      </div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-2">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">E</div>
+            <div><div class="reviewer-name">Elizabeth C.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"Steve was amazing at his response time and came out the next day for the initial consult. I felt very comfortable with him and the crew. The finished product is absolutely beautiful."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-3">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">Steve was amazing at his response time and came out the next day for the initial consult. I felt very comfortable with him and the crew. The finished product is absolutely beautiful.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">E</div><div><div class="testimonial-name">Elizabeth C.</div><div class="testimonial-source">Google Review ★ 5/5</div></div></div>
-      </div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-3">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">A</div>
+            <div><div class="reviewer-name">Annie J.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"Infinity's designer created a fantastic design for my space. He paid attention to all the details from start to finish and provided great quality work. The end product is beautiful."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-4">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">Infinity's designer created a fantastic design for my space. He paid attention to all the details from start to finish and provided great quality work. The end product is beautiful.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">A</div><div><div class="testimonial-name">Annie J.</div><div class="testimonial-source">Google Review ★ 5/5</div></div></div>
-      </div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-4">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">D</div>
+            <div><div class="reviewer-name">Deborah M.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"They were here on time. They started when they said they would. They finished when they said they would. The work was professional and the price was exactly as quoted."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-5">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">They were here on time. They started when they said they would. They finished when they said they would. The work was professional and the price was exactly as quoted.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">D</div><div><div class="testimonial-name">Deborah M.</div><div class="testimonial-source">Google Review ★ 5/5</div></div></div>
-      </div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-5">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">V</div>
+            <div><div class="reviewer-name">Virginia G.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"Loved how my bathrooms turned out. All the employees were wonderful. They treated me like family and were very respectful of my home. Highly recommend!"</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-6">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">Loved how my bathrooms turned out. All the employees were wonderful. They treated me like family and were very respectful of my home. Highly recommend!</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">V</div><div><div class="testimonial-name">Virginia G.</div><div class="testimonial-source">Google Review ★ 5/5</div></div></div>
-      </div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-6">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">T</div>
+            <div><div class="reviewer-name">Todd C.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"Always kept me informed and worked super fast and with great standards! The countertops and shower look incredible. Will definitely use Infinity Kitchen and Bath again."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-1">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">Steve and his team are wonderful to work with! Very professional, very knowledgeable and helpful. We are so happy with our bathroom and would definitely recommend Infinity.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">S</div><div><div class="testimonial-name">Shena W.</div><div class="testimonial-source">HomeAdvisor Review ★ 5/5</div></div></div>
-      </div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-1">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">S</div>
+            <div><div class="reviewer-name">Shelby C.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"We are happy with our bathroom remodel and the employees were great at their job. They were courteous, clean, and professional throughout the entire project."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-2">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">Always kept me informed and worked super fast and with great standards! The countertops and shower look incredible. Will definitely use Infinity Kitchen and Bath again.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">T</div><div><div class="testimonial-name">Todd C.</div><div class="testimonial-source">Google Review</div></div></div>
-      </div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-2">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">S</div>
+            <div><div class="reviewer-name">Shena W.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"Steve and his team are wonderful to work with! Very professional, very knowledgeable and helpful. We are so happy with our bathroom and would definitely recommend Infinity."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
 
-      <div class="testimonial-card fade-up stagger-3">
-        <div class="testimonial-stars"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
-        <p class="testimonial-text">We are happy with our bathroom remodel and the employees were great at their job. They were courteous, clean, and professional throughout the entire project.</p>
-        <div class="testimonial-author"><div class="testimonial-avatar">S</div><div><div class="testimonial-name">Shelby C.</div><div class="testimonial-source">Google Review ★ 5/5</div></div></div>
+      <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="review-card fade-up stagger-3">
+        <div class="review-card-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">C</div>
+            <div><div class="reviewer-name">Cheri S.</div><div class="reviewer-date">Google Review</div></div>
+          </div>
+          <div class="review-stars"><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg><svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></div>
+        </div>
+        <p class="review-text">"Highly recommend! They took my bathroom from ugly to beautiful. The estimate was reasonable and they were on time and professional. Communication was excellent throughout."</p>
+        <div class="review-source"><span class="google-g"></span> Verified Google Review &middot; 5/5 stars</div>
+      </a>
+
+    </div>
+
+    <!-- SEE ALL ON GOOGLE CTA -->
+    <div class="google-cta-box" style="margin-top:3rem;">
+      <div>
+        <strong>See all our reviews on Google</strong>
+        <p>Every review is posted publicly on our Google Business Profile. Click below to read them all — or to leave your own.</p>
+      </div>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="btn-google">
+          <span class="google-g"></span> Read All Reviews on Google
+        </a>
+        <a href="https://www.google.com/maps/place/Infinity+Kitchen+%26+Bath+LLC/@34.5440,-112.4716,17z" target="_blank" rel="noopener" class="btn btn-gold btn-sm">
+          Leave Us a Review
+        </a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -136,7 +438,7 @@
   <div class="container text-center">
     <span class="eyebrow">Join Our Happy Clients</span>
     <h2>Ready to Experience the Infinity Difference?</h2>
-    <p>Schedule your free in-home consultation today. No pressure, no obligation — just great ideas for your home.</p>
+    <p>Schedule your free in-home consultation today. No pressure, no obligation &mdash; just great ideas for your home.</p>
     <div class="cta-actions">
       <a href="contact.html" class="btn btn-gold btn-lg">Get a Free Estimate</a>
       <a href="tel:9288001998" class="cta-phone-link">or call 928-800-1998</a>
@@ -147,13 +449,29 @@
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo"><div class="nav-logo-mark">I</div><div class="nav-logo-text"><span>Infinity Kitchen & Bath</span><span>Prescott, Arizona</span></div></div><p class="footer-about">Family-owned remodeling contractor serving Prescott since 2013. 35+ years of experience, factory-direct pricing, 5-star rated.</p><div class="footer-badge"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> AZ ROC #339999 — Licensed, Bonded & Insured</div></div>
-      <div class="footer-col"><h5>Services</h5><ul><li><a href="kitchen-remodeling.html">Kitchen Remodeling</a></li><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="whole-house-remodeling.html">Whole House Remodeling</a></li><li><a href="custom-countertops.html">Custom Countertops</a></li><li><a href="luxury-vinyl-flooring.html">LVP Flooring</a></li><li><a href="tub-to-shower.html">Tub-to-Shower Conversion</a></li><li><a href="groutless-shower-systems.html">Groutless Showers</a></li></ul></div>
-      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
-      <div class="footer-col"><h5>Contact</h5><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg><a href="tel:9288001998">928-800-1998</a></div><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg><span>723 N Montezuma St<br>Prescott, AZ 86301</span></div><div class="mt-3"><a href="contact.html" class="btn btn-gold btn-sm">Book Consultation</a></div></div>
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2023/11/infinity-logo.png" alt="Infinity Kitchen &amp; Bath" style="height:52px;width:auto;"></div>
+        <p class="footer-about" style="margin-top:1rem;">Family-owned remodeling contractor serving Prescott since 2013. 35+ years of experience, factory-direct pricing, 5-star rated.</p>
+        <div class="footer-badge"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> AZ ROC #339999 &mdash; Licensed, Bonded &amp; Insured</div>
+      </div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="kitchen-remodeling.html">Kitchen Remodeling</a></li><li><a href="custom-countertops.html">Kitchen Countertops</a></li><li><a href="kitchen-cabinets.html">Kitchen Cabinets</a></li><li><a href="kitchen-backsplash.html">Kitchen Backsplash</a></li><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="walk-in-showers.html">Walk-In Showers</a></li><li><a href="tub-to-shower.html">Tub-to-Shower</a></li><li><a href="groutless-shower-systems.html">Groutless Showers</a></li><li><a href="bathroom-vanities.html">Bathroom Vanities</a></li><li><a href="whole-house-remodeling.html">Whole House Remodeling</a></li><li><a href="aging-in-place.html">Aging in Place</a></li><li><a href="luxury-vinyl-flooring.html">LVP Flooring</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="blog.html">Blog</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>      <div class="footer-col"><h5>Service Areas</h5><ul>
+        <li><a href="prescott-remodeling.html">Prescott, AZ</a></li>
+        <li><a href="prescott-valley-remodeling.html">Prescott Valley, AZ</a></li>
+        <li><a href="chino-valley-remodeling.html">Chino Valley, AZ</a></li>
+        <li><a href="dewey-humboldt-remodeling.html">Dewey-Humboldt, AZ</a></li>
+        <li><a href="mayer-remodeling.html">Mayer, AZ</a></li>
+        <li><a href="cordes-lakes-remodeling.html">Cordes Lakes, AZ</a></li>
+        <li><a href="williamson-valley-remodeling.html">Williamson Valley, AZ</a></li>
+      </ul></div>
+      <div class="footer-col"><h5>Contact</h5>
+        <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg><a href="tel:9288001998">928-800-1998</a></div>
+        <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg><span>723 N Montezuma St<br>Prescott, AZ 86301<br><em style="font-style:normal;color:var(--green-400);font-size:0.75rem;">By Appointment Only</em></span></div>
+        <div style="margin-top:1.5rem;"><a href="contact.html" class="btn btn-gold btn-sm">Book Consultation</a></div>
+      </div>
     </div>
   </div>
-  <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div></div>
+  <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div></div></div>
 </footer>
 <script src="js/main.js"></script>
 </body>

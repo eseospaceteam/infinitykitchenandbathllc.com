@@ -3,120 +3,345 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us — Infinity Kitchen & Bath | Prescott, AZ</title>
-  <meta name="description" content="Contact Infinity Kitchen and Bath in Prescott, AZ. Call 928-800-1998 or request a free in-home consultation online. ROC #339999.">
+  <title>Contact Us &amp; Showroom — Infinity Kitchen &amp; Bath | Prescott, AZ</title>
+  <meta name="description" content="Visit the Infinity Kitchen &amp; Bath showroom at 723 N Montezuma St, Prescott, AZ. Showroom consultations by appointment. Call 928-800-1998 or request a free estimate online.">
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .showroom-card {
+      background: var(--white);
+      border: 1.5px solid var(--green-200);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .showroom-card-header {
+      background: var(--green-600);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .showroom-card-header-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .showroom-card-header h3 { color: var(--white); margin: 0; font-size: 1.15rem; }
+    .showroom-card-header span { color: rgba(255,255,255,0.7); font-size: 0.82rem; }
+    .showroom-card-body { padding: 2rem; }
+    .showroom-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .showroom-detail:last-child { margin-bottom: 0; }
+    .showroom-detail svg { color: var(--green-500); flex-shrink: 0; margin-top: 2px; }
+    .showroom-detail-text strong { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-500); margin-bottom: 0.2rem; }
+    .showroom-detail-text p { font-size: 0.95rem; color: var(--green-800); margin: 0; font-weight: 500; }
+    .appt-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--green-50);
+      border: 1.5px solid var(--green-200);
+      border-radius: 100px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--green-600);
+      letter-spacing: 0.05em;
+      margin-top: 0.5rem;
+    }
+    .appt-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--green-500);
+      border-radius: 50%;
+    }
+    .map-section { height: 420px; position: relative; }
+    .map-section iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .map-address-overlay {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: var(--white);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-xl);
+      max-width: 240px;
+      border: 1px solid var(--green-100);
+    }
+    .map-address-overlay strong { display: block; font-size: 0.85rem; font-weight: 700; color: var(--green-800); margin-bottom: 0.25rem; }
+    .map-address-overlay p { font-size: 0.82rem; color: var(--gray-500); margin: 0; }
+    .contact-ways {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .contact-way {
+      background: var(--white);
+      border: 1px solid var(--green-100);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+    }
+    .contact-way:hover { border-color: var(--green-300); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .contact-way-icon {
+      width: 56px; height: 56px;
+      background: var(--green-50);
+      border: 1.5px solid var(--green-100);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green-500);
+      margin: 0 auto 1.25rem;
+    }
+    .contact-way h4 { font-size: 1rem; margin-bottom: 0.4rem; color: var(--green-800); }
+    .contact-way p { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 1rem; }
+    .contact-way a.way-link { font-size: 0.95rem; font-weight: 700; color: var(--green-600); transition: var(--transition); }
+    .contact-way a.way-link:hover { color: var(--green-500); }
+    @media (max-width: 768px) {
+      .contact-ways { grid-template-columns: 1fr; }
+      .map-section { height: 300px; }
+      .map-address-overlay { max-width: 180px; padding: 0.75rem 1rem; }
+    }
+  </style>
 </head>
 <body>
+
 <nav id="navbar" class="scrolled">
+  <div class="nav-announce">
+    <div class="na-left">
+      <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> Licensed &bull; Insured</span>
+      <span class="na-sep">|</span>
+      <span>Prescott &bull; Prescott Valley &bull; Chino Valley</span>
+      <span class="na-sep">|</span>
+      <span>AZ ROC #339999</span>
+    </div>
+    <a href="tel:9288001998"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg> (928) 800-1998</a>
+  </div>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><div class="nav-logo-mark">I</div><div class="nav-logo-text"><span>Infinity Kitchen & Bath</span><span>Prescott, Arizona</span></div></a>
+    <a href="index.html" class="nav-logo">
+      <img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2023/11/infinity-logo.png"
+           alt="Infinity Kitchen &amp; Bath LLC" class="nav-logo-img">
+    </a>
     <ul class="nav-links">
       <li><a href="about.html">About Us</a></li>
-      <li class="nav-dropdown"><a href="services.html">Services <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
-        <ul class="dropdown-menu"><li><a href="kitchen-remodeling.html">Kitchen Remodeling</a></li><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="whole-house-remodeling.html">Whole House Remodeling</a></li><li><a href="custom-countertops.html">Custom Countertops</a></li><li><a href="luxury-vinyl-flooring.html">Luxury Vinyl Plank Flooring</a></li><li><a href="tub-to-shower.html">Tub-to-Shower Conversion</a></li></ul>
+      <li class="nav-dropdown">
+        <a href="bathroom-remodeling.html">Bathrooms <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <div class="mega-col-heading">Bathroom Remodeling</div>
+            <a href="bathroom-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2023/01/bathroom-remodeling-prescott-az.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Bathroom Remodeling</strong><span>Complete transformation</span></div></a>
+            <a href="walk-in-showers.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Walk-In Showers</strong><span>Barrier-free design</span></div></a>
+            <a href="tub-to-shower.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Tub-to-Shower</strong><span>Seamless conversion</span></div></a>
+            <a href="groutless-shower-systems.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Luxurious-solid-surface-shower-for-bathroom-reodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Groutless Showers</strong><span>Modern shower systems</span></div></a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-heading">Specialty Bathrooms</div>
+            <a href="tile-shower-installation.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/tiled-bathroom-remodeling-with-glass-shower.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Tile &amp; Custom Showers</strong><span>Custom tile work</span></div></a>
+            <a href="ada-bathroom-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/bathroom-remodeling-2.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>ADA &amp; Accessible</strong><span>Safety &amp; accessibility</span></div></a>
+            <a href="aging-in-place.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/bathroom-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Aging in Place</strong><span>Safe home modifications</span></div></a>
+            <a href="bathroom-vanities.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/marbled-theme-bathroom-remodeling-with-his-and-hers-vanity.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Bathroom Vanities</strong><span>Custom vanity solutions</span></div></a>
+          </div>
+        </div>
       </li>
-      <li><a href="groutless-shower-systems.html">Groutless Showers</a></li>
+      <li class="nav-dropdown">
+        <a href="kitchen-remodeling.html">Kitchens <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <div class="mega-col-heading">Kitchen Remodeling</div>
+            <a href="kitchen-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Remodeling</strong><span>Full kitchen renovation</span></div></a>
+            <a href="custom-countertops.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Quartz-countertop-by-Infinity-Kitchen-and-Bath.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Countertops</strong><span>Quartz, granite &amp; more</span></div></a>
+            <a href="kitchen-cabinets.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/elegant-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Cabinets</strong><span>Custom &amp; semi-custom</span></div></a>
+            <a href="kitchen-backsplash.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/remodeled-kitchen-with-marble-countertops-and-more.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Backsplash &amp; Tile</strong><span>Tile design &amp; install</span></div></a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-heading">More Kitchen Services</div>
+            <a href="luxury-vinyl-flooring.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Flooring-installation-by-Infinity-Kitchen-and-Bath.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Kitchen Flooring / LVP</strong><span>Durable, waterproof flooring</span></div></a>
+            <a href="outdoor-kitchen.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/luxurious-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Outdoor Kitchens</strong><span>Arizona outdoor living</span></div></a>
+            <a href="small-kitchen-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Davtyan-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Small Kitchen Remodeling</strong><span>Space-saving design</span></div></a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <a href="services.html">Services <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <div class="mega-col-heading">Whole Home Projects</div>
+            <a href="whole-house-remodeling.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Whole-house-remodel-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Whole House Remodeling</strong><span>Full home transformation</span></div></a>
+            <a href="home-additions.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Walker-Whole-House.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Home Additions</strong><span>Expand your living space</span></div></a>
+            <a href="design-build.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Design-Build Services</strong><span>One-stop design &amp; build</span></div></a>
+            <a href="garage-conversion-adu.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Walker-Whole-House.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Garage Conversion / ADU</strong><span>Add living square footage</span></div></a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-col-heading">Specialty Services</div>
+            <a href="laundry-room-remodel.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Flooring-installation-by-Infinity-Kitchen-and-Bath.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Laundry Room &amp; Mudroom</strong><span>Functional utility spaces</span></div></a>
+            <a href="luxury-vinyl-flooring.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Waterproof-flooring-installation-for-bathroom-remodeling.png" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Flooring &amp; LVP</strong><span>All flooring types</span></div></a>
+            <a href="aging-in-place.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/bathroom-remodeling.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Aging in Place</strong><span>Safe home modifications</span></div></a>
+            <a href="design-build.html" class="mega-item"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Whole-house-remodel-by-Infinity-Kitchen-and-Bath.jpg" alt="" class="mega-thumb" loading="lazy"><div class="mega-item-text"><strong>Our Process</strong><span>From consult to completion</span></div></a>
+          </div>
+        </div>
+      </li>
       <li><a href="gallery.html">Gallery</a></li>
       <li><a href="reviews.html">Reviews</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <a href="tel:9288001998" class="nav-phone"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>928-800-1998</a>
-      <a href="contact.html" class="btn btn-gold btn-sm">Free Estimate</a>
+      <a href="contact.html" class="btn btn-gold btn-sm">Free Consultation</a>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-nav" id="mobileNav">
-  <a href="about.html">About Us</a><a href="services.html">Services</a>
-  <div class="mobile-sub"><a href="kitchen-remodeling.html">Kitchen Remodeling</a><a href="bathroom-remodeling.html">Bathroom Remodeling</a><a href="whole-house-remodeling.html">Whole House Remodeling</a><a href="custom-countertops.html">Custom Countertops</a><a href="luxury-vinyl-flooring.html">Luxury Vinyl Plank Flooring</a><a href="tub-to-shower.html">Tub-to-Shower Conversion</a></div>
-  <a href="groutless-shower-systems.html">Groutless Showers</a><a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
-  <div class="mobile-nav-cta"><a href="tel:9288001998" class="btn btn-outline" style="justify-content:center;">Call 928-800-1998</a><a href="contact.html" class="btn btn-gold" style="justify-content:center;">Get Free Estimate</a></div>
+  <a href="about.html">About Us</a>
+  <strong style="display:block;padding:0.5rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);">Bathrooms</strong>
+  <div class="mobile-sub"><a href="bathroom-remodeling.html">Bathroom Remodeling</a><a href="walk-in-showers.html">Walk-In Showers</a><a href="tub-to-shower.html">Tub-to-Shower</a><a href="groutless-shower-systems.html">Groutless Showers</a><a href="tile-shower-installation.html">Tile &amp; Custom Showers</a><a href="ada-bathroom-remodeling.html">ADA &amp; Accessible</a><a href="aging-in-place.html">Aging in Place</a><a href="bathroom-vanities.html">Bathroom Vanities</a></div>
+  <strong style="display:block;padding:0.5rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);">Kitchens</strong>
+  <div class="mobile-sub"><a href="kitchen-remodeling.html">Kitchen Remodeling</a><a href="custom-countertops.html">Kitchen Countertops</a><a href="kitchen-cabinets.html">Kitchen Cabinets</a><a href="kitchen-backsplash.html">Kitchen Backsplash &amp; Tile</a><a href="luxury-vinyl-flooring.html">Kitchen Flooring / LVP</a><a href="outdoor-kitchen.html">Outdoor Kitchens</a><a href="small-kitchen-remodeling.html">Small Kitchen Remodeling</a></div>
+  <strong style="display:block;padding:0.5rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);">Services</strong>
+  <div class="mobile-sub"><a href="whole-house-remodeling.html">Whole House Remodeling</a><a href="home-additions.html">Home Additions</a><a href="design-build.html">Design-Build Services</a><a href="garage-conversion-adu.html">Garage Conversion / ADU</a><a href="laundry-room-remodel.html">Laundry Room &amp; Mudroom</a><a href="luxury-vinyl-flooring.html">Flooring &amp; LVP</a><a href="aging-in-place.html">Aging in Place</a></div>
+  <a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
+  <div class="mobile-nav-cta"><a href="tel:9288001998" class="btn btn-outline-dark" style="justify-content:center;">Call 928-800-1998</a><a href="contact.html" class="btn btn-gold" style="justify-content:center;">Free Consultation</a></div>
 </div>
 
+<!-- ============ HERO ============ -->
 <section class="page-hero">
   <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span style="color:rgba(255,255,255,0.75)">Contact Us</span></div>
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span style="color:rgba(255,255,255,0.75)">Contact &amp; Showroom</span></div>
     <span class="eyebrow">Get In Touch</span>
     <h1>Let's Talk About Your Project</h1>
-    <p>Ready to transform your home? Call us, stop by the showroom, or fill out the form below and we'll get back to you within one business day.</p>
+    <p>Call us, visit our Prescott showroom by appointment, or fill out the form below and we'll follow up within one business day.</p>
   </div>
 </section>
 
-<section class="section section-dark">
+<!-- ============ 3 WAYS TO REACH US ============ -->
+<section class="section-sm section">
   <div class="container">
-    <div class="contact-grid">
+    <div class="contact-ways">
+      <div class="contact-way fade-up stagger-1">
+        <div class="contact-way-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
+        </div>
+        <h4>Call Us</h4>
+        <p>Talk to our team directly. We answer questions, discuss your project, and schedule estimates.</p>
+        <a href="tel:9288001998" class="way-link">928-800-1998</a>
+      </div>
+      <div class="contact-way fade-up stagger-2">
+        <div class="contact-way-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg>
+        </div>
+        <h4>Visit Our Showroom</h4>
+        <p>See materials, finishes, and samples in person at our Prescott location — by appointment.</p>
+        <a href="#showroom" class="way-link">723 N Montezuma St, Prescott</a>
+      </div>
+      <div class="contact-way fade-up stagger-3">
+        <div class="contact-way-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v.217l7 4.2 7-4.2V4a1 1 0 00-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 002 13h12a1 1 0 00.966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/></svg>
+        </div>
+        <h4>Request Online</h4>
+        <p>Fill out our quick form and we'll reach out within one business day to get you scheduled.</p>
+        <a href="#contact-form" class="way-link">Fill Out the Form Below ↓</a>
+      </div>
+    </div>
 
-      <!-- Contact Info -->
-      <div class="contact-info fade-up">
-        <div>
-          <span class="eyebrow">Reach Us Directly</span>
-          <h2>We're Here to Help</h2>
-          <div class="gold-divider"></div>
-          <p style="color:rgba(255,255,255,0.65);margin-top:0.5rem;">Whether you have a quick question or are ready to start planning your dream kitchen or bathroom, we'd love to hear from you. We respond to all inquiries promptly.</p>
+    <!-- ============ SHOWROOM + FORM GRID ============ -->
+    <div class="grid-2" style="gap:3rem;align-items:start;" id="showroom">
+
+      <!-- SHOWROOM FEATURE -->
+      <div class="fade-up">
+        <span class="eyebrow">Our Showroom</span>
+        <h2>See It Before You Commit</h2>
+        <div class="gold-divider"></div>
+        <p style="margin-bottom:2rem;">Visit our Prescott showroom to touch, compare, and choose from real materials — countertops, cabinet finishes, flooring samples, shower wall systems, and more. Our team will walk you through your options with zero sales pressure.</p>
+
+        <div class="showroom-card">
+          <div class="showroom-card-header">
+            <div class="showroom-card-header-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg>
+            </div>
+            <div>
+              <h3>Infinity Kitchen &amp; Bath Showroom</h3>
+              <span>Prescott, Arizona</span>
+            </div>
+          </div>
+          <div class="showroom-card-body">
+            <div class="showroom-detail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg>
+              <div class="showroom-detail-text">
+                <strong>Address</strong>
+                <p>723 N Montezuma St<br>Prescott, AZ 86301</p>
+              </div>
+            </div>
+            <div class="showroom-detail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 00-1 0V9a.5.5 0 00.252.434l3.5 2a.5.5 0 00.496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 108 0a8 8 0 000 16zm7-8A7 7 0 111 8a7 7 0 0114 0z"/></svg>
+              <div class="showroom-detail-text">
+                <strong>Hours</strong>
+                <p>By Appointment Only</p>
+                <div class="appt-badge">Appointment Required</div>
+              </div>
+            </div>
+            <div class="showroom-detail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
+              <div class="showroom-detail-text">
+                <strong>Phone</strong>
+                <p><a href="tel:9288001998" style="color:var(--green-600);font-weight:600;">928-800-1998</a></p>
+              </div>
+            </div>
+            <div class="showroom-detail">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg>
+              <div class="showroom-detail-text">
+                <strong>License</strong>
+                <p>AZ ROC #339999 — Licensed, Bonded &amp; Insured</p>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--green-100);">
+              <p style="font-size:0.82rem;color:var(--gray-500);margin-bottom:1rem;">Book your showroom consultation and see real materials from top manufacturers — no commitment required.</p>
+              <a href="tel:9288001998" class="btn btn-gold" style="width:100%;justify-content:center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
+                Call to Book Showroom Visit
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div class="contact-info-item">
-          <div class="contact-info-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
-          </div>
-          <div class="contact-info-text">
-            <strong>Phone</strong>
-            <a href="tel:9288001998">928-800-1998</a>
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg>
-          </div>
-          <div class="contact-info-text">
-            <strong>Showroom Address</strong>
-            <p>723 N Montezuma St<br>Prescott, AZ 86301</p>
-            <p style="font-size:0.8rem;margin-top:0.25rem;color:rgba(255,255,255,0.35)">Consultations by appointment only</p>
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v.217l7 4.2 7-4.2V4a1 1 0 00-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 002 13h12a1 1 0 00.966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/></svg>
-          </div>
-          <div class="contact-info-text">
-            <strong>Service Areas</strong>
-            <p>Prescott, Prescott Valley, Chino Valley, Dewey-Humboldt, Mayer, Cordes Lakes, and Williamson, AZ</p>
-          </div>
-        </div>
-
-        <div class="contact-info-item">
-          <div class="contact-info-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg>
-          </div>
-          <div class="contact-info-text">
-            <strong>License</strong>
-            <p>AZ ROC #339999 — Licensed, Bonded & Insured</p>
-          </div>
-        </div>
-
-        <!-- Trust -->
-        <div style="background:var(--dark-3);border:1px solid var(--border-dark);border-radius:8px;padding:1.5rem;">
-          <p style="font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">What to Expect</p>
-          <ul class="check-list light">
-            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 011.07 1.05l-3.99 4.99a.75.75 0 01-1.08.02L4.324 8.384a.75.75 0 111.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 01.02-.022z"/></svg>Response within 1 business day</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 011.07 1.05l-3.99 4.99a.75.75 0 01-1.08.02L4.324 8.384a.75.75 0 111.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 01.02-.022z"/></svg>Free in-home consultation at your convenience</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 011.07 1.05l-3.99 4.99a.75.75 0 01-1.08.02L4.324 8.384a.75.75 0 111.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 01.02-.022z"/></svg>Computer-aided design included, no charge</li>
-            <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 011.07 1.05l-3.99 4.99a.75.75 0 01-1.08.02L4.324 8.384a.75.75 0 111.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 01.02-.022z"/></svg>No obligation — ever</li>
+        <!-- What to expect -->
+        <div style="margin-top:1.5rem;background:var(--green-25);border:1px solid var(--green-100);border-radius:10px;padding:1.5rem;">
+          <p style="font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);margin-bottom:1rem;">What to Expect at Your Consultation</p>
+          <ul class="check-list">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z"/></svg>
+              Browse real countertop, cabinet &amp; flooring samples
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z"/></svg>
+              Discuss your vision one-on-one with our team
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z"/></svg>
+              Get a realistic timeline and ballpark budget
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z"/></svg>
+              No pressure, no obligation — ever
+            </li>
           </ul>
         </div>
       </div>
 
-      <!-- Contact Form -->
-      <div class="fade-up stagger-2">
-        <div class="form-card">
-          <span class="eyebrow">Request a Free Estimate</span>
-          <h3 style="color:var(--white);margin-bottom:0.5rem;margin-top:0.5rem;">Tell Us About Your Project</h3>
-          <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:2rem;">Fill out the form and we'll reach out to schedule your free in-home consultation.</p>
-
+      <!-- CONTACT FORM -->
+      <div class="fade-up stagger-2" id="contact-form">
+        <span class="eyebrow">Free Estimate</span>
+        <h2>Tell Us About Your Project</h2>
+        <div class="gold-divider"></div>
+        <div class="form-card" style="margin-top:2rem;">
+          <p style="font-size:0.9rem;color:var(--gray-500);margin-bottom:2rem;">Fill out the form and we'll follow up within one business day to schedule your free in-home or showroom consultation.</p>
           <form id="contactForm">
             <div class="form-grid">
               <div class="form-group">
@@ -150,42 +375,79 @@
                   <option value="flooring">Luxury Vinyl Plank Flooring</option>
                   <option value="tub-shower">Tub-to-Shower Conversion</option>
                   <option value="groutless">Groutless Shower System</option>
+                  <option value="walk-in-shower">Walk-In Shower</option>
                   <option value="other">Other / Not Sure Yet</option>
                 </select>
               </div>
               <div class="form-group full">
+                <label for="consult-type">Preferred Consultation Type</label>
+                <select id="consult-type" name="consult-type">
+                  <option value="">Select preference...</option>
+                  <option value="in-home">In-Home Consultation</option>
+                  <option value="showroom">Showroom Visit (Prescott)</option>
+                  <option value="either">Either Works for Me</option>
+                </select>
+              </div>
+              <div class="form-group full">
                 <label for="message">Tell Us About Your Project</label>
-                <textarea id="message" name="message" placeholder="Describe what you're looking to accomplish, your timeline, any specific ideas you have..."></textarea>
+                <textarea id="message" name="message" placeholder="Describe what you're looking to accomplish, your timeline, any specific ideas..."></textarea>
               </div>
             </div>
             <button type="submit" class="btn btn-gold btn-lg" style="width:100%;justify-content:center;">Send My Request</button>
-            <p style="font-size:0.78rem;color:rgba(255,255,255,0.3);text-align:center;margin-top:1rem;margin-bottom:0;">We respect your privacy and never share your information.</p>
+            <p style="font-size:0.78rem;color:var(--gray-400);text-align:center;margin-top:1rem;margin-bottom:0;">We respect your privacy and never share your information.</p>
           </form>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- Map placeholder -->
-<div style="background:var(--dark-2);height:320px;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--border-dark);">
-  <div style="text-align:center;color:rgba(255,255,255,0.4);">
-    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" style="color:var(--gold);margin-bottom:1rem;" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg>
-    <p style="margin:0;font-size:0.9rem;">723 N Montezuma St, Prescott, AZ 86301</p>
-    <p style="margin:0.25rem 0 0;font-size:0.8rem;">Showroom consultations by appointment only</p>
+<!-- ============ MAP ============ -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3280.902!2d-112.4716!3d34.5440!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872cb2aabd000001%3A0x1!2s723+N+Montezuma+St%2C+Prescott%2C+AZ+86301!5e0!3m2!1sen!2sus!4v1"
+    allowfullscreen="" loading="lazy" title="Infinity Kitchen and Bath Showroom Location"></iframe>
+  <div class="map-address-overlay">
+    <strong>Infinity Kitchen &amp; Bath</strong>
+    <p>723 N Montezuma St<br>Prescott, AZ 86301</p>
+    <p style="margin-top:0.4rem;color:var(--green-500);font-weight:600;font-size:0.78rem;">&#x2022; By Appointment Only</p>
   </div>
 </div>
 
+<!-- ============ FOOTER ============ -->
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo"><div class="nav-logo-mark">I</div><div class="nav-logo-text"><span>Infinity Kitchen & Bath</span><span>Prescott, Arizona</span></div></div><p class="footer-about">Family-owned remodeling contractor serving Prescott since 2013. 35+ years of experience, factory-direct pricing, 5-star rated.</p><div class="footer-badge"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> AZ ROC #339999 — Licensed, Bonded & Insured</div></div>
-      <div class="footer-col"><h5>Services</h5><ul><li><a href="kitchen-remodeling.html">Kitchen Remodeling</a></li><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="whole-house-remodeling.html">Whole House Remodeling</a></li><li><a href="custom-countertops.html">Custom Countertops</a></li><li><a href="luxury-vinyl-flooring.html">LVP Flooring</a></li><li><a href="tub-to-shower.html">Tub-to-Shower Conversion</a></li><li><a href="groutless-shower-systems.html">Groutless Showers</a></li></ul></div>
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2023/11/infinity-logo.png" alt="Infinity Kitchen &amp; Bath" style="height:52px;width:auto;"></div>
+        <p class="footer-about" style="margin-top:1rem;">Family-owned remodeling contractor serving Prescott since 2013. 35+ years of experience, factory-direct pricing, 5-star rated.</p>
+        <div class="footer-badge"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> AZ ROC #339999 &#8212; Licensed, Bonded &amp; Insured</div>
+      </div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="kitchen-remodeling.html">Kitchen Remodeling</a></li><li><a href="custom-countertops.html">Kitchen Countertops</a></li><li><a href="kitchen-cabinets.html">Kitchen Cabinets</a></li><li><a href="kitchen-backsplash.html">Kitchen Backsplash</a></li><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="walk-in-showers.html">Walk-In Showers</a></li><li><a href="tub-to-shower.html">Tub-to-Shower</a></li><li><a href="groutless-shower-systems.html">Groutless Showers</a></li><li><a href="bathroom-vanities.html">Bathroom Vanities</a></li><li><a href="whole-house-remodeling.html">Whole House Remodeling</a></li><li><a href="aging-in-place.html">Aging in Place</a></li><li><a href="luxury-vinyl-flooring.html">LVP Flooring</a></li></ul></div>
       <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
-      <div class="footer-col"><h5>Contact</h5><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg><a href="tel:9288001998">928-800-1998</a></div><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg><span>723 N Montezuma St<br>Prescott, AZ 86301</span></div><div class="mt-3"><a href="contact.html" class="btn btn-gold btn-sm">Book Consultation</a></div></div>
+      <div class="footer-col">
+        <h5>Showroom</h5>
+        <div class="footer-contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
+          <a href="tel:9288001998">928-800-1998</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg>
+          <span>723 N Montezuma St<br>Prescott, AZ 86301<br><em style="font-style:normal;color:var(--green-400);font-size:0.75rem;">By Appointment Only</em></span>
+        </div>
+        <div style="margin-top:1.5rem;">
+          <a href="contact.html" class="btn btn-gold btn-sm">Book Consultation</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div></div>
+  <div class="footer-bottom">
+    <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;">
+      <p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
 </footer>
 <script src="js/main.js"></script>
 </body>

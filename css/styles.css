@@ -857,6 +857,30 @@ a.service-card { text-decoration: none; color: inherit; }
   object-fit: cover;
   transition: transform 0.5s var(--ease);
 }
+/* Masonry gallery — images at natural aspect ratio, no cropping */
+.gallery-masonry { columns: 4; column-gap: 0.75rem; }
+.gallery-masonry .gallery-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+  aspect-ratio: auto;
+}
+.gallery-masonry .gallery-item img { height: auto; }
+.gallery-item-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(to top, rgba(7,26,16,0.75), transparent);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: var(--transition);
+  letter-spacing: 0.02em;
+}
+.gallery-item:hover .gallery-item-caption { opacity: 1; }
+@media (max-width: 1100px) { .gallery-masonry { columns: 3; } }
+@media (max-width: 700px) { .gallery-masonry { columns: 2; } }
+@media (max-width: 480px) { .gallery-masonry { columns: 1; } }
 .gallery-item:hover img { transform: scale(1.05); }
 .gallery-item-overlay {
   position: absolute;
@@ -1215,7 +1239,7 @@ footer {
   transition: var(--transition);
 }
 .lightbox.open { opacity: 1; visibility: visible; }
-.lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+.lightbox-img { max-width: 94vw; max-height: 92vh; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 64px rgba(0,0,0,0.5); }
 .lightbox-close {
   position: absolute; top: 1.5rem; right: 1.5rem;
   width: 44px; height: 44px;

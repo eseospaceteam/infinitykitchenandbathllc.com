@@ -11,14 +11,16 @@
     .sierra-hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 118px);
+      min-height: 100vh;
       background: #fff;
+      padding-top: 118px;
+      box-sizing: border-box;
     }
     .sierra-hero-left {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 5rem 4rem 5rem 5rem;
+      padding: 4rem 4rem 4rem 5rem;
     }
     .sierra-hero-h1 {
       font-family: var(--font-serif);
@@ -91,7 +93,7 @@
     .sierra-hero-badge-text span { font-size: 0.7rem; color: var(--gray-500); }
 
     @media (max-width: 900px) {
-      .sierra-hero { grid-template-columns: 1fr; min-height: auto; }
+      .sierra-hero { grid-template-columns: 1fr; min-height: auto; padding-top: 108px; }
       .sierra-hero-left { padding: 3rem 1.5rem; }
       .sierra-hero-right { height: 340px; }
     }

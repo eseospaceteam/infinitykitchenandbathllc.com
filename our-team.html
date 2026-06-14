@@ -7,57 +7,18 @@
   <meta name="description" content="Meet the Infinity Kitchen & Bath team in Prescott, AZ. Family-owned, 35+ years of combined experience, licensed AZ ROC #339999. Get to know the people behind your remodel.">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .cs-section {
-      padding: 5rem 0 6rem;
-      text-align: center;
-    }
-    .cs-icon {
-      width: 80px; height: 80px;
-      background: var(--green-50);
-      border: 2px solid var(--green-100);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 2rem;
-      color: var(--green-500);
-    }
-    .cs-card {
-      background: var(--white);
-      border: 1px solid var(--green-100);
-      border-radius: 16px;
-      padding: 3rem;
-      max-width: 640px;
-      margin: 0 auto 3rem;
-      box-shadow: var(--shadow-lg);
-    }
-    .cs-keywords {
-      display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 2rem;
-    }
-    .cs-keyword {
-      background: var(--green-25);
-      border: 1px solid var(--green-100);
-      border-radius: 100px;
-      padding: 0.25rem 0.85rem;
-      font-size: 0.78rem;
-      color: var(--green-600);
-      font-weight: 500;
-    }
-    .cs-cta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .cs-cta-card {
-      background: var(--white);
-      border: 1px solid var(--green-100);
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-    }
-    .cs-cta-card h4 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--green-800); }
-    .cs-cta-card p { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 1.25rem; }
-    @media (max-width: 600px) { .cs-cta-grid { grid-template-columns: 1fr; } }
+    .team-card { background:var(--white); border:1px solid var(--green-100); border-radius:16px; overflow:hidden; box-shadow:var(--shadow-md); }
+    .team-card-photo { width:100%; aspect-ratio:4/3; object-fit:cover; background:var(--green-25); display:block; }
+    .team-card-body { padding:2rem; }
+    .team-card-name { font-size:1.25rem; font-family:var(--font-serif); color:var(--green-900); margin:0 0 0.25rem; }
+    .team-card-title { font-size:0.85rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); margin:0 0 1rem; }
+    .team-stat-row { display:flex; gap:2rem; flex-wrap:wrap; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--green-100); }
+    .team-stat { text-align:center; }
+    .team-stat-num { font-size:1.75rem; font-family:var(--font-serif); font-weight:700; color:var(--green-800); line-height:1; }
+    .team-stat-label { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gray-500); margin-top:0.25rem; }
+    .value-pill { display:inline-flex; align-items:center; gap:0.5rem; background:var(--green-25); border:1px solid var(--green-100); border-radius:100px; padding:0.4rem 1rem; font-size:0.85rem; color:var(--green-800); font-weight:500; }
+    .placeholder-photo { width:100%; aspect-ratio:4/3; background:linear-gradient(135deg,var(--green-100) 0%,var(--green-200) 100%); display:flex; align-items:center; justify-content:center; }
+    .placeholder-photo svg { opacity:0.35; }
   </style>
 </head>
 <body>
@@ -156,42 +117,171 @@
   <div class="mobile-nav-cta"><a href="tel:9288001998" class="btn btn-outline-dark" style="justify-content:center;">Call 928-800-1998</a><a href="contact.html" class="btn btn-gold" style="justify-content:center;">Free Consultation</a></div>
 </div>
 
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="services.html">Company</a><span>/</span><span style="color:rgba(255,255,255,0.75)">Our Team</span></div>
-    <span class="eyebrow">About Our Team</span>
+<!-- ═══ HERO ═══════════════════════════════════════════════════════════ -->
+<section class="page-hero" style="background-image:url('https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg');background-size:cover;background-position:center right;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,#1B4332 0%,#1B4332 42%,rgba(27,67,50,0.55) 65%,transparent 100%);"></div>
+  <div class="page-hero-inner" style="position:relative;">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="about.html">About Us</a><span>/</span><span>Our Team</span></div>
+    <span class="eyebrow">The People Behind Every Project</span>
     <h1>Meet the Infinity Kitchen &amp; Bath Team</h1>
-    <p>Serving Prescott, Prescott Valley, Chino Valley, and surrounding Yavapai County communities.</p>
+    <p style="color:rgba(255,255,255,0.85);margin-top:0.75rem;">Family-owned, locally rooted, and personally invested in every Prescott home we touch. No subcontracted strangers — the same trusted team from first consultation to final walkthrough.</p>
   </div>
 </section>
 
-<section class="cs-section">
+<!-- ═══ INTRO ══════════════════════════════════════════════════════════ -->
+<section class="section">
   <div class="container">
-    <div class="cs-card">
-      <div class="cs-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 00-1 0V9a.5.5 0 00.252.434l3.5 2a.5.5 0 00.496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 108 0a8 8 0 000 16zm7-8A7 7 0 111 8a7 7 0 0114 0z"/></svg>
+    <div class="grid-2" style="align-items:center;gap:4rem;">
+      <div class="fade-up">
+        <span class="eyebrow">Family-Owned Since 2013</span>
+        <h2>You Know Who's Coming to Your Home</h2>
+        <div class="gold-divider"></div>
+        <p>When you hire a big box remodeling company or a franchise, you rarely know who will actually show up at your door. At Infinity Kitchen and Bath, that's never been the case. We're a family-owned business, and the people you meet during your consultation are the same people who build your project. Our reputation in Prescott is built on personal accountability — the kind that only comes from a team that lives and works in the same community as our clients.</p>
+        <p>Steve Hunt founded Infinity Kitchen and Bath in 2013 with a straightforward idea: bring high-end design and quality craftsmanship to Prescott homeowners without the big-city markup. Over a decade later, that same philosophy drives every project we take on. Our team brings over 35 years of combined remodeling experience — in kitchens, bathrooms, whole-house renovations, additions, and specialty work — and every member of that team treats your home with the same care they'd want in their own.</p>
+        <p>We are licensed by the Arizona Registrar of Contractors (ROC #339999), fully insured, and have maintained a 5-star reputation with Prescott homeowners for over ten years. That track record matters to us — not as a marketing point, but because every project is a neighbor's home, and every finished remodel is a reflection of the people who built it.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.75rem;">
+          <span class="value-pill"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> AZ ROC #339999</span>
+          <span class="value-pill"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> Founded 2013</span>
+          <span class="value-pill"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> 35+ Years Experience</span>
+          <span class="value-pill"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> 5-Star Rated</span>
+        </div>
       </div>
-      <span class="eyebrow">Coming Soon</span>
-      <h2 style="margin-top:0.5rem;">Meet the Infinity Kitchen &amp; Bath Team</h2>
-      <div class="gold-divider"></div>
-      <p style="font-size:1rem;color:var(--gray-500);margin-top:1.5rem;">This page is being built with full service details, project photos, pricing information, and more. Check back soon &mdash; or reach out now and we&rsquo;ll answer all your questions directly.</p>
-      <div class="cs-keywords"><span class="cs-keyword">Infinity Kitchen Bath Team</span> <span class="cs-keyword">Prescott Remodeling Contractor</span> <span class="cs-keyword">About Our Team</span> <span class="cs-keyword">Meet the Remodeler</span></div>
-    </div>
-
-    <div class="cs-cta-grid">
-      <div class="cs-cta-card">
-        <h4>Call Us Directly</h4>
-        <p>Talk to our team today about your our team project &mdash; no wait required.</p>
-        <a href="tel:9288001998" class="btn btn-gold" style="width:100%;justify-content:center;">928-800-1998</a>
-      </div>
-      <div class="cs-cta-card">
-        <h4>Request a Free Estimate</h4>
-        <p>Fill out our quick form and we&rsquo;ll follow up within one business day.</p>
-        <a href="contact.html" class="btn btn-outline" style="width:100%;justify-content:center;">Get Free Estimate</a>
+      <div class="fade-up stagger-2">
+        <div style="border-radius:8px;overflow:hidden;min-height:420px;background:url('https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Walker-Whole-House.jpg') center/cover no-repeat;"></div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ═══ STATS BAR ══════════════════════════════════════════════════════ -->
+<div style="background:var(--green-900);padding:2.5rem 0;">
+  <div class="container">
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;text-align:center;">
+      <div><div style="font-size:2.25rem;font-family:var(--font-serif);font-weight:700;color:var(--gold);">10+</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-top:0.25rem;">Years Serving Prescott</div></div>
+      <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
+      <div><div style="font-size:2.25rem;font-family:var(--font-serif);font-weight:700;color:var(--gold);">35+</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-top:0.25rem;">Years Combined Experience</div></div>
+      <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
+      <div><div style="font-size:2.25rem;font-family:var(--font-serif);font-weight:700;color:var(--gold);">500+</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-top:0.25rem;">Projects Completed</div></div>
+      <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
+      <div><div style="font-size:2.25rem;font-family:var(--font-serif);font-weight:700;color:var(--gold);">5&#9733;</div><div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-top:0.25rem;">Average Rating</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TEAM PROFILES ══════════════════════════════════════════════════ -->
+<section class="section-gray">
+  <div class="container">
+    <div class="section-header text-center fade-up" style="max-width:700px;margin:0 auto 3.5rem;">
+      <span class="eyebrow">Leadership</span>
+      <h2>The People Who Build Your Project</h2>
+      <div class="gold-divider center"></div>
+      <p>Every Infinity team member is a skilled professional who has earned the trust of Prescott homeowners over years of hands-on remodeling work.</p>
+    </div>
+
+    <!-- STEVE HUNT -->
+    <div class="grid-2" style="align-items:center;gap:4rem;max-width:960px;margin:0 auto 4rem;">
+      <div class="fade-up">
+        <div class="team-card">
+          <div class="placeholder-photo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm2-3a2 2 0 11-4 0 2 2 0 014 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.029 10 8 10c-2.029 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg>
+          </div>
+          <div class="team-card-body">
+            <div class="team-card-name">Steve Hunt</div>
+            <div class="team-card-title">Owner &amp; Lead Designer</div>
+            <div class="team-stat-row">
+              <div class="team-stat"><div class="team-stat-num">10+</div><div class="team-stat-label">Years at Infinity</div></div>
+              <div class="team-stat"><div class="team-stat-num">AZ</div><div class="team-stat-label">ROC #339999</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-up stagger-2">
+        <span class="eyebrow">Founder &amp; Owner</span>
+        <h2>Steve Hunt</h2>
+        <div class="gold-divider"></div>
+        <p>Steve Hunt founded Infinity Kitchen and Bath in 2013 with a clear mission: bring honest, high-quality home remodeling to Prescott without the high-pressure sales tactics or inflated prices that had become common in the industry. More than a decade later, he still personally oversees every project the company takes on.</p>
+        <p>Steve's background spans kitchen design, bathroom renovation, structural work, and project management. He holds Arizona contractor's license ROC #339999 and has led Infinity's growth from a one-man operation to the most trusted remodeling team in the Prescott area. His philosophy is straightforward: do what you say, show up when you say you will, and don't cut corners to protect the profit margin.</p>
+        <p>When he's not on a job site or in a design consultation, Steve is involved in the Prescott community — a place he's called home for over two decades. That rootedness is why Infinity has earned so many of its projects through referrals from existing clients. In a business built on trust, Steve's reputation is the company's most valuable asset.</p>
+        <div style="margin-top:1.75rem;">
+          <a href="contact.html" class="btn btn-gold">Schedule a Consultation with Steve</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ VALUES SECTION ═════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header text-center fade-up" style="max-width:700px;margin:0 auto 3rem;">
+      <span class="eyebrow">What We Stand For</span>
+      <h2>The Values That Drive Every Project</h2>
+      <div class="gold-divider center"></div>
+    </div>
+    <div class="grid-3">
+      <div class="fade-up stagger-1" style="background:var(--green-25);border-radius:12px;padding:2rem;border:1px solid var(--green-100);">
+        <h3 style="color:var(--green-800);margin-bottom:0.75rem;">Honest Pricing</h3>
+        <p>We provide detailed, itemized quotes before work begins. Our fixed-price contracts mean you know your number before a single tool touches your home — no escalating change orders, no vague estimates that double by project end. Factory-direct purchasing keeps your material costs below what a showroom-based contractor would charge.</p>
+      </div>
+      <div class="fade-up stagger-2" style="background:var(--green-25);border-radius:12px;padding:2rem;border:1px solid var(--green-100);">
+        <h3 style="color:var(--green-800);margin-bottom:0.75rem;">Personal Accountability</h3>
+        <p>Steve Hunt and the Infinity team are not a faceless organization — we're your neighbors in Prescott. When you have a question, you call us directly. When there's an issue on the job, Steve knows about it the same day. That personal accountability is what a family-owned local business offers that a national franchise never can.</p>
+      </div>
+      <div class="fade-up stagger-3" style="background:var(--green-25);border-radius:12px;padding:2rem;border:1px solid var(--green-100);">
+        <h3 style="color:var(--green-800);margin-bottom:0.75rem;">Craft That Lasts</h3>
+        <p>We don't build for the inspection — we build for the next 20 years. Every shower is waterproofed to system spec. Every cabinet is leveled and shimmed correctly. Every countertop seam is finished to an invisible line. We take the extra time because we'll stand behind the work, and we back every project with a one-year workmanship warranty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CREDENTIALS ════════════════════════════════════════════════════ -->
+<section class="section-gray">
+  <div class="container">
+    <div class="grid-2" style="align-items:center;gap:4rem;">
+      <div class="fade-up">
+        <span class="eyebrow">Licensing &amp; Credentials</span>
+        <h2>Licensed, Insured &amp; Verified</h2>
+        <div class="gold-divider"></div>
+        <p>Infinity Kitchen and Bath is licensed by the Arizona Registrar of Contractors under license number ROC #339999. You can verify our license status directly at <strong>azroc.gov</strong> — we have nothing to hide and encourage every homeowner to check contractor credentials before signing a contract.</p>
+        <p>We carry general liability insurance and workers' compensation coverage on all employees and subcontractors who work in your home. Certificates of insurance are available upon request at any point in the process. For more detail on our licensing and insurance coverage, see our <a href="licensing-insurance.html" style="color:var(--green-800);font-weight:600;">licensing &amp; insurance page</a>.</p>
+        <ul style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.75rem;list-style:none;padding:0;">
+          <li style="display:flex;align-items:flex-start;gap:0.75rem;"><span style="color:var(--gold);font-weight:700;font-size:1.1rem;">&#10003;</span><span><strong>AZ ROC License #339999</strong> — active, verified, no violations</span></li>
+          <li style="display:flex;align-items:flex-start;gap:0.75rem;"><span style="color:var(--gold);font-weight:700;font-size:1.1rem;">&#10003;</span><span><strong>General Liability Insurance</strong> — full coverage, certificates on request</span></li>
+          <li style="display:flex;align-items:flex-start;gap:0.75rem;"><span style="color:var(--gold);font-weight:700;font-size:1.1rem;">&#10003;</span><span><strong>Workers' Compensation</strong> — all workers on your property covered</span></li>
+          <li style="display:flex;align-items:flex-start;gap:0.75rem;"><span style="color:var(--gold);font-weight:700;font-size:1.1rem;">&#10003;</span><span><strong>Bonded</strong> — additional protection for the homeowner</span></li>
+          <li style="display:flex;align-items:flex-start;gap:0.75rem;"><span style="color:var(--gold);font-weight:700;font-size:1.1rem;">&#10003;</span><span><strong>1-Year Workmanship Warranty</strong> — on all installed work</span></li>
+        </ul>
+      </div>
+      <div class="fade-up stagger-2" style="background:var(--white);border-radius:12px;padding:2.5rem;border:1px solid var(--green-100);box-shadow:var(--shadow-md);">
+        <h3 style="color:var(--green-800);margin-bottom:1rem;">What to Ask Any Contractor</h3>
+        <p style="color:var(--gray-600);margin-bottom:1.25rem;">Before hiring any remodeling contractor in Prescott — including us — ask these questions:</p>
+        <ol style="padding-left:1.5rem;display:flex;flex-direction:column;gap:0.75rem;color:var(--gray-700);">
+          <li>Can I see your ROC license number and verify it at azroc.gov?</li>
+          <li>Are you bonded and insured — can you provide a certificate?</li>
+          <li>Do you pull permits for work that requires them?</li>
+          <li>Is your quote fixed-price or time-and-materials?</li>
+          <li>Who physically does the work — your own employees or subcontractors?</li>
+          <li>Do you offer a written workmanship warranty?</li>
+        </ol>
+        <p style="color:var(--gray-500);font-size:0.875rem;margin-top:1.5rem;">We pass every one of these checks. Any contractor who can't answer them clearly is a risk to your project and your home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═════════════════════════════════════════════════════════════ -->
+<div style="background:var(--green-900);padding:4rem 0;text-align:center;">
+  <div class="container fade-up">
+    <h2 style="color:#fff;margin-bottom:1rem;">Ready to Meet the Team in Person?</h2>
+    <p style="color:rgba(255,255,255,0.8);max-width:580px;margin:0 auto 2rem;font-size:1.05rem;">Schedule a free in-home consultation and you'll meet Steve and the Infinity team at your home — not a showroom. We'll walk your space, talk through your goals, and give you a real quote with no obligation.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+      <a href="contact.html" class="btn btn-gold btn-lg">Schedule a Free Consultation</a>
+      <a href="tel:9288001998" class="btn btn-outline-light btn-lg">Call 928-800-1998</a>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="container">

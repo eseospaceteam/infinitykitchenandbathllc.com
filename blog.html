@@ -83,6 +83,7 @@
         </div>
       </li>
       <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="blog.html">Blog</a></li>
       <li><a href="reviews.html">Reviews</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -100,7 +101,7 @@
   <div class="mobile-sub"><a href="kitchen-remodeling.html">Kitchen Remodeling</a><a href="custom-countertops.html">Kitchen Countertops</a><a href="kitchen-cabinets.html">Kitchen Cabinets</a><a href="kitchen-backsplash.html">Kitchen Backsplash &amp; Tile</a><a href="luxury-vinyl-flooring.html">Kitchen Flooring / LVP</a><a href="outdoor-kitchen.html">Outdoor Kitchens</a><a href="small-kitchen-remodeling.html">Small Kitchen Remodeling</a></div>
   <strong style="display:block;padding:0.5rem 1.5rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--green-500);">Services</strong>
   <div class="mobile-sub"><a href="whole-house-remodeling.html">Whole House Remodeling</a><a href="home-additions.html">Home Additions</a><a href="design-build.html">Design-Build Services</a><a href="garage-conversion-adu.html">Garage Conversion / ADU</a><a href="laundry-room-remodel.html">Laundry Room &amp; Mudroom</a><a href="luxury-vinyl-flooring.html">Flooring &amp; LVP</a><a href="aging-in-place.html">Aging in Place</a></div>
-  <a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
+  <a href="gallery.html">Gallery</a><a href="blog.html">Blog</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a>
   <div class="mobile-nav-cta"><a href="tel:9288001998" class="btn btn-outline-dark" style="justify-content:center;">Call 928-800-1998</a><a href="contact.html" class="btn btn-gold" style="justify-content:center;">Free Consultation</a></div>
 </div>
 
@@ -113,82 +114,240 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding-top:1rem;">
   <div class="container">
-    <div class="grid-3">
-      <a href="kitchen-remodel-cost.html" class="blog-card-link">
-        <div class="blog-card fade-up stagger-1">
-          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="Kitchen remodel cost Prescott AZ"></div>
+    <!-- Category filter -->
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2.5rem;justify-content:center;" id="blogFilters">
+      <button class="blog-filter-btn active" data-filter="all" onclick="filterBlog('all',this)">All Posts</button>
+      <button class="blog-filter-btn" data-filter="kitchen" onclick="filterBlog('kitchen',this)">Kitchen</button>
+      <button class="blog-filter-btn" data-filter="bathroom" onclick="filterBlog('bathroom',this)">Bathroom</button>
+      <button class="blog-filter-btn" data-filter="materials" onclick="filterBlog('materials',this)">Materials &amp; Flooring</button>
+      <button class="blog-filter-btn" data-filter="planning" onclick="filterBlog('planning',this)">Planning &amp; Costs</button>
+    </div>
+    <style>
+      .blog-filter-btn{padding:0.45rem 1.1rem;border:2px solid var(--green-900);border-radius:99px;background:#fff;color:var(--green-900);font-weight:600;font-size:0.85rem;cursor:pointer;transition:background 0.2s,color 0.2s;}
+      .blog-filter-btn.active,.blog-filter-btn:hover{background:var(--green-900);color:#fff;}
+      .blog-card-link[data-hidden]{display:none;}
+    </style>
+
+    <!-- All posts grid -->
+    <div class="grid-3" id="blogGrid">
+
+      <!-- KITCHEN (9 posts) -->
+      <a href="how-to-plan-kitchen-remodel.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="How to plan a kitchen remodel" loading="lazy"></div>
           <div class="blog-card-body">
             <span class="blog-tag">Kitchen</span>
-            <h3>How Much Does a Kitchen Remodel Cost in Prescott, AZ?</h3>
-            <p>Real numbers — not national averages. We break down what Prescott homeowners actually pay for cosmetic refreshes, mid-range remodels, and full kitchen renovations.</p>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">June 5, 2026</p>
+            <h3>How to Plan a Kitchen Remodel Without Losing Your Mind</h3>
+            <p>The right sequence for every decision: budget, contractor selection, material selections, and what to do before demo day.</p>
           </div>
         </div>
       </a>
-      <a href="bathroom-remodel-cost.html" class="blog-card-link">
-        <div class="blog-card fade-up stagger-2">
-          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/luxury-bathroom-remodeling.jpg" alt="Bathroom remodel cost Prescott AZ"></div>
+
+      <a href="kitchen-design-trends-2026.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Davtyan-kitchen-remodeling.jpg" alt="2026 kitchen design trends" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">May 29, 2026</p>
+            <h3>2026 Kitchen Design Trends: What's In and What's Out</h3>
+            <p>Warm earthy tones, two-tone cabinets, unlacquered brass — what's gaining momentum and what's fading for Arizona kitchens.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="kitchen-backsplash-ideas.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/remodeled-kitchen-with-marble-countertops-and-more.jpg" alt="Kitchen backsplash ideas" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">May 22, 2026</p>
+            <h3>Kitchen Backsplash Ideas That Never Go Out of Style</h3>
+            <p>Subway tile, large format, natural stone, grout color — the options that hold up over time and what to avoid in Arizona's climate.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="outdoor-kitchen-roi.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/luxurious-kitchen-remodeling.jpg" alt="Outdoor kitchen ROI Prescott AZ" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">May 15, 2026</p>
+            <h3>Is an Outdoor Kitchen Worth It in Prescott, AZ?</h3>
+            <p>ROI, material specs for Arizona's climate, permit costs, and who should (and shouldn't) build an outdoor kitchen here.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="kitchen-remodel-roi.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/remodeled-kitchen-with-marble-countertops-and-more.jpg" alt="Kitchen remodel ROI" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">May 8, 2026</p>
+            <h3>Kitchen Remodel ROI: Which Upgrades Add the Most Home Value?</h3>
+            <p>Countertops return 70–85%. Professional appliances return 20–35%. The real data on where to spend and where to hold back.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="kitchen-remodel-timeline.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="Kitchen remodel timeline" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">May 1, 2026</p>
+            <h3>Kitchen Remodel Timeline: What to Expect Week by Week</h3>
+            <p>8 phases, typical durations, Yavapai County permit waits, and the most common sources of delays.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="shaker-vs-flat-panel-cabinets.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/elegant-kitchen-remodeling.jpg" alt="Shaker vs flat panel cabinets" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">April 24, 2026</p>
+            <h3>Shaker vs. Flat Panel vs. Raised Panel Cabinet Doors</h3>
+            <p>Which cabinet door style fits your Prescott home's architecture? Cost, resale appeal, and finish options compared.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="kitchen-remodel-vs-refresh.html" class="blog-card-link" data-category="kitchen">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Davtyan-kitchen-remodeling.jpg" alt="Kitchen remodel vs refresh guide" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">April 3, 2026</p>
+            <h3>Kitchen Remodel vs. Kitchen Refresh: Which One Do You Need?</h3>
+            <p>Most people assume they need a full remodel. Often they don't. Five questions that tell you exactly which path makes sense.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="kitchen-remodel-cost.html" class="blog-card-link" data-category="kitchen planning">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Kempner-kitchen-remodeling.jpg" alt="Kitchen remodel cost Prescott AZ" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Kitchen</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">March 5, 2026</p>
+            <h3>How Much Does a Kitchen Remodel Cost in Prescott, AZ?</h3>
+            <p>Real numbers — not national averages. What Prescott homeowners actually pay for cosmetic refreshes, mid-range, and full kitchen renovations.</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- BATHROOM (4 posts) -->
+      <a href="groutless-shower-walls.html" class="blog-card-link" data-category="bathroom">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Luxurious-solid-surface-shower-for-bathroom-reodeling.jpg" alt="Groutless shower walls guide" loading="lazy"></div>
           <div class="blog-card-body">
             <span class="blog-tag">Bathrooms</span>
-            <h3>How Much Does a Bathroom Remodel Cost in Prescott, AZ?</h3>
-            <p>From a $5,000 cosmetic update to a $70,000 master bath renovation — here's what drives the cost and where you can save without sacrificing quality.</p>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">June 12, 2026</p>
+            <h3>Groutless Shower Walls: Pros, Cons &amp; Best Materials</h3>
+            <p>Solid surface panels, large-format tile with epoxy grout, and porcelain slabs — what's genuinely groutless and what the trade-offs are.</p>
           </div>
         </div>
       </a>
-      <a href="quartz-vs-granite.html" class="blog-card-link">
-        <div class="blog-card fade-up stagger-3">
-          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2023/01/quartz-granite-stone-countertops-prescott-az.jpg" alt="Quartz vs granite countertops"></div>
+
+      <a href="tub-to-shower-conversion-cost.html" class="blog-card-link" data-category="bathroom planning">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg" alt="Tub to shower conversion cost" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Bathrooms</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">June 9, 2026</p>
+            <h3>Tub-to-Shower Conversion: Cost, Timeline &amp; What to Expect</h3>
+            <p>Real Prescott pricing from $4,500 to $22,000+, what drives cost, and the week-by-week construction timeline.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="frameless-vs-framed-shower.html" class="blog-card-link" data-category="bathroom">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Luxurious-solid-surface-shower-for-bathroom-reodeling.jpg" alt="Groutless vs tile shower comparison" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Bathrooms</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">April 17, 2026</p>
+            <h3>Groutless vs. Tile Showers: Which Is Right for You?</h3>
+            <p>Maintenance, budget, and lifestyle — the honest side-by-side comparison for Prescott homeowners.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="bathroom-remodel-cost.html" class="blog-card-link" data-category="bathroom planning">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/luxury-bathroom-remodeling.jpg" alt="Bathroom remodel cost Prescott AZ" loading="lazy"></div>
+          <div class="blog-card-body">
+            <span class="blog-tag">Bathrooms</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">March 12, 2026</p>
+            <h3>How Much Does a Bathroom Remodel Cost in Prescott, AZ?</h3>
+            <p>From a $5,000 cosmetic update to a $70,000 master bath renovation — what drives cost and where to save without sacrificing quality.</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- MATERIALS & FLOORING (2 posts) -->
+      <a href="quartz-vs-granite.html" class="blog-card-link" data-category="materials">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/11/quartz-granite-stone-countertops-prescott-az.jpg" alt="Quartz vs granite countertops" loading="lazy"></div>
           <div class="blog-card-body">
             <span class="blog-tag">Countertops</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">March 19, 2026</p>
             <h3>Quartz vs. Granite: The Honest Comparison</h3>
-            <p>Both are beautiful and durable — but they're not the same. We break down maintenance, cost, and the Prescott factors that should drive your decision.</p>
+            <p>Maintenance, cost, and the Prescott factors — hard water, resale demographics, and how each material performs in Arizona.</p>
           </div>
         </div>
       </a>
-      <a href="frameless-vs-framed-shower.html" class="blog-card-link">
-        <div class="blog-card fade-up stagger-4">
-          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Luxurious-solid-surface-shower-for-bathroom-reodeling.jpg" alt="Groutless vs tile shower comparison"></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Bathrooms</span>
-            <h3>Groutless vs. Tile Showers: Which Is Right for You?</h3>
-            <p>For most Prescott homeowners, the choice comes down to maintenance, budget, and lifestyle. Here's the honest side-by-side comparison.</p>
-          </div>
-        </div>
-      </a>
-      <a href="lvp-vs-tile.html" class="blog-card-link">
-        <div class="blog-card fade-up stagger-5">
-          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Waterproof-flooring-installation-for-bathroom-remodeling.png" alt="LVP vs tile flooring comparison"></div>
+
+      <a href="lvp-vs-tile.html" class="blog-card-link" data-category="materials">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Waterproof-flooring-installation-for-bathroom-remodeling.png" alt="LVP vs tile flooring comparison" loading="lazy"></div>
           <div class="blog-card-body">
             <span class="blog-tag">Flooring</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">March 26, 2026</p>
             <h3>LVP vs. Tile Flooring: Which Is Right for Your Prescott Home?</h3>
-            <p>Both are waterproof and durable — but they serve different rooms and lifestyles. Here's how to choose the right flooring for each space.</p>
+            <p>Both are waterproof and durable — but they serve different rooms and lifestyles. How to choose for each space.</p>
           </div>
         </div>
       </a>
-      <a href="kitchen-remodel-vs-refresh.html" class="blog-card-link">
-        <div class="blog-card fade-up stagger-6">
-          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2025/03/Davtyan-kitchen-remodeling.jpg" alt="Kitchen remodel vs refresh guide"></div>
-          <div class="blog-card-body">
-            <span class="blog-tag">Kitchen</span>
-            <h3>Kitchen Remodel vs. Kitchen Refresh: Which One Do You Need?</h3>
-            <p>Most people assume they need a full remodel. Often they don't. Five questions that tell you exactly which path makes sense for your kitchen and budget.</p>
-          </div>
-        </div>
-      </a>
-      <a href="remodel-vs-renovation.html" class="blog-card-link">
-        <div class="blog-card fade-up stagger-1">
-          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Whole-house-remodel-by-Infinity-Kitchen-and-Bath.jpg" alt="Remodel vs renovation guide"></div>
+
+      <!-- PLANNING & TIPS (1 post) -->
+      <a href="remodel-vs-renovation.html" class="blog-card-link" data-category="planning">
+        <div class="blog-card">
+          <div class="blog-card-img"><img src="https://infinitykitchenandbathllc.com/wp-content/uploads/2024/12/Whole-house-remodel-by-Infinity-Kitchen-and-Bath.jpg" alt="Remodel vs renovation guide" loading="lazy"></div>
           <div class="blog-card-body">
             <span class="blog-tag">General</span>
+            <p class="blog-date" style="font-size:0.78rem;color:var(--gray-400);margin:0.3rem 0 0.5rem;">April 10, 2026</p>
             <h3>Remodel vs. Renovation: What's the Difference and Why It Matters</h3>
-            <p>These terms get used interchangeably — but they have different meanings for permits, insurance, and contractor quotes. Here's the clear explanation.</p>
+            <p>These terms have different meanings for permits, insurance, and contractor quotes. The clear explanation.</p>
           </div>
         </div>
       </a>
-    </div>
+
+    </div><!-- /grid -->
   </div>
 </section>
+
+<script>
+function filterBlog(cat, btn) {
+  document.querySelectorAll('.blog-filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('#blogGrid .blog-card-link').forEach(function(card){
+    if(cat==='all'||card.dataset.category.split(' ').indexOf(cat)!==-1){
+      card.removeAttribute('data-hidden');
+      card.style.display='';
+    } else {
+      card.setAttribute('data-hidden','');
+      card.style.display='none';
+    }
+  });
+}
+</script>
 
 <section class="cta-banner">
   <div class="container text-center">
@@ -211,7 +370,7 @@
         <div class="footer-badge"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> AZ ROC #339999 &mdash; Licensed, Bonded &amp; Insured</div>
       </div>
       <div class="footer-col"><h5>Services</h5><ul><li><a href="kitchen-remodeling.html">Kitchen Remodeling</a></li><li><a href="custom-countertops.html">Kitchen Countertops</a></li><li><a href="kitchen-cabinets.html">Kitchen Cabinets</a></li><li><a href="kitchen-backsplash.html">Kitchen Backsplash</a></li><li><a href="bathroom-remodeling.html">Bathroom Remodeling</a></li><li><a href="walk-in-showers.html">Walk-In Showers</a></li><li><a href="tub-to-shower.html">Tub-to-Shower</a></li><li><a href="groutless-shower-systems.html">Groutless Showers</a></li><li><a href="bathroom-vanities.html">Bathroom Vanities</a></li><li><a href="whole-house-remodeling.html">Whole House Remodeling</a></li><li><a href="aging-in-place.html">Aging in Place</a></li><li><a href="luxury-vinyl-flooring.html">LVP Flooring</a></li></ul></div>
-      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>      <div class="footer-col"><h5>Service Areas</h5><ul>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="blog.html">Blog</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>      <div class="footer-col"><h5>Service Areas</h5><ul>
         <li><a href="prescott-remodeling.html">Prescott, AZ</a></li>
         <li><a href="prescott-valley-remodeling.html">Prescott Valley, AZ</a></li>
         <li><a href="chino-valley-remodeling.html">Chino Valley, AZ</a></li>
@@ -220,7 +379,7 @@
         <li><a href="cordes-lakes-remodeling.html">Cordes Lakes, AZ</a></li>
         <li><a href="williamson-valley-remodeling.html">Williamson Valley, AZ</a></li>
       </ul></div>
-      <div class="footer-col"><h5>Contact</h5><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg><a href="tel:9288001998">928-800-1998</a></div><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg><span>723 N Montezuma St<br>Prescott, AZ 86301</span></div><div class="mt-3"><a href="contact.html" class="btn btn-gold btn-sm">Book Consultation</a></div></div>
+      <div class="footer-col"><h5>Contact</h5><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg><a href="tel:9288001998">928-800-1998</a></div><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg><span>723 N Montezuma St<br>Prescott, AZ 86301<br><em style="font-style:normal;color:var(--green-400);font-size:0.75rem;">By Appointment Only</em></span></div><div class="mt-3"><a href="contact.html" class="btn btn-gold btn-sm">Book Consultation</a></div></div>
     </div>
   </div>
   <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div></div>

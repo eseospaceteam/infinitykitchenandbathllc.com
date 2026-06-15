@@ -181,6 +181,48 @@
     <priority>0.75</priority>
   </url>
 
+  <!-- ═══ WEST VALLEY / MARICOPA LOCATION PAGES ═══════════════════════ -->
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/avondale-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/buckeye-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/goodyear-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/glendale-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/peoria-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/sun-city-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/sun-city-west-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://infinitykitchenandbathllc.com/surprise-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- ═══ BLOG / COMPARISON ARTICLES ════════════════════════════════ -->
   <url>
     <loc>https://infinitykitchenandbathllc.com/blog.html</loc>

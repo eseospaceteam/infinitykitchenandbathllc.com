@@ -107,17 +107,31 @@ if (lightbox) {
 // ---- Contact form ----
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
     const original = btn.textContent;
     btn.textContent = 'Sending...';
     btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Message Sent!';
-      contactForm.reset();
-      setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 3000);
-    }, 1200);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(contactForm))),
+      });
+      if (res.ok) {
+        btn.textContent = 'Request Sent!';
+        contactForm.reset();
+        setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
+      } else {
+        btn.textContent = 'Something went wrong — please call us';
+        setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
+      }
+    } catch {
+      btn.textContent = 'Something went wrong — please call us';
+      setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
+    }
   });
 }
 

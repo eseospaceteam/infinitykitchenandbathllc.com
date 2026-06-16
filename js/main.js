@@ -135,6 +135,21 @@ if (contactForm) {
   });
 }
 
+// ---- Call click tracking ----
+document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+  link.addEventListener('click', () => {
+    const number = link.href.replace('tel:', '');
+    // GA4
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'phone_call_click', { event_category: 'Contact', event_label: number });
+    }
+    // GTM dataLayer
+    if (window.dataLayer) {
+      window.dataLayer.push({ event: 'phone_call_click', phone_number: number });
+    }
+  });
+});
+
 // ---- Smooth anchor links ----
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', (e) => {

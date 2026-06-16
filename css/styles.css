@@ -125,6 +125,7 @@ p:last-child { margin-bottom: 0; }
 
 .section-cream { background: var(--cream); }
 .section-gray  { background: var(--gray-50); }
+.section-gray:not(.section) { padding: 5rem 0; }
 
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -684,6 +685,33 @@ p:last-child { margin-bottom: 0; }
 }
 .service-card-link:hover { gap: 0.6rem; color: var(--green-400); }
 a.service-card { text-decoration: none; color: inherit; }
+
+/* Simplified service cards — h4/p direct children, no .service-card-body wrapper */
+.service-card:not(:has(.service-card-body)):not(:has(.service-card-img)) {
+  padding: 1.5rem;
+}
+.service-card:not(:has(.service-card-body)):not(:has(.service-card-img)) h4,
+.service-card:not(:has(.service-card-body)):not(:has(.service-card-img)) h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--green-800);
+}
+.service-card:not(:has(.service-card-body)):not(:has(.service-card-img)) p {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  margin-bottom: 0;
+}
+a.service-card:not(:has(.service-card-body)):not(:has(.service-card-img))::after {
+  content: 'Learn More \2192';
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--green-500);
+  margin-top: 1rem;
+}
+a.service-card:not(:has(.service-card-body)):not(:has(.service-card-img)):hover::after {
+  color: var(--green-400);
+}
 
 /* ---- Pillar process blocks ---- */
 .pillar-process {

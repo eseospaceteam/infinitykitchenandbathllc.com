@@ -4,8 +4,8 @@
       position: fixed;
       left: 0;
       top: 50%;
-      transform: translateY(-50%) rotate(180deg);
-      writing-mode: vertical-lr;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
       background: #1B4332;
       color: #fff;
       border: none;

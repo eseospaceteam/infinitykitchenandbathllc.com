@@ -362,6 +362,13 @@
         body: JSON.stringify(payload),
       });
       if (res.ok) {
+        // GA4 lead conversion
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'generate_lead', { form_location: 'estimate_tab', form_id: 'ikbForm' });
+        }
+        if (window.dataLayer) {
+          window.dataLayer.push({ event: 'generate_lead', form_location: 'estimate_tab', form_id: 'ikbForm' });
+        }
         form.style.display = 'none';
         success.style.display = 'block';
         setTimeout(() => {

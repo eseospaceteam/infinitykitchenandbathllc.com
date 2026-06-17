@@ -121,6 +121,13 @@ if (contactForm) {
         body: JSON.stringify(Object.fromEntries(new FormData(contactForm))),
       });
       if (res.ok) {
+        // GA4 lead conversion
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'generate_lead', { form_location: 'contact_page', form_id: 'contactForm' });
+        }
+        if (window.dataLayer) {
+          window.dataLayer.push({ event: 'generate_lead', form_location: 'contact_page', form_id: 'contactForm' });
+        }
         btn.textContent = 'Request Sent!';
         contactForm.reset();
         setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);

@@ -19,7 +19,7 @@
       border-radius: 0 7px 7px 0;
       box-shadow: 3px 0 12px rgba(0,0,0,0.22);
       transition: background 0.2s;
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
     .ikb-tab:hover { background: #2B7A42; }
 
@@ -53,7 +53,7 @@
         color: #fff;
         border: none;
         cursor: pointer;
-        font-family: 'Inter', 'Helvetica Neue', sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
         transition: filter 0.15s;
       }
       .ikb-mobile-call { background: #1B4332; }
@@ -91,7 +91,7 @@
       transition: left 0.32s cubic-bezier(0.4,0,0.2,1);
       padding: 2rem 1.75rem 2.5rem;
       box-shadow: 4px 0 32px rgba(0,0,0,0.35);
-      font-family: 'Inter', 'Helvetica Neue', sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
     }
     .ikb-panel.ikb-open { left: 0; }
 

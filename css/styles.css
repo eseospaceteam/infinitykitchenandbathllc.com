@@ -3,7 +3,7 @@
    White & Forest Green Brand Palette
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Fonts: system Arial stack (set in :root) — no web-font load needed */
 
 /* ---- Variables ---- */
 :root {
@@ -42,8 +42,9 @@
   --border-dark:  rgba(255,255,255,0.09);
   --border-light: rgba(43,122,66,0.14);
 
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+  /* Senior-friendly: Arial-first, highly legible (headings stay strong via weight) */
+  --font-serif: Arial, Helvetica, 'Segoe UI', system-ui, sans-serif;
+  --font-sans:  Arial, Helvetica, 'Segoe UI', system-ui, sans-serif;
 
   --max-width: 1280px;
   --nav-height: 118px;
@@ -69,9 +70,9 @@ input, textarea, select { font: inherit; }
 /* ---- Base ---- */
 body {
   font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--gray-700);
+  font-size: 1.0625rem;   /* ~17px — larger base for senior readability */
+  line-height: 1.75;
+  color: #1F2937;          /* darker body text for higher contrast */
   background: var(--white);
   overflow-x: hidden;
 }
@@ -82,10 +83,10 @@ h1, h2, h3, h4, h5 {
   line-height: 1.2;
   color: var(--green-800);
 }
-h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; }
-h2 { font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 600; }
-h3 { font-size: clamp(1.3rem, 2.2vw, 1.75rem); font-weight: 600; }
-h4 { font-size: 1.2rem; font-weight: 600; }
+h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: clamp(1.35rem, 2.2vw, 1.8rem); font-weight: 700; }
+h4 { font-size: 1.25rem; font-weight: 700; }
 p { margin-bottom: 1rem; }
 p:last-child { margin-bottom: 0; }
 

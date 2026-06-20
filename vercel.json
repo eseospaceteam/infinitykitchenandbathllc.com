@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/frameless-vs-framed-shower.html", "destination": "/groutless-vs-tile-shower.html", "permanent": true },
+    { "source": "/frameless-vs-framed-shower", "destination": "/groutless-vs-tile-shower.html", "permanent": true },
+    { "source": "/services/tub-to-shower-conversion", "destination": "/tub-to-shower.html", "permanent": true },
+    { "source": "/services/tub-to-shower-conversion/", "destination": "/tub-to-shower.html", "permanent": true }
+  ]
+}

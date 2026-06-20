@@ -197,6 +197,16 @@ p:last-child { margin-bottom: 0; }
   color: var(--white);
   transform: translateY(-2px);
 }
+/* Light outline button for use on dark hero banners */
+.btn-outline-light {
+  border: 1.5px solid rgba(255,255,255,0.55);
+  color: var(--white);
+}
+.btn-outline-light:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
 .btn-dark {
   background: var(--green-700);
   color: var(--white);

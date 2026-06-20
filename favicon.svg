@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Infinity Kitchen & Bath">
+  <rect width="512" height="512" rx="96" fill="#1D5535"/>
+  <g fill="none" stroke="#ffffff" stroke-width="42">
+    <circle cx="156" cy="256" r="100"/>
+    <circle cx="356" cy="256" r="100"/>
+  </g>
+</svg>

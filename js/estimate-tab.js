@@ -79,21 +79,22 @@
 
     .ikb-panel {
       position: fixed;
-      left: -400px;
+      left: 0;
       top: 0;
       height: 100%;
       width: 360px;
       max-width: 100vw;
+      transform: translateX(-100%);
       background: #1B4332;
       color: #fff;
       z-index: 1202;
       overflow-y: auto;
-      transition: left 0.32s cubic-bezier(0.4,0,0.2,1);
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
       padding: 2rem 1.75rem 2.5rem;
       box-shadow: 4px 0 32px rgba(0,0,0,0.35);
       font-family: Arial, Helvetica, sans-serif;
     }
-    .ikb-panel.ikb-open { left: 0; }
+    .ikb-panel.ikb-open { transform: translateX(0); }
 
     .ikb-panel-close {
       position: absolute;

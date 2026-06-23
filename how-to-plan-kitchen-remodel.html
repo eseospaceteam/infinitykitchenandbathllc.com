@@ -6,8 +6,11 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    // Consent Mode v2 defaults: analytics granted in the US (opt-out), denied in EU/EEA/UK/CH until opt-in
+    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'granted'});
+    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
+    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc});}}catch(e){}
     gtag('js', new Date());
-
     gtag('config', 'G-EK9HSW7F90');
   </script>
   <meta charset="UTF-8">
@@ -321,9 +324,10 @@
       </div>
     </div>
   </div>
-  <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div></div></div>
+  <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" class="ikb-cookie-prefs" onclick="if(window.ikbCookieSettings){ikbCookieSettings();return false;}">Cookie Preferences</a></div></div></div>
 </footer>
 <script src="js/main.js"></script>
+<script src="js/cookie-consent.js"></script>
 <script src="js/estimate-tab.js"></script>
 </body>
 </html>

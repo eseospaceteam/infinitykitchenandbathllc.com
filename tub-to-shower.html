@@ -6,8 +6,11 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    // Consent Mode v2 defaults: analytics granted in the US (opt-out), denied in EU/EEA/UK/CH until opt-in
+    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'granted'});
+    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
+    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc});}}catch(e){}
     gtag('js', new Date());
-
     gtag('config', 'G-EK9HSW7F90');
   </script>
   <meta charset="UTF-8">
@@ -449,9 +452,10 @@
       <div class="footer-col"><h5>Showrooms</h5><div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg><span><strong style="display:block;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--green-400);margin-bottom:0.15rem;">Prescott</strong>723 N Montezuma St<br>Prescott, AZ 86301<br><a href="tel:9288001998" style="color:var(--green-400);font-size:0.78rem;">928-800-1998</a><br><em style="font-style:normal;color:var(--green-400);font-size:0.75rem;">By Appointment Only</em></span></div><div class="footer-contact-item" style="margin-top:0.75rem;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 018 14.58a31.481 31.481 0 01-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0110 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 002 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 110-4 2 2 0 010 4z"/></svg><span><strong style="display:block;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--green-400);margin-bottom:0.15rem;">Avondale <em style="font-style:normal;color:var(--gold);">(Coming Soon)</em></strong>316 N Central Ave<br>Avondale, AZ 85323<br><a href="tel:6028856998" style="color:var(--green-400);font-size:0.78rem;">602-885-6998</a><br><em style="font-style:normal;color:var(--green-400);font-size:0.75rem;">By Appointment Only</em></span></div><div style="margin-top:1.25rem;"><a href="contact.html" class="btn btn-gold btn-sm">Book Consultation</a></div></div>
     </div>
   </div>
-  <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div></div>
+  <div class="footer-bottom"><div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;width:100%;"><p style="margin:0;">&copy; 2025 Infinity Kitchen and Bath LLC. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a><a href="cookie-policy.html">Cookie Policy</a><a href="#" class="ikb-cookie-prefs" onclick="if(window.ikbCookieSettings){ikbCookieSettings();return false;}">Cookie Preferences</a></div></div></div>
 </footer>
 <script src="js/main.js"></script>
+<script src="js/cookie-consent.js"></script>
 <script src="js/estimate-tab.js"></script>
 </body>
 </html>

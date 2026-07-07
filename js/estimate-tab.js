@@ -127,8 +127,18 @@
     .ikb-panel .ikb-sub {
       font-size: 0.85rem;
       color: rgba(255,255,255,0.7);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
+    .ikb-stars {
+      font-size: 0.85rem;
+      margin: 0 0 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .ikb-stars-icons { color: #F5B841; letter-spacing: 1px; font-size: 0.95rem; }
+    .ikb-stars-txt { color: rgba(255,255,255,0.72); }
+    .ikb-stars-txt strong { color: #fff; }
 
     .ikb-field {
       width: 100%;
@@ -273,6 +283,7 @@
       <p style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin:0 0 0.4rem;">Infinity Kitchen &amp; Bath</p>
       <h3>Get Your Free Estimate</h3>
       <p class="ikb-sub">We'll call or text you back within one business day.</p>
+      <div class="ikb-stars"><span class="ikb-stars-icons">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span class="ikb-stars-txt"><strong>5.0</strong> &middot; 16 Google reviews</span></div>
       <form id="ikbForm" novalidate>
         <input class="ikb-field" type="text"  name="name"    placeholder="Your Name"           required autocomplete="name">
         <input class="ikb-field" type="tel"   name="phone"   placeholder="Phone Number"        required autocomplete="tel">
@@ -290,7 +301,7 @@
       </div>
       <div class="ikb-call">
         ${PHONE_ICON}
-        <span>Rather call? <a href="tel:9288001998">928-800-1998</a></span>
+        <span>Rather call? <a href="tel:${PHONE_NUM}">${PHONE_DISPLAY}</a></span>
       </div>
       <div class="ikb-trust">
         <p class="ikb-trust-label">Why Infinity Kitchen &amp; Bath</p>
@@ -336,6 +347,21 @@
 
   const mobileEstBtn = document.getElementById('ikbMobileEstimate');
   if (mobileEstBtn) mobileEstBtn.addEventListener('click', open);
+
+  // Expose the panel + route in-content primary CTAs to the low-friction estimate form.
+  // Progressive enhancement: if JS is off, the anchor still navigates to contact.html.
+  window.ikbOpenEstimate = open;
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest(
+      '[data-estimate], a.btn-gold[href="contact.html"], a.btn-gold[href="/contact.html"]'
+    );
+    if (!trigger) return;
+    e.preventDefault();
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'open_estimate', { source: 'inline_cta' });
+    }
+    open();
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

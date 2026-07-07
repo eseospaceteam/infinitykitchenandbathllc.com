@@ -87,6 +87,8 @@ h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.0
 h2 { font-size: clamp(1.9rem, 3.5vw, 3rem); font-weight: 700; letter-spacing: -0.01em; }
 h3 { font-size: clamp(1.35rem, 2.2vw, 1.8rem); font-weight: 700; }
 h4 { font-size: 1.25rem; font-weight: 700; }
+/* Card/step/pillar titles promoted from h4 to h3 for heading hierarchy — keep h4 sizing */
+h3.h-card { font-size: 1.25rem; }
 p { margin-bottom: 1rem; }
 p:last-child { margin-bottom: 0; }
 

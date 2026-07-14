@@ -107,6 +107,8 @@ if (lightbox) {
 // ---- Contact form ----
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
+  // Timestamp when the form loaded — lets the server reject instant bot submits.
+  const contactShownAt = Date.now();
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
@@ -115,10 +117,12 @@ if (contactForm) {
     btn.disabled = true;
 
     try {
+      const payload = Object.fromEntries(new FormData(contactForm));
+      payload.elapsed = Date.now() - contactShownAt;
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(contactForm))),
+        body: JSON.stringify(payload),
       });
       if (res.ok) {
         // GA4 lead conversion

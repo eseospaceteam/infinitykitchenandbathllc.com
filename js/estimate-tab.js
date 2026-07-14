@@ -289,6 +289,8 @@
         <input class="ikb-field" type="tel"   name="phone"   placeholder="Phone Number"        required autocomplete="tel">
         <input class="ikb-field" type="email" name="email"   placeholder="Email (optional)"             autocomplete="email">
         <textarea class="ikb-field"           name="project" placeholder="What's the project? (optional)"></textarea>
+        <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" value="">
+
         <button class="ikb-btn" type="submit" id="ikbSubmit">${SEND_ICON} Request Free Estimate</button>
         <p class="ikb-disclaimer">By submitting you agree to be contacted by phone, text, or email. Msg &amp; data rates may apply.</p>
       </form>
@@ -328,6 +330,10 @@
   const form    = document.getElementById('ikbForm');
   const success = document.getElementById('ikbSuccess');
   const submitBtn = document.getElementById('ikbSubmit');
+
+  // Timestamp when the form first became reachable — used to reject
+  // near-instant bot submissions server-side.
+  const formShownAt = Date.now();
 
   function open() {
     panel.classList.add('ikb-open');
@@ -376,6 +382,8 @@
       service: 'Estimate Request (Quick Form)',
       address: '',
       'consult-type': '',
+      company: data.company || '',
+      elapsed: Date.now() - formShownAt,
     };
 
     const original = submitBtn.innerHTML;

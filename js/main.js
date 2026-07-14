@@ -142,19 +142,36 @@ if (contactForm) {
   });
 }
 
-// ---- Call click tracking ----
-document.querySelectorAll('a[href^="tel:"]').forEach(link => {
-  link.addEventListener('click', () => {
-    const number = link.href.replace('tel:', '');
-    // GA4
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'phone_call_click', { event_category: 'Contact', event_label: number });
-    }
-    // GTM dataLayer
-    if (window.dataLayer) {
-      window.dataLayer.push({ event: 'phone_call_click', phone_number: number });
-    }
-  });
+// ---- Contact click tracking (delegated) ----
+// Delegated at the document level so it also covers links injected after load
+// (e.g. the estimate-tab.js mobile call bar and slide-in panel), plus email
+// and map/directions clicks. Fires GA4 events + GTM dataLayer pushes.
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href]');
+  if (!link) return;
+  const href = link.getAttribute('href') || '';
+
+  let event, params, dl;
+  if (href.startsWith('tel:')) {
+    const number = href.replace('tel:', '');
+    event = 'phone_call_click';
+    params = { event_category: 'Contact', event_label: number };
+    dl = { event: 'phone_call_click', phone_number: number };
+  } else if (href.startsWith('mailto:')) {
+    const addr = href.replace('mailto:', '').split('?')[0];
+    event = 'email_click';
+    params = { event_category: 'Contact', event_label: addr };
+    dl = { event: 'email_click', email: addr };
+  } else if (/google\.[^/]+\/maps|maps\.app\.goo\.gl|goo\.gl\/maps|\/maps\//.test(href) || link.hasAttribute('data-track-map')) {
+    event = 'directions_click';
+    params = { event_category: 'Contact', event_label: href };
+    dl = { event: 'directions_click', map_url: href };
+  } else {
+    return;
+  }
+
+  if (typeof gtag !== 'undefined') gtag('event', event, params);
+  if (window.dataLayer) window.dataLayer.push(dl);
 });
 
 // ---- Smooth anchor links ----

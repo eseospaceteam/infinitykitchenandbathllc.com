@@ -61,6 +61,27 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- ═══ PRESCOTT NEIGHBORHOODS ═══ -->
+  <url>
+    <loc>https://www.infinitykitchenandbathllc.com/south-prescott-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.infinitykitchenandbathllc.com/downtown-prescott-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.infinitykitchenandbathllc.com/prescott-lakes-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.infinitykitchenandbathllc.com/yavapai-hills-remodeling.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://www.infinitykitchenandbathllc.com/custom-countertops.html</loc>
     <changefreq>monthly</changefreq>

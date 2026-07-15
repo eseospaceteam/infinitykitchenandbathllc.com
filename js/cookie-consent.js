@@ -1,5 +1,5 @@
 /*!
- * Infinity Kitchen & Bath — Cookie consent banner
+ * Infinity Kitchens and Baths — Cookie consent banner
  * Works with Google Consent Mode v2 (defaults set inline in <head>).
  * - US visitors: analytics granted by default (opt-out). Declining sets analytics_storage=denied.
  * - EU/EEA/UK/CH visitors: analytics denied by default (opt-in). Accepting sets analytics_storage=granted.

@@ -88,7 +88,7 @@ export default async function handler(req, res) {
 
   const html = `
     <h2 style="margin:0 0 16px;color:#1B4332;font-family:sans-serif;">
-      New Lead — Infinity Kitchen &amp; Bath
+      New Lead — Infinity Kitchens and Baths
     </h2>
     <table style="border-collapse:collapse;width:100%;max-width:580px;font-family:sans-serif;font-size:14px;">
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;width:140px;">Name</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(firstName)} ${esc(lastName)}</td></tr>
@@ -114,7 +114,7 @@ export default async function handler(req, res) {
   ].join('\n');
 
   const body = new URLSearchParams({
-    from: `Infinity Kitchen & Bath <noreply@send.infinitykitchenandbathllc.com>`,
+    from: `Infinity Kitchens and Baths <noreply@send.infinitykitchenandbathllc.com>`,
     to: 'stevehuntkitchens@gmail.com',
     cc: 'hello@eseospace.com',
     subject: `New Lead: ${firstName} ${lastName} — ${serviceLabel}`,

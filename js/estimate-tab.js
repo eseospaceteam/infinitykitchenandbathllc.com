@@ -280,7 +280,7 @@
     <div class="ikb-overlay" id="ikbOverlay"></div>
     <div class="ikb-panel" id="ikbPanel" role="dialog" aria-modal="true" aria-label="Request a Free Estimate">
       <button class="ikb-panel-close" id="ikbClose" aria-label="Close">&times;</button>
-      <p style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin:0 0 0.4rem;">Infinity Kitchen &amp; Bath</p>
+      <p style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin:0 0 0.4rem;">Infinity Kitchens and Baths</p>
       <h3>Get Your Free Estimate</h3>
       <p class="ikb-sub">We'll call or text you back within one business day.</p>
       <div class="ikb-stars"><span class="ikb-stars-icons">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span class="ikb-stars-txt"><strong>5.0</strong> &middot; 16 Google reviews</span></div>
@@ -306,7 +306,7 @@
         <span>Rather call? <a href="tel:${PHONE_NUM}">${PHONE_DISPLAY}</a></span>
       </div>
       <div class="ikb-trust">
-        <p class="ikb-trust-label">Why Infinity Kitchen &amp; Bath</p>
+        <p class="ikb-trust-label">Why Infinity Kitchens and Baths</p>
         <div class="ikb-trust-item">${CHECKSHIELD} <span><strong>AZ ROC #339999</strong> — Arizona Licensed Contractor</span></div>
         <div class="ikb-trust-item">${CHECKSHIELD} <span>Licensed, Bonded &amp; Insured</span></div>
         <div class="ikb-trust-item">${CHECKSHIELD} <span>Free in-home or showroom consultation</span></div>

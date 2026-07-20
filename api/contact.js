@@ -43,7 +43,32 @@ export default async function handler(req, res) {
     return fakeOk();
   }
 
-  // 4) Light gibberish heuristic on free-text fields — keyboard-mash spam has
+  // 4) Random-token detector — the signature of the bot leads that keep getting
+  //    through (e.g. name "gwhWvuVfktsvExuKiWoynzAT", message "EyBivCOePwdFDFaexZwJmqi").
+  //    Real names and messages never mash capitals into the middle of a token,
+  //    string long runs of consonants, or pack a 15+ char single token with
+  //    almost no vowels. Legit interior caps (McKenna, DeShawn, iPhone) hit at
+  //    most one transition, so the >=3 threshold leaves them alone.
+  const looksRandom = (s) => {
+    const str = String(s || '').trim();
+    if (str.length < 8) return false;
+    const interiorCaps = (str.match(/[a-z][A-Z]/g) || []).length;
+    if (interiorCaps >= 3) return true;
+    const runs = str.match(/[bcdfghjklmnpqrstvwxz]+/gi) || [];
+    const longestConsonantRun = runs.reduce((m, w) => Math.max(m, w.length), 0);
+    if (longestConsonantRun >= 6) return true;
+    const letters = (str.match(/[a-z]/gi) || []).length;
+    const vowels = (str.match(/[aeiou]/gi) || []).length;
+    const vowelRatio = letters ? vowels / letters : 0;
+    if (!/\s/.test(str) && str.length >= 15 && vowelRatio < 0.35) return true;
+    return false;
+  };
+  const fullName = `${firstName || ''} ${lastName || ''}`.trim();
+  if (looksRandom(fullName) || looksRandom(message)) {
+    return fakeOk();
+  }
+
+  // 5) Light gibberish heuristic on longer free-text — keyboard-mash spam has
   //    very few spaces/vowels relative to length. Kept conservative so it never
   //    trips on a short, real message.
   const looksLikeGibberish = (s) => {

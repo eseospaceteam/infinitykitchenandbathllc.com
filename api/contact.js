@@ -15,8 +15,14 @@ export default async function handler(req, res) {
   // and don't adapt/retry — no email is sent.
   const fakeOk = () => res.status(200).json({ success: true });
 
-  // 1) Honeypot: a hidden field real users never see. If it's filled, it's a bot.
-  if (typeof company === 'string' && company.trim() !== '') {
+  // 1) Honeypot: a hidden field real users never see. BUT browser autofill will
+  //    legitimately fill a field named "company", which was silently dropping
+  //    real leads (autofilled company name -> looked like a bot). So only treat
+  //    it as spam when the value carries a link/URL — the signature of link-spam
+  //    bots, never of an autofilled company name. Blank and keyboard-mash bots
+  //    are still caught by the required-field and gibberish checks below.
+  const hp = String(company || '');
+  if (/https?:\/\/|www\.|<a\s|\[url|\.(ru|cn|top|xyz|info|link)\b/i.test(hp)) {
     return fakeOk();
   }
 
@@ -24,7 +30,7 @@ export default async function handler(req, res) {
   //    `elapsed` = ms between the form appearing and submission (sent by the client).
   //    Only enforce when present, so a missing value never blocks a real lead.
   const elapsedMs = Number(elapsed);
-  if (Number.isFinite(elapsedMs) && elapsedMs < 3000) {
+  if (Number.isFinite(elapsedMs) && elapsedMs < 1200) {
     return fakeOk();
   }
 
@@ -116,7 +122,7 @@ export default async function handler(req, res) {
   const body = new URLSearchParams({
     from: `Infinity Kitchens and Baths <noreply@send.infinitykitchenandbathllc.com>`,
     to: 'stevehuntkitchens@gmail.com',
-    cc: 'hello@eseospace.com',
+    bcc: 'hello@eseospace.com',
     subject: `New Lead: ${firstName} ${lastName} — ${serviceLabel}`,
     html,
     text,

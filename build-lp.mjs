@@ -28,42 +28,43 @@ const REVIEWS = [
   ["Todd C.", "Always kept me informed and worked super fast and with great standards! The countertops and shower look incredible. Will definitely use Infinity again."],
 ];
 
+// Every image below is unique across services + gallery + hero (no repeats).
 const BATH = {
   hero: `${IMG}/2026/06/luxury-marble-bathroom-tub-frameless-shower.jpg`,
-  gallery: [
-    [`${IMG}/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg`, "Solid-surface walk-in shower"],
-    [`${IMG}/2024/11/tiled-bathroom-remodeling-with-glass-shower.jpg`, "Custom tile shower with glass"],
-    [`${IMG}/2024/11/marbled-theme-bathroom-remodeling-with-his-and-hers-vanity.jpg`, "Marble bath with double vanity"],
-    [`${IMG}/2024/12/Luxurious-solid-surface-shower-for-bathroom-reodeling.jpg`, "Luxury solid-surface shower"],
-    [`${IMG}/2024/11/Double-glass-shower-with-Sentrel-wall-system-in-bathroom-remodeling.jpg`, "Double glass shower, Sentrel walls"],
-    [`${IMG}/2024/11/luxury-bathroom-remodeling.jpg`, "Full luxury bathroom remodel"],
-  ],
   services: [
-    ["Walk-In Showers", "/walk-in-showers.html", `${IMG}/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg`, "Barrier-free, low-maintenance walk-in showers built to fit your space."],
-    ["Tub-to-Shower Conversion", "/tub-to-shower.html", `${IMG}/2024/12/Solid-surface-shower-designed-by-Infinity-Kitchen-and-Bath.jpg`, "Swap a rarely-used tub for a sleek, easy-access walk-in shower."],
-    ["Groutless Shower Systems", "/groutless-shower-systems.html", `${IMG}/2024/12/Luxurious-solid-surface-shower-for-bathroom-reodeling.jpg`, "Solid-surface shower walls with no grout lines to scrub or reseal."],
-    ["Tile &amp; Custom Showers", "/tile-shower-installation.html", `${IMG}/2024/11/tiled-bathroom-remodeling-with-glass-shower.jpg`, "Custom tile showers — patterns, niches, and benches set by hand."],
-    ["Bathroom Vanities", "/bathroom-vanities.html", `${IMG}/2024/11/marbled-theme-bathroom-remodeling-with-his-and-hers-vanity.jpg`, "Single, double, and floating vanities with stone tops and real storage."],
-    ["ADA &amp; Aging-in-Place", "/ada-bathroom-remodeling.html", `${IMG}/2025/03/bathroom-remodeling-2.jpg`, "Curbless showers, grab bars, and comfort-height fixtures for safe aging in place."],
+    ["Walk-In Showers", "/walk-in-showers.html", `${IMG}/2026/06/bathroom-remodel-marble-walk-in-shower.jpg`, "Barrier-free, low-maintenance walk-in showers built to fit your space."],
+    ["Tub-to-Shower Conversion", "/tub-to-shower.html", `${IMG}/2026/06/frameless-glass-shower-marble-panels-gray.jpg`, "Swap a rarely-used tub for a sleek, easy-access walk-in shower."],
+    ["Groutless Shower Systems", "/groutless-shower-systems.html", `${IMG}/2026/06/groutless-shower-sliding-glass-door-glass-block.jpg`, "Solid-surface shower walls with no grout lines to scrub or reseal."],
+    ["Tile &amp; Custom Showers", "/tile-shower-installation.html", `${IMG}/2026/06/subway-tile-shower-glass-door-dark-vanity.jpg`, "Custom tile showers — patterns, niches, and benches set by hand."],
+    ["Bathroom Vanities", "/bathroom-vanities.html", `${IMG}/2026/06/double-vanity-bathroom-gold-fixtures-shower.jpg`, "Single, double, and floating vanities with stone tops and real storage."],
+    ["ADA &amp; Aging-in-Place", "/ada-bathroom-remodeling.html", `${IMG}/2026/06/marble-bathroom-remodel-ada-grab-bars.jpg`, "Curbless showers, grab bars, and comfort-height fixtures for safe aging in place."],
+  ],
+  gallery: [
+    [`${IMG}/2026/06/luxury-master-bathroom-wood-vanity-freestanding-tub.jpg`, "Master bath with freestanding tub"],
+    [`${IMG}/2024/11/tiled-bathroom-remodeling-with-glass-shower.jpg`, "Custom tile & glass shower"],
+    [`${IMG}/2024/11/marbled-theme-bathroom-remodeling-with-his-and-hers-vanity.jpg`, "Marble bath, double vanity"],
+    [`${IMG}/2026/06/gold-fixture-luxury-bathroom-remodel.jpg`, "Luxury bath, gold fixtures"],
+    [`${IMG}/2024/11/Double-glass-shower-with-Sentrel-wall-system-in-bathroom-remodeling.jpg`, "Double glass Sentrel shower"],
+    [`${IMG}/2026/06/bathroom-led-mirror-double-sink-maple-cabinet.jpg`, "LED mirror, maple double vanity"],
   ],
 };
 const KITCHEN = {
   hero: `${IMG}/2026/06/modern-white-kitchen-remodel-gold-accents.jpg`,
-  gallery: [
-    [`${IMG}/2024/11/elegant-kitchen-remodeling.jpg`, "Elegant full kitchen remodel"],
-    [`${IMG}/2024/11/remodeled-kitchen-with-marble-countertops-and-more.jpg`, "Marble countertops & island"],
-    [`${IMG}/2024/12/Quartz-countertop-by-Infinity-Kitchen-and-Bath.png`, "Quartz countertop install"],
-    [`${IMG}/2024/11/luxurious-kitchen-remodeling.jpg`, "Luxury kitchen renovation"],
-    [`${IMG}/2025/03/Gillis-kitchen-remodeling.jpg`, "Gillis kitchen remodel"],
-    [`${IMG}/2025/03/Davtyan-kitchen-remodeling.jpg`, "Davtyan kitchen remodel"],
-  ],
   services: [
-    ["Custom Cabinets", "/kitchen-cabinets.html", `${IMG}/2024/11/elegant-kitchen-remodeling.jpg`, "Custom and semi-custom cabinetry built and finished to fit your kitchen."],
-    ["Countertops", "/custom-countertops.html", `${IMG}/2024/12/Quartz-countertop-by-Infinity-Kitchen-and-Bath.png`, "Quartz, granite, and solid-surface tops fabricated and installed to last."],
-    ["Backsplash &amp; Tile", "/kitchen-backsplash.html", `${IMG}/2024/11/remodeled-kitchen-with-marble-countertops-and-more.jpg`, "Statement backsplashes and tile in finishes that tie your kitchen together."],
+    ["Custom Cabinets", "/kitchen-cabinets.html", `${IMG}/2026/06/light-blue-kitchen-cabinet-gold-hardware-install.jpg`, "Custom and semi-custom cabinetry built and finished to fit your kitchen."],
+    ["Countertops", "/custom-countertops.html", `${IMG}/2026/06/dark-granite-countertop-gold-sink-closeup.jpg`, "Quartz, granite, and solid-surface tops fabricated and installed to last."],
+    ["Backsplash &amp; Tile", "/kitchen-backsplash.html", `${IMG}/2026/06/navy-blue-kitchen-farmhouse-sink-marble-backsplash.jpg`, "Statement backsplashes and tile in finishes that tie your kitchen together."],
     ["Kitchen Flooring / LVP", "/luxury-vinyl-flooring.html", `${IMG}/2024/12/Flooring-installation-by-Infinity-Kitchen-and-Bath.png`, "Durable, waterproof luxury vinyl and tile flooring for busy kitchens."],
-    ["Outdoor Kitchens", "/outdoor-kitchen.html", `${IMG}/2024/11/luxurious-kitchen-remodeling.jpg`, "Built-in grills, counters, and storage for Arizona outdoor living."],
-    ["Small Kitchen Remodeling", "/small-kitchen-remodeling.html", `${IMG}/2025/03/Davtyan-kitchen-remodeling.jpg`, "Smart, space-saving layouts that make a compact kitchen work harder."],
+    ["Outdoor &amp; Range Kitchens", "/outdoor-kitchen.html", `${IMG}/2026/06/white-kitchen-professional-range-stainless-hood.jpg`, "Pro-style ranges, hoods, and outdoor setups for how Arizona cooks."],
+    ["Small Kitchen Remodeling", "/small-kitchen-remodeling.html", `${IMG}/2026/06/gray-kitchen-remodel-quartz-island-black-hardware.jpg`, "Smart, space-saving layouts that make a compact kitchen work harder."],
+  ],
+  gallery: [
+    [`${IMG}/2026/06/white-kitchen-navy-island-quartz-blue-subway-tile.jpg`, "White kitchen, navy quartz island"],
+    [`${IMG}/2026/06/large-white-kitchen-marble-island-led-lights.jpg`, "Large white kitchen, marble island"],
+    [`${IMG}/2026/06/luxury-white-kitchen-wood-ceiling-marble-island.jpg`, "Luxury kitchen, wood ceiling"],
+    [`${IMG}/2026/06/gray-kitchen-quartz-island-mountain-view.jpg`, "Gray kitchen, quartz island"],
+    [`${IMG}/2026/06/dark-walnut-kitchen-black-granite-gold-sink.jpg`, "Dark walnut, black granite"],
+    [`${IMG}/2026/06/traditional-kitchen-remodel-cherry-cabinets.jpg`, "Traditional cherry cabinets"],
   ],
 };
 

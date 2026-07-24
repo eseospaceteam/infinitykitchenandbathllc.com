@@ -190,3 +190,44 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ---- 15th-anniversary promo (15 years / 15% off) ----
+// Click on the top bar → GA4 event, then land on contact.html?promo=15for15
+// where we confirm the offer and tag the lead so it's identifiable in email.
+const promoBar = document.getElementById('promoBar');
+if (promoBar) {
+  promoBar.addEventListener('click', () => {
+    const params = { promo_id: '15for15', promo_name: '15 Years / 15% Off' };
+    if (typeof gtag !== 'undefined') gtag('event', 'select_promotion', params);
+    if (window.dataLayer) window.dataLayer.push({ event: 'select_promotion', ...params });
+  });
+}
+
+if (new URLSearchParams(location.search).get('promo') === '15for15') {
+  const form = document.getElementById('contactForm');
+  if (form) {
+    // Preselect the in-home consult — that's the visit we want to book.
+    const consult = form.querySelector('#consult-type');
+    if (consult && !consult.value) consult.value = 'in-home';
+
+    // Tag the message so the 15% request travels with the lead email.
+    const message = form.querySelector('#message');
+    const tag = "I'd like to claim the 15% anniversary discount.";
+    if (message && !message.value.includes(tag)) {
+      message.value = message.value ? `${message.value}\n\n${tag}` : `${tag}\n\n`;
+    }
+
+    const ribbon = document.createElement('div');
+    ribbon.className = 'promo-claimed';
+    ribbon.innerHTML =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">' +
+      '<path d="M8 16A8 8 0 108 0a8 8 0 000 16zm3.97-10.03a.75.75 0 00-1.08-1.04L7.477 9.417 5.384 7.323a.75.75 0 00-1.06 1.06l2.646 2.647a.75.75 0 001.079-.02l3.992-4.99z"/></svg>' +
+      "<div><strong>15% anniversary discount applied to your request</strong>" +
+      "<p>Finish the form below and we'll confirm your free in-home consultation — we come to you, measure, and price the job with the 15% already taken off.</p></div>";
+    form.parentNode.insertBefore(ribbon, form);
+
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'view_promotion', { promo_id: '15for15', promo_name: '15 Years / 15% Off' });
+    }
+  }
+}

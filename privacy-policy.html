@@ -6,12 +6,13 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    // Consent Mode v2 defaults: analytics granted in the US (opt-out), denied in EU/EEA/UK/CH until opt-in
-    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'granted'});
+    // Consent Mode v2 defaults: analytics + ads granted in the US (opt-out), denied in EU/EEA/UK/CH until opt-in
+    gtag('consent', 'default', {'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
     gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
-    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc});}}catch(e){}
+    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc,'ad_storage':_ikbc,'ad_user_data':_ikbc,'ad_personalization':_ikbc});}}catch(e){}
     gtag('js', new Date());
     gtag('config', 'G-EK9HSW7F90');
+    gtag('config', 'AW-17095449186');
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -200,7 +201,7 @@
         <li><strong>Email service providers</strong> — for responding to inquiries</li>
         <li><strong>Hosting providers</strong> — for operating and maintaining the Site</li>
       </ul>
-      <p>These third parties are contractually restricted from using your information for purposes other than those described. We do not currently integrate with advertising platforms, remarketing services, or social media tracking pixels.</p>
+      <p>These third parties are contractually restricted from using your information for purposes other than those described. We use Google Ads conversion measurement to understand which of our advertisements lead to enquiries. We do not integrate with social media tracking pixels, and we do not sell your personal information.</p>
 
       <h2>Your Rights and Choices</h2>
       <p>You may request access to, correction of, or deletion of personal information we hold about you by contacting us at the information below. We will respond to such requests within a reasonable time. If you have received communications from us and wish to opt out of further contact, simply reply to any email or call us and we will honor your request promptly.</p>

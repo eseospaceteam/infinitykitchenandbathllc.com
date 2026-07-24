@@ -1,8 +1,8 @@
 /*!
  * Infinity Kitchens and Baths — Cookie consent banner
  * Works with Google Consent Mode v2 (defaults set inline in <head>).
- * - US visitors: analytics granted by default (opt-out). Declining sets analytics_storage=denied.
- * - EU/EEA/UK/CH visitors: analytics denied by default (opt-in). Accepting sets analytics_storage=granted.
+ * - US visitors: analytics + ads granted by default (opt-out). Declining denies both.
+ * - EU/EEA/UK/CH visitors: everything denied by default (opt-in). Accepting grants both.
  * Choice is stored in localStorage under "ikb_consent" ("granted" | "denied").
  */
 (function () {
@@ -22,9 +22,9 @@
     // state: "granted" | "denied"
     gtag('consent', 'update', {
       analytics_storage: state,
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
+      ad_storage: state,
+      ad_user_data: state,
+      ad_personalization: state
     });
   }
 

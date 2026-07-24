@@ -6,12 +6,13 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    // Consent Mode v2 defaults: analytics granted in the US (opt-out), denied in EU/EEA/UK/CH until opt-in
-    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'granted'});
+    // Consent Mode v2 defaults: analytics + ads granted in the US (opt-out), denied in EU/EEA/UK/CH until opt-in
+    gtag('consent', 'default', {'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
     gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
-    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc});}}catch(e){}
+    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc,'ad_storage':_ikbc,'ad_user_data':_ikbc,'ad_personalization':_ikbc});}}catch(e){}
     gtag('js', new Date());
     gtag('config', 'G-EK9HSW7F90');
+    gtag('config', 'AW-17095449186');
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,7 +160,7 @@
       <p>Cookies are small text files that a website stores on your device when you visit. They are widely used to make websites work, to remember your preferences, and to provide information to the site owner about how the site is used. &ldquo;Similar technologies&rdquo; include browser storage such as <code>localStorage</code>, which we use to remember your cookie choice.</p>
 
       <h2>How We Use Cookies</h2>
-      <p>We keep our use of cookies deliberately minimal. We use them only to remember your consent preference and to understand, in aggregate, how visitors find and use our Site so we can improve it. <strong>We do not use advertising, remarketing, or social media tracking cookies, and we do not sell your personal information.</strong></p>
+      <p>We keep our use of cookies deliberately minimal. We use them to remember your consent preference, to understand in aggregate how visitors find and use our Site, and to measure the performance of our Google Ads campaigns &mdash; for example, to know which ad led to a contact form submission. <strong>We do not use social media tracking cookies, and we do not sell your personal information.</strong> You can decline advertising and analytics cookies at any time using the &ldquo;Cookie Preferences&rdquo; link in our footer.</p>
 
       <h3>Categories of Cookies We Use</h3>
       <p style="overflow-x:auto;display:block;">

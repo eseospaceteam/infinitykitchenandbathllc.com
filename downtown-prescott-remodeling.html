@@ -6,11 +6,12 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'granted'});
+    gtag('consent', 'default', {'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
     gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
-    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc});}}catch(e){}
+    try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc,'ad_storage':_ikbc,'ad_user_data':_ikbc,'ad_personalization':_ikbc});}}catch(e){}
     gtag('js', new Date());
     gtag('config', 'G-EK9HSW7F90');
+    gtag('config', 'AW-17095449186');
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">

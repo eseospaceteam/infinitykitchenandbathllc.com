@@ -109,12 +109,22 @@ const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   // Timestamp when the form loaded — lets the server reject instant bot submits.
   const contactShownAt = Date.now();
+  // Live region (role="status"). Relabelling the disabled submit button is not
+  // announced by screen readers, so without this a lead could be sent — or
+  // fail — with no feedback at all for a non-sighted visitor.
+  const contactStatus = document.getElementById('contactStatus');
+  const setStatus = (msg, kind) => {
+    if (!contactStatus) return;
+    contactStatus.textContent = msg;
+    contactStatus.className = kind ? `form-status is-${kind}` : 'form-status';
+  };
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
     const original = btn.textContent;
     btn.textContent = 'Sending...';
     btn.disabled = true;
+    setStatus('Sending your request…');
 
     try {
       const payload = Object.fromEntries(new FormData(contactForm));
@@ -133,14 +143,26 @@ if (contactForm) {
           window.dataLayer.push({ event: 'generate_lead', form_location: 'contact_page', form_id: 'contactForm' });
         }
         btn.textContent = 'Request Sent!';
+        setStatus(
+          'Thank you — your request has been sent. We will call you to schedule your free in-home consult.',
+          'success'
+        );
         contactForm.reset();
         setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
       } else {
         btn.textContent = 'Something went wrong — please call us';
+        setStatus(
+          'Sorry, your request could not be sent. Please call us at (928) 800-1998.',
+          'error'
+        );
         setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
       }
     } catch {
       btn.textContent = 'Something went wrong — please call us';
+      setStatus(
+        'Sorry, your request could not be sent. Please call us at (928) 800-1998.',
+        'error'
+      );
       setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
     }
   });
@@ -187,6 +209,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       const offset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 80;
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
+      // preventDefault also cancels the browser's focus move, which would break
+      // the skip link entirely: the page would scroll but focus would stay on
+      // the link, so the next Tab drops the visitor right back into the nav.
+      // Anything given tabindex="-1" as a jump target (e.g. <main id="main">)
+      // takes focus explicitly here.
+      if (target.hasAttribute('tabindex')) target.focus({ preventScroll: true });
     }
   });
 });

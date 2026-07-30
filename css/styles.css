@@ -1093,11 +1093,22 @@ a.service-card:not(:has(.service-card-body)):not(:has(.service-card-img)):hover:
   width: 100%;
 }
 .form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-400); }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--gray-500); }
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
   outline: none;
   border-color: var(--green-500);
   background: var(--white);
   box-shadow: 0 0 0 3px rgba(43,122,66,0.1);
+}
+/* Keyboard focus gets a real, high-contrast ring — the soft 0.1-alpha glow
+   above is a mouse-focus nicety and is not a visible focus indicator on its
+   own. See the a11y block at the end of this file. */
+.form-group input:focus-visible,
+.form-group textarea:focus-visible,
+.form-group select:focus-visible {
+  outline: 3px solid var(--green-600);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 3px rgba(43,122,66,0.22);
 }
 .form-group textarea { resize: vertical; min-height: 120px; }
 .form-group select option { background: var(--white); color: var(--green-900); }
@@ -1924,3 +1935,95 @@ footer {
 .promo-claimed svg { color: #D63F22; flex-shrink: 0; margin-top: 2px; }
 .promo-claimed strong { display: block; color: #B4271F; font-size: 0.95rem; margin-bottom: 0.15rem; }
 .promo-claimed p { margin: 0; font-size: 0.85rem; color: var(--gray-600, #4a5a52); line-height: 1.55; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   Accessibility (WCAG 2.1 AA)
+   Added by a11y-upgrade.mjs. Keep this block LAST so the focus rings win
+   over any earlier `outline: none`.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ---- Skip to main content (WCAG 2.4.1) ----
+   Off-screen until focused, then pinned over the nav. Uses a transform rather
+   than display:none so it stays in the tab order and is reachable. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 10000;
+  transform: translate(-50%, -120%);
+  padding: 0.85rem 1.5rem;
+  background: var(--green-800);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  transition: transform 0.18s ease-in-out;
+}
+.skip-link:focus {
+  transform: translate(-50%, 0);
+  outline: 3px solid var(--white);
+  outline-offset: -6px;
+}
+
+/* The skip target itself must not draw a ring when focused programmatically —
+   it is a whole page region, not a control. */
+main#main:focus { outline: none; }
+
+/* ---- Visible keyboard focus everywhere (WCAG 2.4.7) ----
+   Nothing on the site defined a focus style, so keyboard users were relying on
+   each browser's default — which the form rules explicitly suppressed. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 3px solid var(--green-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* On dark chrome (nav, footer, hero overlays, CTA bands) the brand green does
+   not clear 3:1 against the background, so those rings go white instead. */
+#navbar a:focus-visible,
+#navbar button:focus-visible,
+.mobile-nav a:focus-visible,
+#promoBar:focus-visible,
+footer a:focus-visible,
+footer button:focus-visible,
+.page-hero a:focus-visible,
+.hero a:focus-visible,
+.bottom-cta a:focus-visible,
+.lp-hero a:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* ---- Form submit status (WCAG 4.1.3) ----
+   Announced via role="status"; also shown visually so the message is not
+   audio-only. Empty by default, so it must not reserve space. */
+.form-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.form-status:empty { display: none; }
+.form-status.is-success { color: var(--green-600); }
+.form-status.is-error { color: #B4271F; }
+
+/* ---- Respect reduced-motion preferences (WCAG 2.3.3) ----
+   The site animates cards in on scroll via .fade-up. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .fade-up, .fade-in { opacity: 1 !important; transform: none !important; }
+}

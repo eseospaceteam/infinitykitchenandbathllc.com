@@ -85,16 +85,26 @@
       width: 360px;
       max-width: 100vw;
       transform: translateX(-100%);
+      /* visibility:hidden takes the closed panel out of the tab order and the
+         accessibility tree. Without it the panel is merely translated
+         off-screen, so its 6 controls stayed keyboard-focusable on every page
+         and focus would vanish off the left edge. Delayed so the slide-out
+         animation still plays before it disappears. */
+      visibility: hidden;
       background: #1B4332;
       color: #fff;
       z-index: 1202;
       overflow-y: auto;
-      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0.32s;
       padding: 2rem 1.75rem 2.5rem;
       box-shadow: 4px 0 32px rgba(0,0,0,0.35);
       font-family: Arial, Helvetica, sans-serif;
     }
-    .ikb-panel.ikb-open { transform: translateX(0); }
+    .ikb-panel.ikb-open {
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1), visibility 0s;
+    }
 
     .ikb-panel-close {
       position: absolute;
@@ -186,9 +196,30 @@
 
     .ikb-disclaimer {
       font-size: 0.72rem;
-      color: rgba(255,255,255,0.5);
+      /* 0.5 alpha gave 4.05:1 on the #1B4332 panel — under the 4.5:1 minimum
+         for text this size. 0.6 lands at 5.12:1. */
+      color: rgba(255,255,255,0.6);
       margin-top: 0.85rem;
       line-height: 1.5;
+    }
+
+    .ikb-error {
+      margin: 0.7rem 0 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.45;
+      color: #FFC9C2;
+    }
+    .ikb-error:empty { display: none; }
+
+    /* The panel sits on dark green, where the sitewide green focus ring has
+       almost no contrast. Ring goes white inside the panel instead. */
+    .ikb-panel a:focus-visible,
+    .ikb-panel button:focus-visible,
+    .ikb-panel input:focus-visible,
+    .ikb-panel textarea:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 2px;
     }
 
     .ikb-call {
@@ -285,16 +316,19 @@
       <p class="ikb-sub">We'll call or text you back within one business day.</p>
       <div class="ikb-stars"><span class="ikb-stars-icons">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <span class="ikb-stars-txt"><strong>5.0</strong> &middot; 16 Google reviews</span></div>
       <form id="ikbForm" novalidate>
-        <input class="ikb-field" type="text"  name="name"    placeholder="Your Name"           required autocomplete="name">
-        <input class="ikb-field" type="tel"   name="phone"   placeholder="Phone Number"        required autocomplete="tel">
-        <input class="ikb-field" type="email" name="email"   placeholder="Email (optional)"             autocomplete="email">
-        <textarea class="ikb-field"           name="project" placeholder="What's the project? (optional)"></textarea>
+        <!-- aria-label on each field: a placeholder is not an accessible name,
+             and it disappears as soon as the visitor starts typing. -->
+        <input class="ikb-field" type="text"  name="name"    placeholder="Your Name"           required autocomplete="name" aria-label="Your name">
+        <input class="ikb-field" type="tel"   name="phone"   placeholder="Phone Number"        required autocomplete="tel" aria-label="Phone number">
+        <input class="ikb-field" type="email" name="email"   placeholder="Email (optional)"             autocomplete="email" aria-label="Email address (optional)">
+        <textarea class="ikb-field"           name="project" placeholder="What's the project? (optional)" aria-label="What's the project? (optional)"></textarea>
         <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" value="">
 
         <button class="ikb-btn" type="submit" id="ikbSubmit">${SEND_ICON} Request Free Estimate</button>
+        <p class="ikb-error" id="ikbError" role="alert" aria-live="assertive"></p>
         <p class="ikb-disclaimer">By submitting you agree to be contacted by phone, text, or email. Msg &amp; data rates may apply.</p>
       </form>
-      <div id="ikbSuccess" class="ikb-success" style="display:none;">
+      <div id="ikbSuccess" class="ikb-success" style="display:none;" role="status" aria-live="polite" tabindex="-1">
         <div class="ikb-success-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#fff" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>
         </div>
@@ -330,26 +364,72 @@
   const form    = document.getElementById('ikbForm');
   const success = document.getElementById('ikbSuccess');
   const submitBtn = document.getElementById('ikbSubmit');
+  const errorEl = document.getElementById('ikbError');
+
+  // role="alert" only announces on CONTENT CHANGE, so the node must already be
+  // in the DOM (it is, rendered empty) and then be given text.
+  function showError() {
+    if (!errorEl) return;
+    errorEl.textContent = `Sorry, we could not send that. Please call ${PHONE_DISPLAY}.`;
+    setTimeout(() => { errorEl.textContent = ''; }, 8000);
+  }
 
   // Timestamp when the form first became reachable — used to reject
   // near-instant bot submissions server-side.
   const formShownAt = Date.now();
 
+  // The panel declares role="dialog" aria-modal="true", which promises
+  // assistive tech that focus is confined to it. Honour that: move focus in on
+  // open, keep Tab inside, and hand focus back to whatever opened it on close.
+  const FOCUSABLE =
+    'a[href], button:not([disabled]), input:not([disabled]):not([tabindex="-1"]), select, textarea, [tabindex]:not([tabindex="-1"])';
+  let lastFocused = null;
+
   function open() {
+    lastFocused = document.activeElement;
     panel.classList.add('ikb-open');
     overlay.classList.add('ikb-open');
     document.body.style.overflow = 'hidden';
+    // A visibility:hidden element cannot take focus, so the new style has to be
+    // applied first. Reading offsetHeight forces that synchronously — using
+    // requestAnimationFrame here instead is unreliable, because rAF does not
+    // fire in a backgrounded tab (or under headless), and focus would silently
+    // never move into the dialog.
+    void panel.offsetHeight;
+    const first = panel.querySelector('input:not([tabindex="-1"])') || closeBtn;
+    first.focus();
   }
   function close() {
+    const wasOpen = panel.classList.contains('ikb-open');
     panel.classList.remove('ikb-open');
     overlay.classList.remove('ikb-open');
     document.body.style.overflow = '';
+    if (wasOpen && lastFocused && typeof lastFocused.focus === 'function') {
+      lastFocused.focus();
+    }
+    lastFocused = null;
   }
 
   tab.addEventListener('click', open);
   closeBtn.addEventListener('click', close);
   overlay.addEventListener('click', close);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key !== 'Tab' || !panel.classList.contains('ikb-open')) return;
+    const items = [...panel.querySelectorAll(FOCUSABLE)].filter(
+      (el) => el.offsetParent !== null || el === document.activeElement
+    );
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
 
   const mobileEstBtn = document.getElementById('ikbMobileEstimate');
   if (mobileEstBtn) mobileEstBtn.addEventListener('click', open);
@@ -406,6 +486,10 @@
         }
         form.style.display = 'none';
         success.style.display = 'block';
+        // The panel is a modal dialog, so moving focus to the confirmation is
+        // what actually tells a screen-reader user the request went through —
+        // a display toggle on its own announces nothing.
+        success.focus();
         setTimeout(() => {
           form.reset();
           form.style.display = 'block';
@@ -416,6 +500,7 @@
         }, 4000);
       } else {
         submitBtn.textContent = 'Error — please call us';
+        showError();
         setTimeout(() => { submitBtn.innerHTML = original; submitBtn.disabled = false; }, 3500);
       }
     } catch {

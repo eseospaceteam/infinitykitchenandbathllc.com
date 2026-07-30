@@ -1936,6 +1936,29 @@ footer {
 .promo-claimed strong { display: block; color: #B4271F; font-size: 0.95rem; margin-bottom: 0.15rem; }
 .promo-claimed p { margin: 0; font-size: 0.85rem; color: var(--gray-600, #4a5a52); line-height: 1.55; }
 
+/* ---- Pillar uplink ----
+   The one-line "part of our complete X guide" bar that cluster pages carry
+   directly under the hero, pointing back up to their hub. Added by
+   wire-hubs.mjs. Deliberately quiet — it is a wayfinding aid, not a CTA. */
+.hub-uplink {
+  background: var(--green-50, #EAF5ED);
+  border-bottom: 1px solid var(--green-100);
+}
+.hub-uplink p {
+  margin: 0;
+  padding: 0.85rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--green-800);
+}
+.hub-uplink a {
+  color: var(--green-600);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.hub-uplink a:hover { color: var(--green-500); }
+
 /* ══════════════════════════════════════════════════════════════════════
    Accessibility (WCAG 2.1 AA)
    Added by a11y-upgrade.mjs. Keep this block LAST so the focus rings win

@@ -1936,6 +1936,58 @@ footer {
 .promo-claimed strong { display: block; color: #B4271F; font-size: 0.95rem; margin-bottom: 0.15rem; }
 .promo-claimed p { margin: 0; font-size: 0.85rem; color: var(--gray-600, #4a5a52); line-height: 1.55; }
 
+/* ---- Author box ----
+   Added by fix-bylines.mjs to the Article pages. Laid out as a flex row so a
+   headshot can be dropped in on the left without touching the copy — there is
+   no photograph of Steve in the repo yet, which is the one part of the author
+   component that cannot be finished in code. */
+.author-box {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  max-width: 860px;
+  background: var(--green-25, #F4FAF6);
+  border: 1px solid var(--green-100);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 1.75rem 1.9rem;
+}
+.author-box img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.author-box-body { flex: 1; }
+.author-box h2 {
+  font-size: 1.2rem;
+  margin: 0.3rem 0 0.15rem;
+  color: var(--green-900);
+}
+.author-box .author-role {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--green-600);
+  margin: 0 0 0.85rem;
+}
+.author-box p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  margin: 0 0 0.75rem;
+}
+.author-box .author-links {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.author-box .author-links a { color: var(--green-600); }
+.author-box .author-links span { color: var(--gray-400); margin: 0 0.35rem; }
+@media (max-width: 640px) {
+  .author-box { flex-direction: column; padding: 1.4rem 1.5rem; }
+}
+
 /* ---- Pillar uplink ----
    The one-line "part of our complete X guide" bar that cluster pages carry
    directly under the hero, pointing back up to their hub. Added by

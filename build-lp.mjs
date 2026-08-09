@@ -309,6 +309,38 @@ for (const key of ["avondale", "prescott"]) {
     ],
     ctaHead: `Ready to Remodel Your ${c.city} Kitchen?`,
     ctaSub: "Book a free design consultation. We'll plan the layout, materials, and budget around how you actually cook — no pressure." });
+  PAGES.push({ slug: `kitchen-cabinets-${key}`, kind: "kitchen", service: "Kitchen Cabinets", serviceLower: "kitchen cabinets", city: c.city, region: c.region, area: c.area,
+    metaDesc: `Custom and semi-custom kitchen cabinets in ${c.city}, AZ — new cabinetry, refacing, and refinishing installed by our own crews. Licensed AZ ROC #339999. Free estimate. Call ${ph.display}.`,
+    h1: `Custom Kitchen Cabinets in ${c.city}, AZ`,
+    heroSub: `New cabinetry, refacing, and refinishing for ${c.city} kitchens — measured, built, and installed by one accountable team.`,
+    bullets: ["Free in-home measure and quote", "Custom, semi-custom & RTA cabinetry", "Refacing and refinishing when the boxes are sound", "5.0 star Google rating · AZ ROC #339999"],
+    quick: `Infinity Kitchens and Baths installs kitchen cabinets throughout ${c.city}, AZ — custom and semi-custom cabinetry, cabinet refacing, and refinishing. We measure in your home, build to your layout, and install with our own crews. Licensed (AZ ROC #339999), with a free in-home estimate.`,
+    introH2: `Kitchen Cabinet Installation & Refacing in ${c.city}`,
+    intro: `<p>Cabinets set the cost, the look, and the storage of the whole kitchen, so we start with what you already have. If the boxes are solid, refacing or refinishing gets you a new kitchen for a fraction of a full replacement. If they're not, we build to your layout instead of forcing your kitchen into stock sizes.</p><p>Either way you deal with one team from the in-home measure through final hardware — no handoff to a subcontractor halfway through, and no surprises on the invoice.</p>`,
+    faqs: [
+      [`Do you install kitchen cabinets in ${c.city}?`, `Yes — ${c.city} is part of our service area. We handle new cabinetry, refacing, and refinishing. Call ${ph.display} for a free in-home measure.`],
+      ["Should I reface or replace my cabinets?", "It depends on the boxes. If they're structurally sound and the layout works, refacing gives you new doors, drawer fronts, and finish at a much lower cost. If the boxes are failing or you're changing the layout, replacement is the better spend. We'll tell you honestly which one your kitchen needs."],
+      ["Do you build custom cabinets?", "Yes — custom and semi-custom. That matters most in older homes and awkward layouts where stock sizes leave dead space."],
+      ["Is the estimate free?", `Yes. We measure in your home and give you an honest written estimate at no cost. Call ${ph.display} to book.`],
+    ],
+    ctaHead: `Get a Free Cabinet Quote in ${c.city}`,
+    ctaSub: "We'll measure your kitchen, talk through refacing versus replacement, and give you a clear written estimate — no pressure." });
+  PAGES.push({ slug: `kitchen-countertops-${key}`, kind: "kitchen", service: "Kitchen Countertops", serviceLower: "kitchen countertops", city: c.city, region: c.region, area: c.area,
+    metaDesc: `Kitchen countertop installation in ${c.city}, AZ — quartz, granite, and solid surface, templated and installed by our own crews. Licensed AZ ROC #339999. Free estimate. Call ${ph.display}.`,
+    h1: `Kitchen Countertop Installation in ${c.city}, AZ`,
+    heroSub: `Quartz, granite, and solid-surface countertops for ${c.city} kitchens — templated, fabricated, and installed by one team.`,
+    bullets: ["Free in-home template and quote", "Quartz, granite & solid surface", "Undermount sinks and backsplash handled together", "5.0 star Google rating · AZ ROC #339999"],
+    quick: `Infinity Kitchens and Baths installs kitchen countertops throughout ${c.city}, AZ — quartz, granite, and solid-surface tops, templated in your home and installed by our own crews. We coordinate sink cutouts, edges, and backsplash in the same visit. Licensed (AZ ROC #339999), with a free in-home estimate.`,
+    introH2: `Quartz & Granite Countertops in ${c.city}`,
+    intro: `<p>New counters are the fastest way to change how a kitchen reads, and the one upgrade where the fabrication matters more than the slab. We template in your home rather than working from a sketch, so seams land where you won't see them and the sink cutout fits the sink you actually bought.</p><p>Because we also do the cabinets, backsplash, and plumbing reconnect, there's no gap between trades where your kitchen sits unusable for a week.</p>`,
+    faqs: [
+      [`Do you install countertops in ${c.city}?`, `Yes — ${c.city} is part of our service area. We install quartz, granite, and solid-surface tops. Call ${ph.display} for a free in-home template.`],
+      ["Quartz or granite — which should I pick?", "Quartz is non-porous, needs no sealing, and holds a consistent pattern, which suits busy family kitchens. Granite is natural stone, so every slab is unique and it handles heat better. We'll show you both against your cabinets before you commit."],
+      ["Can you replace counters without redoing the kitchen?", "Yes. Countertop-only replacement is one of our most common jobs. We handle the tear-out, template, install, and plumbing reconnect."],
+      ["Is the estimate free?", `Yes. We template in your home and give you an honest written estimate at no cost. Call ${ph.display} to book.`],
+    ],
+    ctaHead: `Get a Free Countertop Quote in ${c.city}`,
+    ctaSub: "We'll template your kitchen, walk you through quartz versus granite, and give you a clear written estimate — no pressure." });
 }
 
 let n = 0;

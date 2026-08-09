@@ -258,6 +258,7 @@ ${FOOTER_ABS}
       var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
       if(res.ok){
         if(typeof gtag!=='undefined')gtag('event','generate_lead',{form_location:'ads_lp_hero',form_id:'lpForm'});
+        if(window.ikbAdsConv)window.ikbAdsConv('form');
         if(window.dataLayer)dataLayer.push({event:'generate_lead',form_location:'ads_lp_hero',form_id:'lpForm'});
         f.style.display='none';ok.style.display='block';
       }else{btn.textContent='Error \\u2014 please call us';setTimeout(function(){btn.innerHTML=orig;btn.disabled=false;},3500);}

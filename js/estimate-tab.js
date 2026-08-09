@@ -481,6 +481,7 @@
         if (typeof gtag !== 'undefined') {
           gtag('event', 'generate_lead', { form_location: 'estimate_tab', form_id: 'ikbForm' });
         }
+        if (window.ikbAdsConv) window.ikbAdsConv('form');
         if (window.dataLayer) {
           window.dataLayer.push({ event: 'generate_lead', form_location: 'estimate_tab', form_id: 'ikbForm' });
         }

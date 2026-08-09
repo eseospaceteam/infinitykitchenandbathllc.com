@@ -2,6 +2,29 @@
    INFINITY KITCHEN & BATH — MAIN JS
    ============================================ */
 
+// ---- Google Ads conversions (native website actions) ----
+// These are separate from the GA4 events below. The GA4 events feed Analytics
+// and the (lossy, ~1 day delayed) GA4 conversion import; these fire straight at
+// Google Ads so a lead is attributed to the click that paid for it. Defined
+// here because main.js loads on every page before estimate-tab.js and before
+// any form can be submitted.
+window.IKB_ADS = {
+  form:  'AW-17095449186/MPiXCPLH-94cEOK039c_',   // Contact Form Lead (site tag)
+  phone: 'AW-17095449186/TCeDCPXH-94cEOK039c_',   // Phone Click (site tag)
+};
+window.ikbAdsConv = function (kind, cb) {
+  const sendTo = window.IKB_ADS[kind];
+  if (typeof gtag === 'undefined' || !sendTo) { if (cb) cb(); return; }
+  // event_callback can silently never fire (blocked tag, consent denied), so a
+  // timeout guarantees the caller is never left hanging on a navigation.
+  let done = false;
+  const go = () => { if (done) return; done = true; if (cb) cb(); };
+  gtag('event', 'conversion', {
+    send_to: sendTo, value: 1.0, currency: 'USD', event_callback: go,
+  });
+  setTimeout(go, 1200);
+};
+
 // ---- Navbar scroll behavior ----
 const navbar = document.getElementById('navbar');
 function handleNavScroll() {
@@ -139,6 +162,7 @@ if (contactForm) {
         if (typeof gtag !== 'undefined') {
           gtag('event', 'generate_lead', { form_location: 'contact_page', form_id: 'contactForm' });
         }
+        window.ikbAdsConv('form');
         if (window.dataLayer) {
           window.dataLayer.push({ event: 'generate_lead', form_location: 'contact_page', form_id: 'contactForm' });
         }
@@ -198,6 +222,9 @@ document.addEventListener('click', (e) => {
 
   if (typeof gtag !== 'undefined') gtag('event', event, params);
   if (window.dataLayer) window.dataLayer.push(dl);
+  // tel: navigation is not prevented here — the dialer opens over the page, so
+  // the beacon still goes out. Only phone clicks are an Ads conversion.
+  if (event === 'phone_call_click') window.ikbAdsConv('phone');
 });
 
 // ---- Smooth anchor links ----

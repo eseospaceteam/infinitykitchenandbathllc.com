@@ -171,6 +171,25 @@
     }
     textarea.ikb-field { resize: vertical; min-height: 80px; }
 
+    select.ikb-field {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.85rem center;
+      background-size: 11px;
+      padding-right: 2.4rem;
+      cursor: pointer;
+    }
+    /* The native dropdown list is painted in the OS palette, not the panel's —
+       without this, white-on-white options on Windows/Firefox. */
+    select.ikb-field option,
+    select.ikb-field optgroup { color: #1B4332; background: #fff; }
+    /* Nothing chosen yet reads as a placeholder. Depends on the empty first
+       option being invalid, i.e. on the field carrying the required attribute.
+       (No backticks in this block — it is inside a template literal.) */
+    select.ikb-field:invalid { color: rgba(255,255,255,0.45); }
+
     .ikb-btn {
       width: 100%;
       background: #2B7A42;
@@ -300,6 +319,50 @@
   const PHONE_NUM = isWestValley ? '6028856998' : '9288001998';
   const PHONE_DISPLAY = isWestValley ? '(602) 885-6998' : '(928) 800-1998';
 
+  // ── Location ──────────────────────────────────────────────────────────────
+  // Mirrors the footer's Service Areas column. The option VALUES are what land
+  // in the lead email's Address row, so they are written the way Steve reads
+  // them rather than as slugs.
+  const CITIES = {
+    'Prescott Area': [
+      'Prescott', 'Prescott Valley', 'Chino Valley', 'Dewey-Humboldt',
+      'Mayer', 'Cordes Lakes', 'Williamson Valley',
+    ],
+    'West Valley (Phoenix Metro)': [
+      'Avondale', 'Buckeye', 'Glendale', 'Goodyear',
+      'Peoria', 'Surprise', 'Sun City', 'Sun City West',
+    ],
+  };
+
+  // Deliberately NOT preselected from the page slug. Prescott and the West
+  // Valley are ~100 miles apart, so a city silently pre-picked because someone
+  // was reading /avondale-remodeling.html — and left unread — sends a crew to
+  // the wrong end of the state. The visitor picks; the placeholder doubles as
+  // the field's visible label until they do.
+  const CITY_OPTIONS = Object.entries(CITIES)
+    .map(([group, list]) => {
+      const opts = list.map((c) => `<option value="${c}, AZ">${c}</option>`).join('');
+      return `<optgroup label="${group}">${opts}</optgroup>`;
+    })
+    .join('') + '<option value="Other / Not listed">Somewhere else in Arizona</option>';
+
+  // ── Service ───────────────────────────────────────────────────────────────
+  // Values mirror contact.html exactly, because api/contact.js maps them to the
+  // labels it prints in the email and the subject line. Deliberately NO
+  // standalone backsplash option: Steve refers backsplash-only jobs to his tile
+  // installer rather than sending sales staff, so the form must not solicit one.
+  const SERVICE_OPTIONS = [
+    ['kitchen', 'Kitchen Remodeling'],
+    ['bathroom', 'Bathroom Remodeling'],
+    ['whole-house', 'Whole House Remodeling'],
+    ['countertops', 'Custom Countertops'],
+    ['flooring', 'Luxury Vinyl Plank Flooring'],
+    ['tub-shower', 'Tub-to-Shower Conversion'],
+    ['groutless', 'Groutless Shower System'],
+    ['walk-in-shower', 'Walk-In Shower'],
+    ['other', 'Other / Not Sure Yet'],
+  ].map(([v, label]) => `<option value="${v}">${label}</option>`).join('');
+
   const PHONE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/></svg>`;
 
   const HTML = `
@@ -321,7 +384,15 @@
         <input class="ikb-field" type="text"  name="name"    placeholder="Your Name"           required autocomplete="name" aria-label="Your name">
         <input class="ikb-field" type="tel"   name="phone"   placeholder="Phone Number"        required autocomplete="tel" aria-label="Phone number">
         <input class="ikb-field" type="email" name="email"   placeholder="Email (optional)"             autocomplete="email" aria-label="Email address (optional)">
-        <textarea class="ikb-field"           name="project" placeholder="What's the project? (optional)" aria-label="What's the project? (optional)"></textarea>
+        <select class="ikb-field" name="city" required aria-label="Project location">
+          <option value="" disabled selected>Project Location…</option>
+          ${CITY_OPTIONS}
+        </select>
+        <select class="ikb-field" name="service" required aria-label="Service you need">
+          <option value="" disabled selected>What Do You Need?…</option>
+          ${SERVICE_OPTIONS}
+        </select>
+        <textarea class="ikb-field"           name="project" placeholder="Anything else about the project? (optional)" aria-label="Anything else about the project? (optional)"></textarea>
         <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" value="">
 
         <button class="ikb-btn" type="submit" id="ikbSubmit">${SEND_ICON} Request Free Estimate</button>
@@ -368,9 +439,9 @@
 
   // role="alert" only announces on CONTENT CHANGE, so the node must already be
   // in the DOM (it is, rendered empty) and then be given text.
-  function showError() {
+  function showError(msg) {
     if (!errorEl) return;
-    errorEl.textContent = `Sorry, we could not send that. Please call ${PHONE_DISPLAY}.`;
+    errorEl.textContent = msg || `Sorry, we could not send that. Please call ${PHONE_DISPLAY}.`;
     setTimeout(() => { errorEl.textContent = ''; }, 8000);
   }
 
@@ -452,6 +523,26 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form));
+
+    // The form carries `novalidate`, so nothing checks these but us — and the
+    // server answers an incomplete lead with a fake 200 (its anti-bot gate), so
+    // an unvalidated submit would show "Request Sent!" and quietly bin a real
+    // enquiry. Fail here instead, where the visitor can fix it.
+    const need = [
+      ['name',    (v) => v.trim().length >= 2,                   'Please enter your name.'],
+      ['phone',   (v) => v.replace(/\D/g, '').length >= 7,       'Please enter a phone number we can reach you on.'],
+      ['city',    (v) => v !== '',                               'Please choose the project location.'],
+      ['service', (v) => v !== '',                               'Please choose what you need done.'],
+    ];
+    for (const [field, ok, msg] of need) {
+      if (!ok(String(data[field] || ''))) {
+        showError(msg);
+        const el = form.elements[field];
+        if (el && typeof el.focus === 'function') el.focus();
+        return;
+      }
+    }
+
     const nameParts = (data.name || '').trim().split(/\s+/);
     const payload = {
       firstName: nameParts[0] || '',
@@ -459,9 +550,10 @@
       phone: data.phone || '',
       email: data.email || '',
       message: data.project || '',
-      service: 'Estimate Request (Quick Form)',
-      address: '',
+      service: data.service || '',
+      address: data.city || '',
       'consult-type': '',
+      source: 'Quick Estimate (slide-out tab)',
       company: data.company || '',
       elapsed: Date.now() - formShownAt,
     };

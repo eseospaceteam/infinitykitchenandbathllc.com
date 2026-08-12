@@ -14,11 +14,13 @@
  * max-width:768px override to 108px).
  *
  * ── THE OFFER PERIOD LIVES IN ONE PLACE: `PERIOD` BELOW ──
- * Change it and re-run; the script rewrites the copy on pages that already
- * carry the bar rather than skipping them. This matters because the original
- * wording was "This Month", which is silently wrong from the 1st of the next
- * month with nothing to signal it — the bar just quietly starts advertising an
- * offer that has expired. Naming the month instead means it fails visibly.
+ * Change it and re-run; the script rewrites the WHOLE bar on pages that already
+ * carry one rather than skipping them, so both the copy and the markup have a
+ * single source of truth. This matters because the original wording was "This
+ * Month", which is silently wrong from the 1st of the next month with nothing
+ * to signal it — the bar just quietly starts advertising an offer that has
+ * expired. Naming a hard end date instead means it fails visibly, and it is the
+ * urgency that makes the offer worth putting in front of every visitor.
  */
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
@@ -28,16 +30,20 @@ const REMOVE = process.argv.includes('--remove');
 
 // 2026-07-29: extended from July into August at the client's direction.
 // Steve is honouring the 15% through the end of August.
-const PERIOD = 'Through August';
+// 2026-08-12: switched from a period ("Through August") to a hard end date, so
+// the bar reads as a deadline rather than as permanent chrome.
+const PERIOD = 'Ends Aug 31';
 
-const PROMO_FULL = `&#127881; Celebrating 15 Years in Business &mdash; <em>Save 15%</em> on Your Remodel ${PERIOD}`;
-const PROMO_SHORT = `&#127881; 15 Years &mdash; <em>Save 15%</em> ${PERIOD}`;
-
-const BAR = `  <a href="/contact.html?promo=15for15" id="promoBar" data-promo="15for15" aria-label="Claim 15 percent off your remodel — 15th anniversary offer">
+const BAR = `  <a href="/contact.html?promo=15for15" id="promoBar" data-promo="15for15" aria-label="Save 15 percent on your remodel — 15th anniversary offer, ${PERIOD}">
     <span class="promo-inner">
-      <span class="promo-text">
-        <span class="promo-full">${PROMO_FULL}</span>
-        <span class="promo-short">${PROMO_SHORT}</span>
+      <span class="promo-full">
+        <span class="promo-kicker">&#127881; Celebrating 15 Years</span>
+        <span class="promo-offer"><em>Save 15%</em> on Your Remodel</span>
+        <span class="promo-deadline">${PERIOD}</span>
+      </span>
+      <span class="promo-short">
+        <span class="promo-offer"><em>Save 15%</em></span>
+        <span class="promo-deadline">${PERIOD}</span>
       </span>
       <span class="promo-claim">Claim Offer</span>
     </span>
@@ -68,17 +74,13 @@ for (const file of pageFiles()) {
     out = html.replace(/(<nav id="navbar"[^>]*>\n)/, `$1${BAR}`);
     if (out !== html) touched++;
   } else {
-    // Bar already present — bring its copy up to date with PERIOD.
+    // Bar already present — swap the whole element for the current BAR. Patching
+    // the copy in place would leave older markup behind on pages that were
+    // stamped by an earlier version of this script; replacing wholesale means
+    // every page carries whatever BAR says today. The bar contains no nested
+    // <a>, so the non-greedy match to the first </a> is exact.
     const before = out;
-    out = out
-      .replace(
-        /<span class="promo-full">[\s\S]*?<\/span>/,
-        `<span class="promo-full">${PROMO_FULL}</span>`
-      )
-      .replace(
-        /<span class="promo-short">[\s\S]*?<\/span>/,
-        `<span class="promo-short">${PROMO_SHORT}</span>`
-      );
+    out = out.replace(/ *<a href="[^"]*" id="promoBar"[\s\S]*?<\/a>\n/, BAR);
     if (out !== before) retexted++;
   }
 

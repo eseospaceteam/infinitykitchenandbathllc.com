@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const {
     firstName, lastName, email, phone, address,
     service, 'consult-type': consultType, message,
-    company, elapsed,
+    source, company, elapsed,
   } = req.body || {};
 
   // ── Spam gate ─────────────────────────────────────────────
@@ -125,10 +125,11 @@ export default async function handler(req, res) {
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;width:140px;">Name</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(firstName)} ${esc(lastName)}</td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Phone</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;"><a href="tel:${esc(phone)}" style="color:#1B4332;">${esc(phone)}</a></td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Email</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${email ? `<a href="mailto:${esc(email)}" style="color:#1B4332;">${esc(email)}</a>` : '—'}</td></tr>
-      <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Address</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(address) || '—'}</td></tr>
+      <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Address / Location</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(address) || '—'}</td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Service</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(serviceLabel)}</td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Consultation</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(consultLabel)}</td></tr>
-      <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;vertical-align:top;">Message</td><td style="padding:9px 14px;">${esc(message) || '—'}</td></tr>
+      <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;vertical-align:top;">Message</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(message) || '—'}</td></tr>
+      ${source ? `<tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Came from</td><td style="padding:9px 14px;">${esc(source)}</td></tr>` : ''}
     </table>
   `;
 
@@ -138,10 +139,11 @@ export default async function handler(req, res) {
     `Name: ${firstName} ${lastName}`,
     `Phone: ${phone}`,
     `Email: ${email || 'Not provided'}`,
-    `Address: ${address || 'Not provided'}`,
+    `Address / Location: ${address || 'Not provided'}`,
     `Service: ${serviceLabel}`,
     `Consultation: ${consultLabel}`,
     `Message: ${message || 'None'}`,
+    ...(source ? [`Came from: ${source}`] : []),
   ].join('\n');
 
   const body = new URLSearchParams({

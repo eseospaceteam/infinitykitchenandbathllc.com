@@ -53,6 +53,15 @@ const RULES = [
   ].includes(s)],
   ['Neighborhood pages (Prescott)', (s) => NEIGHBORHOODS.some((n) => s === `${n}-remodeling.html`)],
   ['Service areas — regional hub', (s) => s === 'west-valley.html'],
+  ['Guide categories', (s) => [
+    'choosing-a-contractor.html', 'accessibility-guides.html', 'cost-guides.html',
+    'comparison-guides.html', 'shower-guides.html', 'kitchen-guides.html',
+    'bathroom-guides.html', 'planning-guides.html',
+  ].includes(s)],
+  // Matched against the real city list so aging-in-place-guide.html etc. fall through.
+  ['Accessibility service in a specific city', (s) =>
+    ['walk-in-showers', 'tub-to-shower', 'ada-bathroom', 'aging-in-place']
+      .some((sv) => CITIES.some((c) => s === `${sv}-${c}.html`))],
   ['Service in a specific city', (s) => /^(kitchen|bathroom)-remodeling-[a-z-]+\.html$/.test(s)],
   ['Service areas — city hubs', (s) => CITIES.some((c) => s === `${c}-remodeling.html`)],
   ['Choosing a contractor', (s) => /^best-/.test(s)],

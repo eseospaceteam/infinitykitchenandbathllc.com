@@ -319,33 +319,6 @@
   const PHONE_NUM = isWestValley ? '6028856998' : '9288001998';
   const PHONE_DISPLAY = isWestValley ? '(602) 885-6998' : '(928) 800-1998';
 
-  // ── Location ──────────────────────────────────────────────────────────────
-  // Mirrors the footer's Service Areas column. The option VALUES are what land
-  // in the lead email's Address row, so they are written the way Steve reads
-  // them rather than as slugs.
-  const CITIES = {
-    'Prescott Area': [
-      'Prescott', 'Prescott Valley', 'Chino Valley', 'Dewey-Humboldt',
-      'Mayer', 'Cordes Lakes', 'Williamson Valley',
-    ],
-    'West Valley (Phoenix Metro)': [
-      'Avondale', 'Buckeye', 'Glendale', 'Goodyear',
-      'Peoria', 'Surprise', 'Sun City', 'Sun City West',
-    ],
-  };
-
-  // Deliberately NOT preselected from the page slug. Prescott and the West
-  // Valley are ~100 miles apart, so a city silently pre-picked because someone
-  // was reading /avondale-remodeling.html — and left unread — sends a crew to
-  // the wrong end of the state. The visitor picks; the placeholder doubles as
-  // the field's visible label until they do.
-  const CITY_OPTIONS = Object.entries(CITIES)
-    .map(([group, list]) => {
-      const opts = list.map((c) => `<option value="${c}, AZ">${c}</option>`).join('');
-      return `<optgroup label="${group}">${opts}</optgroup>`;
-    })
-    .join('') + '<option value="Other / Not listed">Somewhere else in Arizona</option>';
-
   // ── Service ───────────────────────────────────────────────────────────────
   // Values mirror contact.html exactly, because api/contact.js maps them to the
   // labels it prints in the email and the subject line. Deliberately NO
@@ -384,10 +357,7 @@
         <input class="ikb-field" type="text"  name="name"    placeholder="Your Name"           required autocomplete="name" aria-label="Your name">
         <input class="ikb-field" type="tel"   name="phone"   placeholder="Phone Number"        required autocomplete="tel" aria-label="Phone number">
         <input class="ikb-field" type="email" name="email"   placeholder="Email (optional)"             autocomplete="email" aria-label="Email address (optional)">
-        <select class="ikb-field" name="city" required aria-label="Project location">
-          <option value="" disabled selected>Project Location…</option>
-          ${CITY_OPTIONS}
-        </select>
+        <input class="ikb-field" type="text"   name="city"    placeholder="Enter Your Location" required autocomplete="address-level2" aria-label="Enter your location — city or address">
         <select class="ikb-field" name="service" required aria-label="Service you need">
           <option value="" disabled selected>What Do You Need?…</option>
           ${SERVICE_OPTIONS}
@@ -531,7 +501,7 @@
     const need = [
       ['name',    (v) => v.trim().length >= 2,                   'Please enter your name.'],
       ['phone',   (v) => v.replace(/\D/g, '').length >= 7,       'Please enter a phone number we can reach you on.'],
-      ['city',    (v) => v !== '',                               'Please choose the project location.'],
+      ['city',    (v) => v.trim().length >= 2,                   'Please enter the project location.'],
       ['service', (v) => v !== '',                               'Please choose what you need done.'],
     ];
     for (const [field, ok, msg] of need) {
@@ -551,7 +521,7 @@
       email: data.email || '',
       message: data.project || '',
       service: data.service || '',
-      address: data.city || '',
+      address: (data.city || '').trim(),
       'consult-type': '',
       source: 'Quick Estimate (slide-out tab)',
       company: data.company || '',

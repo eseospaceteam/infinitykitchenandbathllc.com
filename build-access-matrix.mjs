@@ -18,8 +18,11 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { CITIES } from "./wv-city-data.mjs";
 import { ACCESS_SERVICES, PRESCOTT } from "./access-service-data.mjs";
+import { COHORT_OF, COHORT_BODIES } from "./access-cohort-bodies.mjs";
+import { THIRD_SECTION, COHORT_FAQ } from "./access-cohort-extra.mjs";
 
 const APPLY = process.argv.includes("--apply");
+const FORCE = process.argv.includes("--force"); // rewrite pages that already exist
 const BASE = "https://www.infinitykitchenandbathllc.com";
 const WV_DONOR = "kitchen-remodeling-sun-city.html";
 const PR_DONOR = "kitchen-remodeling.html";
@@ -114,8 +117,8 @@ function buildSchema(head, { title, desc, slug, svc, city, faq }) {
 }
 
 /* -------------------------------------------------------------- page body */
-function buildMain(city, svc, faq, phone, telHref, isWV) {
-  const secs = svc.body
+function buildMain(city, svc, faq, phone, telHref, isWV, body) {
+  const secs = body
     .map(
       (s, i) => `
 <section class="section"${i % 2 ? ' style="background:#F9FAFB;"' : ""}>
@@ -249,7 +252,15 @@ const targets = [
 for (const [citySlug, city, sl, phone, telHref, isWV] of targets) {
   for (const [svcSlug, svc] of Object.entries(ACCESS_SERVICES)) {
     const slug = `${svcSlug}-${citySlug}.html`;
-    if (existsSync(slug)) { log.push(`skip  ${slug} (exists)`); continue; }
+    if (existsSync(slug) && !FORCE) { log.push(`skip  ${slug} (exists)`); continue; }
+
+    const cohort = COHORT_OF[citySlug];
+    if (!cohort) throw new Error(`${citySlug}: no cohort assigned`);
+    const base = COHORT_BODIES[svcSlug]?.[cohort];
+    if (!base) throw new Error(`${svcSlug}/${cohort}: no cohort body copy`);
+    const third = THIRD_SECTION[svcSlug]?.[cohort];
+    if (!third) throw new Error(`${svcSlug}/${cohort}: no third section`);
+    const body = [...base, third];
 
     const title = `${svc.label} in ${city.name}, AZ`;
     const desc = `${svc.label} in ${city.name}, AZ. Design, permits and installation by a licensed, family-owned crew. Free in-home consult. AZ ROC #339999.`;
@@ -257,12 +268,12 @@ for (const [citySlug, city, sl, phone, telHref, isWV] of targets) {
     if (title.length > 60) throw new Error(`${slug}: title ${title.length} chars > 60 — ${title}`);
     if (desc.length > 155) throw new Error(`${slug}: description ${desc.length} chars > 155`);
 
-    const faq = svc.faq(city.name);
+    const faq = [...svc.faq(city.name), ...COHORT_FAQ[cohort](svc, city.name)];
     let head = buildHead(sl.head, { title, desc, slug, image: svc.hero });
     head = buildSchema(head, { title, desc, slug, svc, city, faq });
     const html =
       head + "</head>" + sl.nav + sl.mainOpen +
-      buildMain(city, svc, faq, phone, telHref, isWV) +
+      buildMain(city, svc, faq, phone, telHref, isWV, body) +
       sl.footer;
 
     if (APPLY) writeFileSync(slug, html);

@@ -14,6 +14,7 @@
  * Usage: node build-guide-hubs.mjs [--report] [--apply]
  */
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
+import { HUB_SECTIONS } from "./guide-hub-content.mjs";
 
 const APPLY = process.argv.includes("--apply");
 const REPORT = process.argv.includes("--report");
@@ -263,6 +264,18 @@ for (const h of HUBS) {
     <p style="font-size:1.05rem;">${esc(h.intro)}</p>
   </div>
 </section>
+
+${(HUB_SECTIONS[h.slug] ?? [])
+    .map(
+      (sec, i) => `<section class="section"${i % 2 ? ' style="background:#F9FAFB;"' : ""}>
+  <div class="container" style="max-width:860px;">
+    <h2>${esc(sec.h)}</h2>
+    <div class="gold-divider" style="margin:1rem 0 1.5rem;"></div>
+    ${sec.p.map((x) => `<p>${x}</p>`).join("\n    ")}
+  </div>
+</section>`
+    )
+    .join("")}
 
 <section class="section" style="background:#F9FAFB;padding-top:0;">
   <div class="container" style="max-width:900px;">

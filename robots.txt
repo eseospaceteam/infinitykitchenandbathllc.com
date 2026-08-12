@@ -1,4 +1,75 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
+# ---------------------------------------------------------------------------
+# AI / answer-engine crawlers — explicitly allowed.
+# We want Infinity Kitchens and Baths cited in AI answers about Prescott and
+# West Valley remodeling. /api/ is the Mailgun lead endpoint (POST only), so
+# it is excluded for every agent: a GET returns 405 and reads as a crawl error.
+# /lp/ is deliberately NOT disallowed — those pages carry <meta noindex>, and a
+# blocked crawler can never read the noindex it needs to honour.
+# ---------------------------------------------------------------------------
+
+User-agent: GPTBot
+Allow: /
+Disallow: /api/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /api/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /api/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot
+Allow: /
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /api/
+
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /api/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /api/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /api/
+
+Host: https://www.infinitykitchenandbathllc.com
 Sitemap: https://www.infinitykitchenandbathllc.com/sitemap.xml

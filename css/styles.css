@@ -501,7 +501,12 @@ p:last-child { margin-bottom: 0; }
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
+  /* 44px minimum: this is the only way into the nav on a phone. */
+  min-width: 44px;
+  min-height: 44px;
   padding: 8px;
   cursor: pointer;
 }
@@ -1234,7 +1239,9 @@ footer {
 }
 .footer-bottom a { color: var(--gray-400); transition: var(--transition); }
 .footer-bottom a:hover { color: var(--green-500); }
-.footer-bottom-links { display: flex; gap: 1.5rem; }
+/* nowrap here forced the five links onto one 359px row inside a 312px column,
+   which pushed every page 23px wider than a 360px phone. */
+.footer-bottom-links { display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; }
 
 /* ---- Values / About Cards ---- */
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -1383,6 +1390,11 @@ footer {
   .stats-row { grid-template-columns: 1fr 1fr; }
   .hero-actions { flex-direction: column; }
   .hero-actions .btn { width: 100%; justify-content: center; }
+  /* .btn is white-space: nowrap, so a long label ("Call Avondale: 602-885-6998")
+     has a 295px min-content width. Add the card padding around it and the
+     showroom grid could not shrink below 361px, widening contact.html past a
+     360px phone. Let the label wrap rather than the page. */
+  .btn { white-space: normal; text-align: center; }
 }
 
 /* ============================================

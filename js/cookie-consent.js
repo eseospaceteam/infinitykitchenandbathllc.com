@@ -45,7 +45,11 @@
       '#ikb-cc .ikb-cc-accept:hover{opacity:.9;}' +
       '#ikb-cc .ikb-cc-decline{background:transparent;color:#fff;border-color:rgba(255,255,255,.4);}' +
       '#ikb-cc .ikb-cc-decline:hover{background:rgba(255,255,255,.1);}' +
-      '@media(max-width:560px){#ikb-cc .ikb-cc-btns{width:100%;}#ikb-cc button{flex:1 1 auto;}}';
+      '@media(max-width:560px){#ikb-cc .ikb-cc-btns{width:100%;}#ikb-cc button{flex:1 1 auto;}}' +
+      // Below 768px the sticky action bar from estimate-tab.js occupies the
+      // bottom 58px. At bottom:1rem this notice sat on top of it, so Call Now
+      // and Free Estimate could not be tapped while consent was pending.
+      '@media(max-width:767px){#ikb-cc{bottom:calc(58px + 1rem);}}';
     var s = document.createElement('style');
     s.id = 'ikb-cc-styles';
     s.appendChild(document.createTextNode(css));

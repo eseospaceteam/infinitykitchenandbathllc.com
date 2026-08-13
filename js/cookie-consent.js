@@ -49,16 +49,64 @@
       // Below 768px the sticky action bar from estimate-tab.js occupies the
       // bottom 58px. At bottom:1rem this notice sat on top of it, so Call Now
       // and Free Estimate could not be tapped while consent was pending.
-      '@media(max-width:767px){#ikb-cc{bottom:calc(58px + 1rem);}}';
+      '@media(max-width:767px){#ikb-cc{bottom:calc(58px + 1rem);}}' +
+      // The notice is position:fixed, so it takes no space in flow and simply
+      // sat on top of whatever the page ended with — on a 360px screen that was
+      // every footer link (Privacy Policy, Cookie Policy, Accessibility, Cookie
+      // Preferences) plus the last service and blog cards. None of them could be
+      // tapped until the notice was dismissed. Reserve the strip it covers at
+      // the end of the document so that content can be scrolled clear of it.
+      // --ikb-cc-reserve is measured from the live notice by reserveSpace().
+      'body.ikb-cc-open footer{padding-bottom:calc(var(--ikb-cc-reserve,0px) + 1rem);}';
     var s = document.createElement('style');
     s.id = 'ikb-cc-styles';
     s.appendChild(document.createTextNode(css));
     document.head.appendChild(s);
   }
 
+  // --- Space reserved at the end of the document for the fixed notice --------
+  // The notice covers a strip at the bottom of the viewport. Publish that strip's
+  // height so the footer can grow by it; without this the page simply ends
+  // underneath the notice and its last links are untappable.
+  var reserveObserver = null;
+
+  function measureReserve() {
+    var bar = document.getElementById('ikb-cc');
+    if (!bar) return;
+    var top = bar.getBoundingClientRect().top;
+    // Top of the notice to the bottom of the viewport — everything the notice
+    // and the gap below it sit over.
+    var reserve = Math.max(0, Math.round(window.innerHeight - top));
+    document.documentElement.style.setProperty('--ikb-cc-reserve', reserve + 'px');
+  }
+
+  function reserveSpace() {
+    var bar = document.getElementById('ikb-cc');
+    if (!bar) return;
+    document.body.classList.add('ikb-cc-open');
+    measureReserve();
+    // The notice reflows (and changes height) on rotation and on any width
+    // change, so the reserved strip has to be re-measured, not measured once.
+    window.addEventListener('resize', measureReserve);
+    window.addEventListener('orientationchange', measureReserve);
+    if (typeof ResizeObserver === 'function') {
+      reserveObserver = new ResizeObserver(measureReserve);
+      reserveObserver.observe(bar);
+    }
+  }
+
+  function releaseSpace() {
+    document.body.classList.remove('ikb-cc-open');
+    document.documentElement.style.removeProperty('--ikb-cc-reserve');
+    window.removeEventListener('resize', measureReserve);
+    window.removeEventListener('orientationchange', measureReserve);
+    if (reserveObserver) { reserveObserver.disconnect(); reserveObserver = null; }
+  }
+
   function removeBanner() {
     var el = document.getElementById('ikb-cc');
     if (el && el.parentNode) el.parentNode.removeChild(el);
+    releaseSpace();
   }
 
   function showBanner() {
@@ -84,6 +132,7 @@
     bar.querySelector('.ikb-cc-decline').addEventListener('click', function () {
       setChoice('denied'); applyConsent('denied'); removeBanner();
     });
+    reserveSpace();
   }
 
   // Let visitors reopen the banner to change their choice (wired to the footer "Cookie Preferences" link).

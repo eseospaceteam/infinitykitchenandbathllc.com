@@ -1,3 +1,4 @@
+import { applyBlockedSenders } from '../lib/blocked-senders.js';
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -155,6 +156,8 @@ export default async function handler(req, res) {
     text,
   });
 
+  // Known bulk solicitor: re-route away from the client, never deliver to them.
+  applyBlockedSenders(body);
   const mgRes = await fetch(`https://api.mailgun.net/v3/${DOMAIN}/messages`, {
     method: 'POST',
     headers: {

@@ -38,6 +38,8 @@ const CITIES = [
   'williamson-valley', 'camp-verde', 'cottonwood', 'sedona', 'mayer',
   'sun-city-west', 'sun-city', 'avondale', 'buckeye', 'goodyear',
   'glendale', 'peoria', 'surprise', 'prescott',
+  // Aug-2026 territory additions
+  'litchfield-park', 'el-mirage',
 ];
 const NEIGHBORHOODS = ['downtown-prescott', 'south-prescott', 'prescott-lakes', 'yavapai-hills'];
 

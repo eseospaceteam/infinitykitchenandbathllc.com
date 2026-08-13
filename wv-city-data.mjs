@@ -1,5 +1,10 @@
 /**
- * Verified per-city facts for the 8 West Valley pages.
+ * Verified per-city facts for the 10 West Valley pages.
+ *
+ * 12 Aug 2026: Litchfield Park and El Mirage added. They are the two cities on
+ * the client's Aug-2026 territory sheet that had no page on the site. Sourced
+ * the same way as the original eight — against each city's own building
+ * department pages, searched 12 Aug 2026.
  *
  * SOURCING RULE: every claim here was checked against the authority's own site
  * (searched 12 Aug 2026) or against the community's own history page. Nothing in
@@ -98,6 +103,39 @@ export const CITIES = {
       "Sun City Grand deserves separate mention: it is an age-restricted Del Webb community inside Surprise, so those homes carry the same accessibility brief as our Sun City work — grab-bar blocking, curbless entries, comfort-height fixtures — while sitting under city rather than county permitting.",
     localNote:
       "Surprise is a northern run, usually scheduled alongside Sun City and Sun City West.",
+  },
+  "litchfield-park": {
+    name: "Litchfield Park",
+    incorporated: true,
+    authority: "the City of Litchfield Park's Building Safety Department",
+    authorityShort: "City of Litchfield Park Building Safety",
+    authorityUrl: "https://www.litchfieldpark.gov/1233/Building-Within-The-City",
+    permitNote:
+      "Litchfield Park runs its own Building Safety Department out of City Hall at 214 W Wigwam Blvd, and it does all three jobs itself — examining and approving plans, issuing the permit, and inspecting the work. The city publishes a review time of five to ten business days for residential remodels and additions, and says simple permits needing no review may be issued over the counter. Alteration and repair work counts, and so does the electrical, mechanical and plumbing that goes with it.",
+    community: {
+      body: "the city's Design Review Board",
+      bodyUrl: "https://www.litchfieldpark.gov/487/Building-Permit-Questions-and-Answers",
+      note: "Litchfield Park draws a line most cities leave vague, and it is worth understanding before you plan anything. The city's Design Review Board regulates alterations to a building's exterior — so an interior kitchen or bathroom remodel normally sits outside it entirely. CC&Rs are a separate matter again: the city states plainly that those are enforced by your homeowners' association, not by the City. Two different bodies, two different scopes, and neither one is the building permit. We confirm which of the three actually apply to your project before we quote it.",
+    },
+    era: "Litchfield Park started as a Goodyear Tire company town — Paul Litchfield bought 16,000 acres here in 1916 to grow Egyptian long-staple cotton for tyre cord, the townsite took his name in 1926, and the Wigwam opened to the public in 1929. The city laid out a master plan of self-sufficient villages in the 1960s and did not incorporate until 1987, at just 3.3 square miles.",
+    eraImplication:
+      "Two things follow from that, and the second one catches people out. First, the housing runs from genuinely historic homes near the original village core through to subdivisions built decades later, so there is no single Litchfield Park house — we ask what yours is before we price anything. Second, and more practically: the city is only about three and a half square miles, but the Litchfield Park postal address reaches well beyond it. A good number of homes that get post addressed to Litchfield Park sit outside the city limits, which means their permit does not come from Litchfield Park Building Safety at all. Confirming which jurisdiction your address actually falls in is the first thing we do here, because it decides who reviews the plans and how long that takes.",
+    localNote:
+      "Litchfield Park sits just north-west of our Avondale location and is one of the shortest runs we make out here.",
+  },
+  "el-mirage": {
+    name: "El Mirage",
+    incorporated: true,
+    authority: "the City of El Mirage's Development Services department",
+    authorityShort: "City of El Mirage Development Services",
+    authorityUrl: "https://www.elmirageaz.gov/building-permits-inspections",
+    permitNote:
+      "El Mirage handles building permits and inspections through its Development Services department at 10000 N El Mirage Road, open Monday to Friday. A permit is required for new construction, for repair or alteration of an existing structure, and whenever a building is remodelled, renovated or enlarged — which covers essentially every kitchen and bathroom project worth doing. The city moved to an online permitting portal, ELM ONLINE, at the start of 2024, so applications, inspection scheduling and payment run through it rather than over a counter.",
+    era: "El Mirage was founded in 1937 by migrant farm workers on the west bank of the Agua Fria and incorporated in 1951, but almost none of its housing is anywhere near that old. The city counted 7,609 residents at the 2000 census and 31,797 by 2010 — more than a fourfold jump in ten years — as subdivisions went up across what had been farmland.",
+    eraImplication:
+      "That concentration is unusually useful when we quote. Because most of El Mirage's housing went up inside a single decade, a large share of the city's kitchens and bathrooms are now roughly sixteen to twenty-five years old and are giving out on the same schedule: laminate counters, thermofoil or oak cabinet doors, a fibreglass tub surround, a builder-grade mirror and the original fixtures. Behind the walls these houses are generally sound and the rough-in is modern, so the job is finish work rather than repair. That is the good news for an El Mirage budget — the money goes into what you can see, instead of disappearing into problems you cannot.",
+    localNote:
+      "El Mirage is a northern run for us, grouped with Surprise, Sun City and Sun City West.",
   },
   "sun-city": {
     name: "Sun City",

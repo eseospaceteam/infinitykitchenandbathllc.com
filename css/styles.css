@@ -1351,6 +1351,25 @@ footer {
 ::-webkit-scrollbar-thumb:hover { background: var(--green-400); }
 
 /* ---- Responsive ---- */
+
+/* The desktop nav only fits from 1080px up. Below that the row
+   (logo + 8 links + phone + "Free In-Home Consult") overflows the right edge,
+   and because nothing scrolls horizontally the overflow is simply unreachable:
+   measured on production at 780px the CTA button started 296px past the edge,
+   at 844px (iPhone landscape) 232px past it — the primary call to action was
+   entirely off-screen — and "Contact" was clipped by 8px. It stayed broken all
+   the way to 1079px and was only clean at 1080px.
+
+   The hamburger was previously only switched on at 768px, which left the whole
+   769-1079px band — every phone in landscape, and small tablets — showing a
+   desktop nav that did not fit. .hamburger/.mobile-nav are declared globally
+   and position off --nav-height, so they work unchanged at these widths. */
+@media (max-width: 1079px) {
+  .nav-links,
+  .nav-right .btn { display: none; }
+  .hamburger { display: flex; }
+}
+
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .stats-row { grid-template-columns: repeat(2, 1fr); }

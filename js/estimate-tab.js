@@ -27,7 +27,15 @@
     .ikb-mobile-bar {
       display: none;
     }
-    @media (max-width: 767px) {
+    /* 768px, not 767px, to line up with the stylesheet's own layout breakpoint.
+       styles.css collapses .footer-grid to a single column at max-width:768px,
+       which pulls every footer link flush to the left gutter — at exactly 768px
+       (iPad portrait) their tap points land at x=38, inside this tab's fixed
+       0-42px box. The tab is position:fixed and vertically centred, so "Blog"
+       and "FAQ" took no taps at ANY scroll offset (confirmed by hit-testing
+       production at 768x1024). Hiding the tab one pixel later hands 768px to
+       the mobile bar, which is what the rest of the mobile layout expects. */
+    @media (max-width: 768px) {
       .ikb-tab { display: none; }
       .ikb-mobile-bar {
         display: flex;

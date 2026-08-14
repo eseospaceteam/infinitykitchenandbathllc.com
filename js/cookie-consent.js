@@ -49,7 +49,11 @@
       // Below 768px the sticky action bar from estimate-tab.js occupies the
       // bottom 58px. At bottom:1rem this notice sat on top of it, so Call Now
       // and Free Estimate could not be tapped while consent was pending.
-      '@media(max-width:767px){#ikb-cc{bottom:calc(58px + 1rem);}}' +
+      // Kept in step with estimate-tab.js, which now shows the mobile bar up to
+      // 768px inclusive (it used to stop at 767px, one pixel short of the
+      // stylesheet's own layout breakpoint). If this stayed at 767px the notice
+      // would sit on top of the bar at exactly 768px.
+      '@media(max-width:768px){#ikb-cc{bottom:calc(58px + 1rem);}}' +
       // The notice is position:fixed, so it takes no space in flow and simply
       // sat on top of whatever the page ended with — on a 360px screen that was
       // every footer link (Privacy Policy, Cookie Policy, Accessibility, Cookie

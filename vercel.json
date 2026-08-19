@@ -96,5 +96,16 @@
     { "source": "/services", "destination": "/services.html", "permanent": true },
     { "source": "/services/", "destination": "/services.html", "permanent": true },
     { "source": "/services/:path*", "destination": "/services.html", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline'; img-src 'self' https://www.infinitykitchenandbathllc.com data: https://www.google.com; connect-src 'self' https://analytics.google.com https://stats.g.doubleclick.net https://www.google.com https://ad.doubleclick.net https://googleads.g.doubleclick.net; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src https://www.google.com; frame-ancestors 'self'" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    }
   ]
 }

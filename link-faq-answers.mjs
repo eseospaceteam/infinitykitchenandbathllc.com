@@ -26,7 +26,9 @@ import path from 'node:path';
 
 const ROOT = import.meta.dirname;
 const DRY = process.argv.includes('--dry');
-const LIVE = 'https://infinitykitchenandbathllc.com';
+// www, not the apex: the apex 308s to www, so absolutising without it would put a
+// redirect hop inside every link in the markup. The pages' own canonical says www too.
+const LIVE = 'https://www.infinitykitchenandbathllc.com';
 
 /** Every page that exists, so a term can never point at a 404. */
 const PAGES = new Set(fs.readdirSync(ROOT).filter((f) => f.endsWith('.html')));

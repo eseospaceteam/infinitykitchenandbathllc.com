@@ -11,6 +11,12 @@
 
   <!-- ═══ MAIN SERVICE HUBS ══════════════════════════════════════════ -->
   <url>
+    <loc>https://www.infinitykitchenandbathllc.com/guides.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.infinitykitchenandbathllc.com/services.html</loc>
     <lastmod>2026-08-12</lastmod>
     <changefreq>monthly</changefreq>
@@ -1090,6 +1096,18 @@
   <url>
     <loc>https://www.infinitykitchenandbathllc.com/west-valley.html</loc>
     <lastmod>2026-08-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.infinitykitchenandbathllc.com/yavapai-county-remodeling.html</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.infinitykitchenandbathllc.com/locations.html</loc>
+    <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>

@@ -54,7 +54,8 @@ const RULES = [
     'privacy-policy.html', 'terms-of-service.html', 'cookie-policy.html', 'accessibility.html',
   ].includes(s)],
   ['Neighborhood pages (Prescott)', (s) => NEIGHBORHOODS.some((n) => s === `${n}-remodeling.html`)],
-  ['Service areas — regional hub', (s) => s === 'west-valley.html'],
+  ['Service areas — all areas', (s) => s === 'locations.html'],
+  ['Service areas — regional hub', (s) => ['west-valley.html', 'yavapai-county-remodeling.html'].includes(s)],
   ['Guide categories', (s) => [
     'choosing-a-contractor.html', 'accessibility-guides.html', 'cost-guides.html',
     'comparison-guides.html', 'shower-guides.html', 'kitchen-guides.html',

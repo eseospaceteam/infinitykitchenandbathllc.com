@@ -37,7 +37,16 @@ const REMOVE = process.argv.includes('--remove');
 const ORIGIN = 'https://www.infinitykitchenandbathllc.com';
 const AV_ID = `${ORIGIN}/#business-avondale`;
 
-const WV_CITIES = ['Avondale', 'Buckeye', 'Glendale', 'Goodyear', 'Peoria', 'Surprise', 'Sun City', 'Sun City West'];
+/* TEN cities, not eight. El Mirage and Litchfield Park were added to the
+   territory in Aug 2026 by build-territory-cities.mjs, which wrote the branch
+   node with a ten-city areaServed and left this list untouched at eight.
+   Re-running the script in that state would have silently REGRESSED areaServed
+   on 26 pages, dropping two cities that have six live pages between them.
+   Caught 2026-09-04. Keep this in sync with link-territory-cities.mjs. */
+const WV_CITIES = [
+  'Avondale', 'Buckeye', 'El Mirage', 'Glendale', 'Goodyear',
+  'Litchfield Park', 'Peoria', 'Surprise', 'Sun City', 'Sun City West',
+];
 
 const TARGETS = [
   'contact.html',
@@ -68,15 +77,11 @@ const AVONDALE_NODE = {
     postalCode: '85323',
     addressCountry: 'US',
   },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '17:00',
-    },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '10:00', closes: '14:00' },
-  ],
+  /* NO openingHoursSpecification — resolved 2026-09-04, see
+     reconcile-avondale-hours.mjs. Hours here asserted the branch was OPEN while
+     all 225 pages render "Avondale (Coming Soon)" in the footer. Restore this
+     block ONLY in the same change that drops "Coming Soon" from the visible
+     copy, never on its own. */
   areaServed: WV_CITIES.map((name) => ({ '@type': 'City', name })),
   parentOrganization: { '@id': `${ORIGIN}/#business` },
 };
@@ -137,8 +142,9 @@ console.log(`target scope: ${TARGETS.length} West Valley pages + contact.html`);
 if (!REMOVE) {
   console.log('\nreminders:');
   console.log('  · no `geo` — add real coordinates from the Avondale GBP');
-  console.log('  · openingHoursSpecification asserts the location is OPEN, which');
-  console.log('    contradicts the "Coming Soon" copy in the footer of 172 pages.');
-  console.log('    Reconcile one way or the other before this ships to production.');
+  console.log('  · no openingHoursSpecification, deliberately — the footer says');
+  console.log('    "Avondale (Coming Soon)" on all 225 pages. Restore hours only');
+  console.log('    in the same change that drops that label. See');
+  console.log('    reconcile-avondale-hours.mjs.');
 }
 if (missing.length) process.exit(1);

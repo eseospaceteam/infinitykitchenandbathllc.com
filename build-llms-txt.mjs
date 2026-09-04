@@ -44,11 +44,16 @@ const CITIES = [
 const NEIGHBORHOODS = ['downtown-prescott', 'south-prescott', 'prescott-lakes', 'yavapai-hills'];
 
 const RULES = [
-  ['Start here', (s) => ['', 'index.html', 'services.html', 'contact.html'].includes(s)],
+  // accessible-remodeling.html sits here rather than under a service bucket:
+  // it is the parent of the site's largest and most differentiated cluster,
+  // and an AI index should reach it as an entry point, not three hops down.
+  ['Start here', (s) => ['', 'index.html', 'services.html', 'contact.html',
+    'accessible-remodeling.html'].includes(s)],
   ['Company & trust', (s) => [
     'about.html', 'our-team.html', 'reviews.html', 'gallery.html', 'featured-in.html',
     'faq.html', 'prescott-remodeling-faq.html', 'financing.html', 'warranties.html',
     'licensing-insurance.html', 'community.html', 'remodel-cost-calculator.html',
+    'our-process.html',
   ].includes(s)],
   ['Legal & accessibility', (s) => [
     'privacy-policy.html', 'terms-of-service.html', 'cookie-policy.html', 'accessibility.html',
@@ -60,6 +65,7 @@ const RULES = [
     'choosing-a-contractor.html', 'accessibility-guides.html', 'cost-guides.html',
     'comparison-guides.html', 'shower-guides.html', 'kitchen-guides.html',
     'bathroom-guides.html', 'planning-guides.html',
+    'guides.html', // the parent hub; uncategorised since it shipped in Aug 2026
   ].includes(s)],
   // Matched against the real city list so aging-in-place-guide.html etc. fall through.
   ['Accessibility service in a specific city', (s) =>

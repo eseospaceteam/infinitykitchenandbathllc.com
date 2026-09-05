@@ -71,7 +71,7 @@ const POLICY_EDITS = [
    "We keep our use of cookies deliberately minimal. We use them to remember your consent preference, to understand in aggregate how visitors find and use our Site, and to measure the performance of our Google Ads campaigns &mdash; for example, to know which ad led to a contact form submission. <strong>We do not use social media tracking cookies, and we do not sell your personal information.</strong> You can decline advertising and analytics cookies at any time using the &ldquo;Cookie Preferences&rdquo; link in our footer."],
   ["privacy-policy.html",
    "These third parties are contractually restricted from using your information for purposes other than those described. We do not currently integrate with advertising platforms, remarketing services, or social media tracking pixels.",
-   "These third parties are contractually restricted from using your information for purposes other than those described. We use Google Ads conversion measurement to understand which of our advertisements lead to enquiries. We do not integrate with social media tracking pixels, and we do not sell your personal information."],
+   "These third parties are contractually restricted from using your information for purposes other than those described. We use Google Ads conversion measurement to understand which of our advertisements lead to inquiries. We do not integrate with social media tracking pixels, and we do not sell your personal information."],
 ];
 for (const [file, oldText, newText] of POLICY_EDITS) {
   const src = readFileSync(file, "utf8");

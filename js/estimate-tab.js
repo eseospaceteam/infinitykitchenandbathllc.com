@@ -505,7 +505,7 @@
     // The form carries `novalidate`, so nothing checks these but us — and the
     // server answers an incomplete lead with a fake 200 (its anti-bot gate), so
     // an unvalidated submit would show "Request Sent!" and quietly bin a real
-    // enquiry. Fail here instead, where the visitor can fix it.
+    // inquiry. Fail here instead, where the visitor can fix it.
     const need = [
       ['name',    (v) => v.trim().length >= 2,                   'Please enter your name.'],
       ['phone',   (v) => v.replace(/\D/g, '').length >= 7,       'Please enter a phone number we can reach you on.'],

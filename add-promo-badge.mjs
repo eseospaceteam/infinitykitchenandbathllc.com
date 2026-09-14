@@ -32,9 +32,10 @@ const REMOVE = process.argv.includes('--remove');
 // Steve is honouring the 15% through the end of August.
 // 2026-08-12: switched from a period ("Through August") to a hard end date, so
 // the bar reads as a deadline rather than as permanent chrome.
-const PERIOD = 'Ends Aug 31';
+// 2026-09-14: extended to Oct 31 at the agency's direction (bar had run past Aug 31).
+const PERIOD = 'Ends Oct 31';
 
-const BAR = `  <a href="/contact.html?promo=15for15" id="promoBar" data-promo="15for15" aria-label="Save 15 percent on your remodel — 15th anniversary offer, ${PERIOD}">
+const BAR = `  <a href="/contact.html?promo=15for15" rel="nofollow" id="promoBar" data-promo="15for15" aria-label="Save 15 percent on your remodel — 15th anniversary offer, ${PERIOD}">
     <span class="promo-inner">
       <span class="promo-full">
         <span class="promo-kicker">&#127881; Celebrating 15 Years</span>
@@ -67,7 +68,7 @@ for (const file of pageFiles()) {
   let out = html;
 
   if (REMOVE) {
-    out = out.replace(/ *<a href="[^"]*" id="promoBar"[\s\S]*?<\/a>\n/, '');
+    out = out.replace(/ *<a [^>]*id="promoBar"[\s\S]*?<\/a>\n/, '');
     if (out !== html) touched++;
   } else if (!html.includes('id="promoBar"')) {
     // Insert directly after the opening <nav id="navbar" ...> tag.
@@ -80,7 +81,7 @@ for (const file of pageFiles()) {
     // every page carries whatever BAR says today. The bar contains no nested
     // <a>, so the non-greedy match to the first </a> is exact.
     const before = out;
-    out = out.replace(/ *<a href="[^"]*" id="promoBar"[\s\S]*?<\/a>\n/, BAR);
+    out = out.replace(/ *<a [^>]*id="promoBar"[\s\S]*?<\/a>\n/, BAR);
     if (out !== before) retexted++;
   }
 

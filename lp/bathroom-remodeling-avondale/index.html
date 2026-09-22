@@ -76,20 +76,6 @@
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <nav id="navbar" class="scrolled">
-  <a href="/contact.html?promo=15for15" id="promoBar" data-promo="15for15" aria-label="Save 15 percent on your remodel — 15th anniversary offer, Ends Oct 31">
-    <span class="promo-inner">
-      <span class="promo-full">
-        <span class="promo-kicker">&#127881; Celebrating 15 Years</span>
-        <span class="promo-offer"><em>Save 15%</em> on Your Remodel</span>
-        <span class="promo-deadline">Ends Oct 31</span>
-      </span>
-      <span class="promo-short">
-        <span class="promo-offer"><em>Save 15%</em></span>
-        <span class="promo-deadline">Ends Oct 31</span>
-      </span>
-      <span class="promo-claim">Claim Offer</span>
-    </span>
-  </a>
   <div class="nav-announce">
     <div class="na-left">
       <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.71 6.29l-4 4a1 1 0 01-1.42 0l-2-2a1 1 0 011.42-1.42L7 8.17l3.29-3.29a1 1 0 011.42 1.41z"/></svg> Licensed &bull; Insured</span>
@@ -209,6 +195,7 @@
       <form id="lpForm" novalidate>
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="tel" name="phone" placeholder="Phone Number" required autocomplete="tel">
+        <input type="text" name="city" placeholder="Your City (e.g., Prescott)" required autocomplete="address-level2" aria-label="Your city">
         <input type="email" name="email" placeholder="Email (optional)" autocomplete="email">
         <textarea name="project" placeholder="Tell us about your bathroom remodeling project (optional)"></textarea>
         <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -307,11 +294,13 @@
 (function(){
   var f=document.getElementById('lpForm'),ok=document.getElementById('lpOk'),btn=document.getElementById('lpSubmit'),shown=Date.now();
   if(!f)return;
+  f.querySelector('[name=city]').addEventListener('input',function(){this.setCustomValidity('');});
   f.addEventListener('submit',async function(e){
     e.preventDefault();
     var d=Object.fromEntries(new FormData(f)),p=(d.name||'').trim().split(/\s+/);
+    var cf=f.querySelector('[name=city]');if(!(d.city||'').trim()){cf.setCustomValidity('Please enter your city.');cf.reportValidity();cf.focus();return;}
     var payload={firstName:p[0]||'',lastName:p.slice(1).join(' ')||'',phone:d.phone||'',email:d.email||'',
-      message:d.project||'',service:"Bathroom Remodeling — Avondale (Ads LP)",address:'','consult-type':'',company:d.company||'',elapsed:Date.now()-shown};
+      message:d.project||'',service:"Bathroom Remodeling — Avondale (Ads LP)",address:(d.city||'').trim(),'consult-type':'',company:d.company||'',elapsed:Date.now()-shown};
     var orig=btn.innerHTML;btn.textContent='Sending\u2026';btn.disabled=true;
     try{
       var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});

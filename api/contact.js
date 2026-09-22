@@ -44,6 +44,12 @@ export default async function handler(req, res) {
     return fakeOk();
   }
 
+  // 3b) Location is mandatory on every form (client direction, 22 Sep 2026).
+  //     Real 400, not fakeOk: a human who skipped it should be told, not dropped.
+  if (String(address || '').trim().length < 2) {
+    return res.status(400).json({ error: 'Please enter your city.' });
+  }
+
   // 4) Random-token detector — the signature of the bot leads that keep getting
   //    through (e.g. name "gwhWvuVfktsvExuKiWoynzAT", message "EyBivCOePwdFDFaexZwJmqi").
   //    Real names and messages never mash capitals into the middle of a token,
@@ -126,7 +132,7 @@ export default async function handler(req, res) {
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;width:140px;">Name</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(firstName)} ${esc(lastName)}</td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Phone</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;"><a href="tel:${esc(phone)}" style="color:#1B4332;">${esc(phone)}</a></td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Email</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${email ? `<a href="mailto:${esc(email)}" style="color:#1B4332;">${esc(email)}</a>` : '—'}</td></tr>
-      <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Address / Location</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(address) || '—'}</td></tr>
+      <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">City / Address</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(address) || '—'}</td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Service</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(serviceLabel)}</td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Consultation</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(consultLabel)}</td></tr>
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;vertical-align:top;">Message</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(message) || '—'}</td></tr>
@@ -140,7 +146,7 @@ export default async function handler(req, res) {
     `Name: ${firstName} ${lastName}`,
     `Phone: ${phone}`,
     `Email: ${email || 'Not provided'}`,
-    `Address / Location: ${address || 'Not provided'}`,
+    `City / Address: ${address}`,
     `Service: ${serviceLabel}`,
     `Consultation: ${consultLabel}`,
     `Message: ${message || 'None'}`,

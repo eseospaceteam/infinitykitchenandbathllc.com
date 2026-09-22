@@ -169,6 +169,7 @@ ${navFor(cfg.region)}
       <form id="lpForm" novalidate>
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="tel" name="phone" placeholder="Phone Number" required autocomplete="tel">
+        <input type="text" name="city" placeholder="Your City (e.g., Prescott)" required autocomplete="address-level2" aria-label="Your city">
         <input type="email" name="email" placeholder="Email (optional)" autocomplete="email">
         <textarea name="project" placeholder="Tell us about your ${cfg.serviceLower} project (optional)"></textarea>
         <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -248,11 +249,13 @@ ${FOOTER_ABS}
 (function(){
   var f=document.getElementById('lpForm'),ok=document.getElementById('lpOk'),btn=document.getElementById('lpSubmit'),shown=Date.now();
   if(!f)return;
+  f.querySelector('[name=city]').addEventListener('input',function(){this.setCustomValidity('');});
   f.addEventListener('submit',async function(e){
     e.preventDefault();
     var d=Object.fromEntries(new FormData(f)),p=(d.name||'').trim().split(/\\s+/);
+    var cf=f.querySelector('[name=city]');if(!(d.city||'').trim()){cf.setCustomValidity('Please enter your city.');cf.reportValidity();cf.focus();return;}
     var payload={firstName:p[0]||'',lastName:p.slice(1).join(' ')||'',phone:d.phone||'',email:d.email||'',
-      message:d.project||'',service:${JSON.stringify(cfg.service + " — " + cfg.city + " (Ads LP)")},address:'','consult-type':'',company:d.company||'',elapsed:Date.now()-shown};
+      message:d.project||'',service:${JSON.stringify(cfg.service + " — " + cfg.city + " (Ads LP)")},address:(d.city||'').trim(),'consult-type':'',company:d.company||'',elapsed:Date.now()-shown};
     var orig=btn.innerHTML;btn.textContent='Sending\\u2026';btn.disabled=true;
     try{
       var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});

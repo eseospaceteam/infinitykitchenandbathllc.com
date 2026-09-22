@@ -47,10 +47,8 @@
   --font-sans:  Arial, Helvetica, 'Segoe UI', system-ui, sans-serif;
 
   --max-width: 1280px;
-  /* 118px of nav (38px announce + 80px bar) + 56px anniversary promo bar.
-     When the promo ends, drop #promoBar from the markup and set this back
-     to 118px (and the 768px override back to 108px). */
-  --nav-height: 174px;
+  /* 38px announce + 80px bar */
+  --nav-height: 118px;
 
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --transition: all 0.3s var(--ease);
@@ -1380,7 +1378,7 @@ footer {
   .feature-block-content { padding: 3rem; }
 }
 @media (max-width: 768px) {
-  :root { --nav-height: 158px; } /* 108px nav + 50px promo bar */
+  :root { --nav-height: 108px; }
   .nav-inner { height: 70px; }
   .nav-logo-img { height: 38px; }
   .section { padding: 4rem 0; }

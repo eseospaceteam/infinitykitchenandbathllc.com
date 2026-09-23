@@ -17,7 +17,7 @@
  *
  * Idempotent. Usage: node build-llms-txt.mjs [--dry]
  */
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
@@ -43,6 +43,11 @@ const CITIES = [
 ];
 const NEIGHBORHOODS = ['downtown-prescott', 'south-prescott', 'prescott-lakes', 'yavapai-hills'];
 
+const SUPPORTING_LISTS = new Set(
+  readdirSync(path.join(ROOT, 'listicles'))
+    .filter((f) => f.endsWith('.mjs') && /kind:\s*'supporting'/.test(readFileSync(path.join(ROOT, 'listicles', f), 'utf8')))
+    .map((f) => f.replace(/\.mjs$/, '.html')),
+);
 const RULES = [
   // accessible-remodeling.html sits here rather than under a service bucket:
   // it is the parent of the site's largest and most differentiated cluster,
@@ -73,6 +78,11 @@ const RULES = [
       .some((sv) => CITIES.some((c) => s === `${sv}-${c}.html`))],
   ['Service in a specific city', (s) => /^(kitchen|bathroom)-remodeling-[a-z-]+\.html$/.test(s)],
   ['Service areas — city hubs', (s) => CITIES.some((c) => s === `${c}-remodeling.html`)],
+  // Listicles built by build-listicles.mjs: ranked local-contractor lists use top-*;
+  // the "ideas" lists share the best-* prefix with the how-to-choose guides, so they
+  // are matched by their data file's kind, not by slug.
+  ['Best-of lists — local contractors', (s) => /^top-/.test(s)],
+  ['Best-of lists — ideas & materials', (s) => SUPPORTING_LISTS.has(s)],
   ['Choosing a contractor', (s) => /^best-/.test(s)],
   ['Costs & budgeting', (s) => /(-cost|-costs|costs\.html|-roi)\.html$/.test(s)],
   ['Comparisons', (s) => /-vs-/.test(s)],

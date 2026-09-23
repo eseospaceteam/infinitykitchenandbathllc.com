@@ -1,0 +1,131 @@
+export default {
+  slug: 'best-accessible-kitchen-features-for-aging-in-place',
+  kind: 'supporting',
+  title: 'Best Accessible Kitchen Features for Aging in Place (2026)',
+  desc: 'Eleven kitchen features that make cooking easier as you age: drawer bases, pull-down shelves, D-pulls, lower counters, knee space, wall ovens and wider aisles.',
+  h1: 'Best Accessible Kitchen Features for Aging in Place (2026)',
+  eyebrow: 'Aging in Place Guide &mdash; Prescott &amp; the West Valley',
+  crumb: 'Accessible Kitchen Features',
+  heroImg: '/wp-content/uploads/2026/06/modern-white-kitchen-remodel-gold-accents-opt.jpg',
+  heroAlt: 'Remodeled white kitchen with gold hardware and a clear, open floor',
+  readMin: 9,
+  quick:
+    'The accessible kitchen features that do the most are the ones that stop bending and reaching: full-extension drawer bases instead of doors, pull-down upper shelves, a wall oven at waist height and a counter section at 32&ndash;34 inches. Add easy-grip hardware and faucets, good task lighting, a slip-resistant floor and enough clear floor space to turn around. Most of it looks like any well-planned <a href="kitchen-remodeling.html">kitchen remodel</a>.',
+  intro:
+    '<p>The bathroom gets most of the attention in <a href="aging-in-place.html">aging-in-place remodeling</a>, and for good reason: it is where the falls happen. But the kitchen is where independence is quietly lost. It is the pot on the bottom shelf that becomes too much trouble, the upper cabinet that needs a step stool, the oven door that means bending while holding something hot.</p><p>The features below are ranked by how much daily strain they remove for the money and disruption. Where we quote a clearance, it comes from the 2010 ADA Standards for Accessible Design. Private homes do not have to meet the ADA; it governs public places. We use it as a benchmark because its dimensions are well tested, and we apply as much of it as the kitchen and the household actually need.</p>',
+  items: [
+    {
+      name: 'Full-Extension Drawer Base Cabinets',
+      bestFor: 'Best single change for any kitchen',
+      body: '<p>A standard base cabinet is a door and a shelf: to reach the back you kneel, lean in and dig. Replace it with full-extension drawers and the whole contents come out to you, visible from above, whether you are standing or seated. Deep drawers hold pots and small appliances; shallow ones hold utensils and spices.</p><p>This is the upgrade we recommend first, because it helps everyone in the household and never looks like an accessibility feature. Soft-close slides stop a heavy drawer from slamming back into fingers. See our <a href="kitchen-cabinets.html">kitchen cabinets</a> page for construction options.</p>',
+      pros: ['No kneeling or reaching into the back', 'Works standing or seated'],
+      cons: ['Costs more per cabinet than a door and shelf'],
+    },
+    {
+      name: 'Pull-Down Shelves in Upper Cabinets',
+      bestFor: 'Best for keeping upper cabinets usable',
+      body: '<p>Upper cabinets are the first storage to go out of reach, and the top shelf is where step stools &mdash; and falls &mdash; come in. A pull-down shelf is a mechanism installed inside the upper cabinet: you pull a handle and the shelf unit swings out and down to counter height, then lifts back into place.</p><p>They reduce usable space a little and have a weight limit, so they suit everyday dishes and glasses rather than heavy serving pieces. In base cabinets that stay as doors, the counterpart is a pull-out shelf, which rolls the contents forward. Both can be added to many existing cabinet boxes, no full remodel needed.</p>',
+      pros: ['Brings upper storage down to reach', 'Often retrofittable'],
+      cons: ['Loses some cabinet space', 'Weight limits on the mechanism'],
+    },
+    {
+      name: 'D-Pull and Loop Hardware',
+      bestFor: 'Best for arthritic hands',
+      body: '<p>Small round knobs need a pinch and a twist, which is exactly the grip arthritis takes away first. D-shaped pulls, bar pulls and loop handles can be opened with a closed fist, a hooked finger or even a forearm when your hands are full.</p><p>This is the cheapest item on the list and the easiest to add at any time. Choose pulls with enough space behind the bar for four fingers, and put them where a hand falls naturally: near the top of base drawers, near the bottom of upper doors.</p>',
+      pros: ['Inexpensive', 'Usable with a fist or forearm'],
+      cons: ['Long bar pulls can catch clothing in narrow aisles'],
+    },
+    {
+      name: 'Lever, Touch and Touchless Faucets',
+      bestFor: 'Best at the main sink',
+      body: '<p>A single-lever faucet sets flow and temperature with one push of the hand, with no grip or twist needed. Touch and touchless faucets go further: a tap of the wrist or a wave of the hand turns the water on, which helps when hands are full, stiff or covered in raw food. Touchless faucets are one of the kitchen changes listed on our <a href="aging-in-place.html">aging-in-place</a> page.</p><p>Pair any of them with a pull-down spray head so a pot can be filled on the counter instead of lifted out of the sink. Hard water in Prescott and the West Valley is hard on sensor windows and aerators, so choose a model you can clean and service easily.</p>',
+      pros: ['No gripping or twisting', 'Pull-down spray reduces lifting'],
+      cons: ['Sensor faucets need batteries or power and occasional cleaning'],
+    },
+    {
+      name: 'A Lower Counter Section',
+      bestFor: 'Best for seated prep and shorter cooks',
+      body: '<p>Standard counters sit at 36 inches, which is right for a standing adult of average height and too high for someone seated or much shorter. A counter section at 32&ndash;34 inches, as we set out in our <a href="aging-in-place-guide.html">aging-in-place guide</a>, lets a person prep food while seated. The 2010 ADA Standards (&sect;902.3) put accessible work surfaces between 28 and 34 inches above the floor.</p><p>It does not have to look like an afterthought. An island with a dropped end, or a baking counter set lower than the rest, reads as a design choice. Our <a href="kitchen-island-ideas.html">kitchen island ideas</a> show how a split-level island works in practice.</p>',
+      pros: ['Seated prep becomes practical', 'Easy to design in as a baking station'],
+      cons: ['Needs planning at layout stage, not afterward'],
+    },
+    {
+      name: 'Knee Space Under the Sink or Cooktop',
+      bestFor: 'Best for wheelchair users and anyone who needs to sit',
+      body: '<p>An open space under the sink lets a person roll or sit right up to it instead of reaching sideways. The 2010 ADA Standards (&sect;306.3) call for knee clearance at least 27 inches high, and &sect;606.3 keeps a sink rim no higher than 34 inches. The drain pipes need insulating or covering so they cannot burn or scrape legs, the same detail we use on roll-under vanities on our <a href="ada-bathroom-remodeling.html">ADA bathroom</a> page.</p><p>If nobody needs it yet, removable cabinet fronts can close off the space and come out later. A shallower sink bowl helps too, since a deep bowl eats into knee room.</p>',
+      pros: ['Sink usable from a seated position', 'Removable fronts keep storage for now'],
+      cons: ['Gives up sink-base storage once open'],
+    },
+    {
+      name: 'Wall Ovens, Side-Opening Doors and Appliances at Reach',
+      bestFor: 'Best for anyone who dreads bending with hot pans',
+      body: '<p>A range oven puts the hottest, heaviest lift in the kitchen at knee height. A wall oven mounted so its rack sits around counter level turns that into a sideways slide. Side-hinged oven doors, which swing open like a cabinet, let a seated cook get closer to the rack than a drop-down door allows. Put a heat-safe landing counter right beside it.</p><p>The same logic applies elsewhere. Our <a href="aging-in-place-guide.html">guide</a> recommends raising the dishwasher 12&ndash;18 inches on a platform to cut bending, and a side-by-side or French-door refrigerator for easier access. Microwave drawers set below the counter avoid lifting hot liquids from above head height.</p>',
+      pros: ['Removes the worst lift in the kitchen', 'Works standing or seated'],
+      cons: ['Needs cabinet space for a tall oven tower'],
+    },
+    {
+      name: 'Induction Cooktop With Front Controls',
+      bestFor: 'Best for burn and fire safety',
+      body: '<p>Induction heats the pan directly through a magnetic field; the glass only gets hot from contact with the pan. There is no open flame to catch a sleeve and no red-hot element after the pan comes off. Many models also stop heating when no pan is detected, and most have timers and lock functions.</p><p>Choose one with controls at the front or side, so nobody reaches over a hot pot to adjust it. Two practical notes: induction needs magnetic cookware (a magnet that sticks to the base is the test), and anyone with a pacemaker or implanted device should check the manufacturer&rsquo;s guidance before switching. A cooktop set into a counter can also have knee space beneath it for seated cooking.</p>',
+      pros: ['No flame, no glowing element', 'Automatic shutoff on many models'],
+      cons: ['May require new cookware', 'Check with a doctor if anyone has an implanted device'],
+    },
+    {
+      name: 'Layered Task Lighting',
+      bestFor: 'Best for aging eyes',
+      body: '<p>Older eyes need more light and are more bothered by glare. Under-cabinet lighting puts light on the counter where the knife is, rather than behind your head where a ceiling fixture casts your own shadow onto the work. Add light inside deep pantries, too.</p><p>Controls matter as much as fixtures. Our <a href="aging-in-place.html">aging-in-place</a> page puts outlets at 18&ndash;24 inches and switches at 42&ndash;48 inches to reduce bending and reaching, with large rocker switches that work with an elbow. Our <a href="kitchen-lighting-ideas.html">kitchen lighting ideas</a> cover fixture choices in detail.</p>',
+      pros: ['Shadow-free counters', 'Rocker switches work with full hands'],
+      cons: ['Best wired during a remodel'],
+    },
+    {
+      name: 'Slip-Resistant Flooring',
+      bestFor: 'Best for spills and walkers',
+      body: '<p>Kitchen floors get wet in small, unexpected ways: a dropped ice cube, a drip from the sink, a splash from the dog bowl. Choose a matte or lightly textured surface over polished stone or glossy tile. <a href="luxury-vinyl-flooring.html">Luxury vinyl plank</a> is slightly softer underfoot, quiet and forgiving on dropped dishes; matte porcelain from our <a href="tile-flooring.html">tile flooring</a> range holds up to heavy traffic and hard water.</p><p>Keep the floor level from room to room, with no raised thresholds for a walker wheel or a shuffling foot to catch. If the floor must change material, a color-contrasting edge makes the change visible. Our <a href="lvp-vs-tile.html">LVP vs. tile</a> comparison sets the two side by side.</p>',
+      pros: ['Fewer slips on spills', 'Level transitions for walkers'],
+      cons: ['Heavily textured tile is harder to clean'],
+    },
+    {
+      name: 'Wider Aisles and Clear Floor Space',
+      bestFor: 'Best for walkers, wheelchairs and two cooks',
+      body: '<p>Everything above depends on being able to get to it. The 2010 ADA Standards set a 60-inch turning space (&sect;304.3) and a 30 by 48 inch clear floor space in front of each fixture or appliance (&sect;305.3). For kitchens, &sect;804.2 calls for at least 40 inches between opposing counters in a pass-through kitchen and 60 inches in a U-shaped one.</p><p>Not every home can reach those numbers, and not every household needs them. We use them as the target and tell you where your floor plan falls short. Opening a wall or moving an island is sometimes the change that makes everything else work; our <a href="small-kitchen-remodeling.html">small kitchen remodeling</a> page covers how we find room in tight layouts.</p>',
+      pros: ['Room for a walker, wheelchair or helper', 'Two people can cook at once'],
+      cons: ['Can mean moving walls or an island'],
+    },
+  ],
+  after:
+    '<h2>The ADA kitchen benchmarks, in one table</h2><p>A private home does not have to meet the 2010 ADA Standards for Accessible Design. They cover public accommodations. These are the figures we plan toward when a household wants a kitchen that will work with a walker or wheelchair.</p><div class="table-scroll"><table class="data-table"><thead><tr><th>Requirement</th><th>2010 ADA Standards figure</th><th>Section</th></tr></thead><tbody><tr><td>Turning space</td><td>60 in. diameter circle</td><td>&sect;304.3</td></tr><tr><td>Clear floor space at a fixture or appliance</td><td>30 in. by 48 in.</td><td>&sect;305.3</td></tr><tr><td>Knee clearance height</td><td>27 in. minimum</td><td>&sect;306.3</td></tr><tr><td>Work surface height</td><td>28 to 34 in.</td><td>&sect;902.3</td></tr><tr><td>Sink rim height</td><td>34 in. maximum</td><td>&sect;606.3</td></tr><tr><td>Clearance between opposing counters</td><td>40 in. (pass-through) / 60 in. (U-shaped)</td><td>&sect;804.2</td></tr></tbody></table></div><h2>What to do now, and what to plan for</h2><p>Some of this list can happen any weekend: D-pulls, a new faucet, pull-out shelves in existing cabinets, brighter under-cabinet lights. The rest belongs in a remodel, because it depends on layout, plumbing and wiring: drawer bases, a lower counter, knee space, a wall oven, wider aisles and a level floor. If you are remodeling anyway, it costs little extra to plan the second group now, even if nobody needs them yet. Our <a href="accessible-remodeling.html">accessible remodeling</a> page explains how we decide what is worth doing in a particular home, and the <a href="aging-in-place-guide.html">aging-in-place guide</a> walks through the rest of the house.</p><p>Infinity Kitchens and Baths works across Yavapai County and the West Valley, including Sun City and Sun City West, and can plan the kitchen and the bathroom at the same free in-home consultation. If you are comparing contractors, our ranked lists of <a href="top-aging-in-place-remodelers-sun-city.html">aging-in-place remodelers in Sun City</a> and <a href="top-ada-bathroom-remodelers-west-valley.html">ADA bathroom remodelers in the West Valley</a> are a good starting point, and our guide to <a href="best-grab-bars-that-dont-look-clinical.html">grab bars that don&rsquo;t look clinical</a> covers the bathroom side.</p>',
+  faq: [
+    {
+      q: 'What is the most important accessible kitchen feature?',
+      a: 'For most households it is replacing door-and-shelf base cabinets with full-extension drawers. Everything in the drawer comes out to you, so there is no kneeling or reaching into the back of a dark cabinet, and it works for a standing or seated cook. It also looks like any well-planned kitchen, so nobody reads it as an accessibility feature.',
+    },
+    {
+      q: 'What counter height is best for aging in place?',
+      a: 'Standard counters are 36 inches. We suggest keeping most of the kitchen at that height and adding one section at 32 to 34 inches for seated prep. The 2010 ADA Standards put accessible work surfaces between 28 and 34 inches. A dropped end on an island or a lower baking counter is the usual way to fit it in without it looking out of place.',
+    },
+    {
+      q: 'Is an induction cooktop safer for seniors?',
+      a: 'In several ways, yes. There is no flame to catch clothing, the glass only gets hot from contact with the pan, and many models stop heating when no pan is detected. Choose one with front or side controls so nobody reaches over a hot pot. It needs magnetic cookware, and anyone with a pacemaker should check the manufacturer&rsquo;s guidance first.',
+    },
+    {
+      q: 'How much space does a wheelchair need in a kitchen?',
+      a: 'The 2010 ADA Standards set a 60-inch turning space and a 30 by 48 inch clear floor space in front of each appliance or fixture. They also call for at least 40 inches between opposing counters in a pass-through kitchen and 60 inches in a U-shaped one. Homes do not have to meet the ADA, but these are the targets we plan toward.',
+    },
+    {
+      q: 'Can I make my kitchen more accessible without a full remodel?',
+      a: 'Yes. D-shaped pulls, a lever or touchless faucet, pull-out and pull-down shelves in existing cabinets and better under-cabinet lighting can all be added to a working kitchen. Drawer bases, a lower counter, knee space, a wall oven and wider aisles depend on layout, plumbing and wiring, so they are best planned as part of a remodel.',
+    },
+  ],
+  related: [
+    { href: 'kitchen-remodeling.html', title: 'Kitchen Remodeling in Prescott' },
+    { href: 'aging-in-place.html', title: 'Aging in Place Remodeling' },
+    { href: 'aging-in-place-guide.html', title: 'Complete Aging in Place Guide' },
+    { href: 'accessible-remodeling.html', title: 'Accessible &amp; Aging-in-Place Remodeling' },
+    { href: 'kitchen-cabinets.html', title: 'Kitchen Cabinets' },
+    { href: 'top-aging-in-place-remodelers-sun-city.html', title: 'Top Aging-in-Place Remodelers in Sun City' },
+  ],
+  cta: {
+    h: 'Plan a kitchen that keeps working for you',
+    p: 'Book a free in-home consultation. We will look at your layout, your cabinets and your clearances, and tell you which changes are worth making now.',
+  },
+};

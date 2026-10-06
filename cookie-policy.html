@@ -6,9 +6,8 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    // Consent Mode v2 defaults: analytics + ads granted in the US (opt-out), denied in EU/EEA/UK/CH until opt-in
-    gtag('consent', 'default', {'ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','analytics_storage':'granted'});
-    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','region':['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
+    // Consent Mode v2: nothing is stored (no _ga/_gcl cookies) until the visitor clicks Accept
+    gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});
     try{var _ikbc=localStorage.getItem('ikb_consent');if(_ikbc==='granted'||_ikbc==='denied'){gtag('consent','update',{'analytics_storage':_ikbc,'ad_storage':_ikbc,'ad_user_data':_ikbc,'ad_personalization':_ikbc});}}catch(e){}
     gtag('js', new Date());
     gtag('config', 'G-EK9HSW7F90');
@@ -275,7 +274,7 @@
     <div class="breadcrumb"><a href="/">Home</a><span>/</span><span style="color:rgba(255,255,255,0.75)">Cookie Policy</span></div>
     <span class="eyebrow">Legal</span>
     <h1>Cookie Policy</h1>
-    <p style="color:rgba(255,255,255,0.75);margin-top:0.5rem;">Effective Date: June 23, 2026 &mdash; Infinity Kitchens and Baths, LLC</p>
+    <p style="color:rgba(255,255,255,0.75);margin-top:0.5rem;">Last updated: October 6, 2026 &mdash; Infinity Kitchens and Baths, LLC</p>
   </div>
 </section>
 
@@ -322,16 +321,23 @@
             <td style="padding:0.6rem 0.75rem;">Maintains session state for our specific GA4 property.</td>
             <td style="padding:0.6rem 0.75rem;">Up to 2 years</td>
           </tr>
+          <tr style="border-bottom:1px solid var(--green-100);">
+            <td style="padding:0.6rem 0.75rem;"><code>_gcl_au</code>, <code>_gcl_aw</code></td>
+            <td style="padding:0.6rem 0.75rem;">Advertising (Google Ads)</td>
+            <td style="padding:0.6rem 0.75rem;">Measures whether a visit from one of our Google ads led to a call or an estimate request. <code>_gcl_aw</code> is set only when you arrive by clicking an ad.</td>
+            <td style="padding:0.6rem 0.75rem;">90 days</td>
+          </tr>
         </tbody>
       </table>
       </p>
-      <p>Analytics cookies are set by Google Analytics and are subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google&rsquo;s Privacy Policy</a>. Exact cookie names and durations may change as Google updates its products.</p>
+      <p>These cookies are set only after you choose &ldquo;Accept&rdquo;. Analytics and advertising cookies are set by Google and are subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google&rsquo;s Privacy Policy</a>. Exact cookie names and durations may change as Google updates its products.</p>
 
       <h2>Your Consent Choices</h2>
-      <p>We use Google Consent Mode and a consent banner to manage analytics cookies based on where you are located:</p>
+      <p>We use Google Consent Mode together with a consent banner. For every visitor, wherever you are located:</p>
       <ul style="margin:0.75rem 0 1rem 1.5rem;">
-        <li><strong>European Economic Area, the United Kingdom, and Switzerland:</strong> analytics cookies are <em>off by default</em> and are only set after you choose &ldquo;Accept&rdquo; (opt-in).</li>
-        <li><strong>United States and elsewhere:</strong> analytics cookies are enabled by default, and you may turn them off at any time by choosing &ldquo;Decline&rdquo; (opt-out).</li>
+        <li>Analytics and advertising cookies are <em>off by default</em>. No Google Analytics or Google Ads cookie is set until you choose &ldquo;Accept&rdquo;.</li>
+        <li>Until then, and if you choose &ldquo;Decline&rdquo;, Google receives only cookieless signals (for example, that a page was viewed), with no cookie identifier attached.</li>
+        <li>If you accept and later change your mind, choosing &ldquo;Decline&rdquo; under Cookie Preferences turns them off again and removes the Google cookies already set on this Site.</li>
       </ul>
       <p>Essential storage (your consent preference) is always used because the Site cannot remember your choice without it.</p>
 

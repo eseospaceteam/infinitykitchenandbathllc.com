@@ -1,8 +1,9 @@
 /*!
  * Infinity Kitchens and Baths — Cookie consent banner
  * Works with Google Consent Mode v2 (defaults set inline in <head>).
- * - US visitors: analytics + ads granted by default (opt-out). Declining denies both.
- * - EU/EEA/UK/CH visitors: everything denied by default (opt-in). Accepting grants both.
+ * - Every visitor: analytics + ads DENIED by default (opt-in), so no _ga/_gcl cookie is
+ *   set until Accept. Accepting grants both; Declining keeps them denied and removes any
+ *   Google cookies left from an earlier Accept.
  * Choice is stored in localStorage under "ikb_consent" ("granted" | "denied").
  */
 (function () {
@@ -16,6 +17,21 @@
   }
   function setChoice(v) {
     try { localStorage.setItem(STORAGE_KEY, v); } catch (e) {}
+  }
+
+  // Remove Google Analytics / Ads cookies already set (someone who accepted earlier and
+  // now declines). GA writes them on the registrable domain, so clear every level.
+  function clearGoogleCookies() {
+    var names = document.cookie.split(';').map(function (c) { return c.split('=')[0].trim(); })
+      .filter(function (n) { return /^(_ga|_gid|_gat|_gcl_)/.test(n); });
+    var parts = location.hostname.split('.');
+    var domains = [''];
+    for (var i = 0; i < parts.length - 1; i++) domains.push('; domain=.' + parts.slice(i).join('.'));
+    names.forEach(function (n) {
+      domains.forEach(function (d) {
+        document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + d;
+      });
+    });
   }
 
   function applyConsent(state) {
@@ -122,9 +138,10 @@
     bar.setAttribute('aria-live', 'polite');
     bar.setAttribute('aria-label', 'Cookie consent');
     bar.innerHTML =
-      '<p>We use cookies to analyze site traffic and improve your experience. ' +
-      'See our <a href="cookie-policy.html">Cookie Policy</a> and ' +
-      '<a href="privacy-policy.html">Privacy Policy</a>.</p>' +
+      '<p>With your permission, we use Google Analytics and Google Ads cookies to see how ' +
+      'the site is used and whether our ads work. Nothing is set until you click Accept. ' +
+      'See our <a href="/cookie-policy.html">Cookie Policy</a> and ' +
+      '<a href="/privacy-policy.html">Privacy Policy</a>.</p>' +
       '<div class="ikb-cc-btns">' +
       '<button type="button" class="ikb-cc-decline">Decline</button>' +
       '<button type="button" class="ikb-cc-accept">Accept</button>' +
@@ -134,7 +151,7 @@
       setChoice('granted'); applyConsent('granted'); removeBanner();
     });
     bar.querySelector('.ikb-cc-decline').addEventListener('click', function () {
-      setChoice('denied'); applyConsent('denied'); removeBanner();
+      setChoice('denied'); applyConsent('denied'); clearGoogleCookies(); removeBanner();
     });
     reserveSpace();
   }

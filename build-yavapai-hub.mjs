@@ -90,10 +90,10 @@ const SERVICE_MATRIX = [
     ['Sedona', 'bathroom-remodeling-sedona.html'],
   ]},
   { service: 'Accessible &amp; Aging-in-Place', hub: 'aging-in-place.html', pages: [
-    ['ADA Bathrooms, Prescott', 'ada-bathroom-prescott.html'],
-    ['Aging in Place, Prescott', 'aging-in-place-prescott.html'],
-    ['Walk-In Showers, Prescott', 'walk-in-showers-prescott.html'],
-    ['Tub-to-Shower, Prescott', 'tub-to-shower-prescott.html'],
+    ['ADA Bathrooms, Prescott', 'ada-bathroom-remodeling.html'],
+    ['Aging in Place, Prescott', 'aging-in-place.html'],
+    ['Walk-In Showers, Prescott', 'walk-in-showers.html'],
+    ['Tub-to-Shower, Prescott', 'tub-to-shower.html'],
     ['Best Aging-in-Place Remodeler, Yavapai County', 'best-aging-in-place-remodeler-yavapai-county.html'],
   ]},
 ];

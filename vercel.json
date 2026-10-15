@@ -619,6 +619,126 @@
       "source": "/blog/energy-efficient-remodeling-guide/",
       "destination": "/blog.html",
       "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-prescott.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-prescott",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-prescott.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-prescott",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-prescott.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-prescott",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-prescott.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-prescott",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-ada-bathroom-remodelers-west-valley.html",
+      "destination": "/best-ada-bathroom-remodeler-prescott.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-ada-bathroom-remodelers-west-valley",
+      "destination": "/best-ada-bathroom-remodeler-prescott.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-aging-in-place-remodelers-sun-city.html",
+      "destination": "/aging-in-place-sun-city.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-aging-in-place-remodelers-sun-city",
+      "destination": "/aging-in-place-sun-city.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-bathroom-remodelers-prescott.html",
+      "destination": "/best-bathroom-remodeler-prescott.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-bathroom-remodelers-prescott",
+      "destination": "/best-bathroom-remodeler-prescott.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-bathroom-remodelers-surprise.html",
+      "destination": "/bathroom-remodeling-surprise.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-bathroom-remodelers-surprise",
+      "destination": "/bathroom-remodeling-surprise.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-cabinet-installers-prescott.html",
+      "destination": "/best-cabinet-maker-prescott.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-cabinet-installers-prescott",
+      "destination": "/best-cabinet-maker-prescott.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-kitchen-bath-remodelers-prescott-valley.html",
+      "destination": "/best-remodeling-contractor-prescott-valley.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-kitchen-bath-remodelers-prescott-valley",
+      "destination": "/best-remodeling-contractor-prescott-valley.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-kitchen-remodelers-peoria-glendale.html",
+      "destination": "/kitchen-remodeling-peoria.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-kitchen-remodelers-peoria-glendale",
+      "destination": "/kitchen-remodeling-peoria.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-kitchen-remodelers-prescott.html",
+      "destination": "/best-kitchen-remodeler-prescott.html",
+      "permanent": true
+    },
+    {
+      "source": "/top-kitchen-remodelers-prescott",
+      "destination": "/best-kitchen-remodeler-prescott.html",
+      "permanent": true
     }
   ],
   "headers": [

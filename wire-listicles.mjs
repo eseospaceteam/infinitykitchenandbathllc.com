@@ -30,29 +30,17 @@ const label = (d) => plain(d.h1).replace(/&amp;/g, '&').replace(/&/g, '&amp;');
 
 // target page -> listicle slugs it should link to
 const INBOUND = {
-  'best-kitchen-remodeler-prescott.html': ['top-kitchen-remodelers-prescott'],
-  'best-bathroom-remodeler-prescott.html': ['top-bathroom-remodelers-prescott'],
-  'best-cabinet-maker-prescott.html': ['top-cabinet-installers-prescott'],
-  'best-remodeling-contractor-prescott-valley.html': ['top-kitchen-bath-remodelers-prescott-valley'],
-  'best-ada-bathroom-remodeler-prescott.html': ['top-ada-bathroom-remodelers-west-valley'],
-  'best-aging-in-place-remodeler-yavapai-county.html': ['top-aging-in-place-remodelers-sun-city', 'best-accessible-kitchen-features-for-aging-in-place'],
+  'best-aging-in-place-remodeler-yavapai-county.html': ['best-accessible-kitchen-features-for-aging-in-place'],
   'best-countertop-installer-prescott.html': ['best-kitchen-countertop-materials'],
   'best-flooring-contractor-prescott.html': ['best-kitchen-flooring-options'],
   'best-walk-in-shower-installer-prescott.html': ['best-shower-niche-and-bench-ideas'],
   'custom-countertops.html': ['best-kitchen-countertop-materials'],
-  'kitchen-cabinets.html': ['top-cabinet-installers-prescott', 'best-cabinet-colors', 'best-cabinet-hardware-styles', 'best-kitchen-storage-and-pantry-ideas'],
-  'kitchen-remodeling.html': ['top-kitchen-remodelers-prescott', 'best-kitchen-sink-types'],
-  'bathroom-remodeling.html': ['top-bathroom-remodelers-prescott', 'best-bathroom-storage-ideas', 'best-bathroom-ventilation-and-moisture-fixes'],
-  'aging-in-place.html': ['top-aging-in-place-remodelers-sun-city', 'best-grab-bars-that-dont-look-clinical'],
-  'ada-bathroom-remodeling.html': ['top-ada-bathroom-remodelers-west-valley', 'best-grab-bars-that-dont-look-clinical'],
+  'kitchen-cabinets.html': ['best-cabinet-colors', 'best-cabinet-hardware-styles', 'best-kitchen-storage-and-pantry-ideas'],
+  'kitchen-remodeling.html': ['best-kitchen-sink-types'],
+  'bathroom-remodeling.html': ['best-bathroom-storage-ideas', 'best-bathroom-ventilation-and-moisture-fixes'],
+  'aging-in-place.html': ['best-grab-bars-that-dont-look-clinical'],
+  'ada-bathroom-remodeling.html': ['best-grab-bars-that-dont-look-clinical'],
   'luxury-vinyl-flooring.html': ['best-kitchen-flooring-options'],
-  'surprise-remodeling.html': ['top-bathroom-remodelers-surprise'],
-  'sun-city-remodeling.html': ['top-aging-in-place-remodelers-sun-city'],
-  'sun-city-west-remodeling.html': ['top-aging-in-place-remodelers-sun-city'],
-  'peoria-remodeling.html': ['top-kitchen-remodelers-peoria-glendale'],
-  'glendale-remodeling.html': ['top-kitchen-remodelers-peoria-glendale'],
-  'prescott-valley-remodeling.html': ['top-kitchen-bath-remodelers-prescott-valley'],
-  'prescott-remodeling.html': ['top-kitchen-remodelers-prescott', 'top-bathroom-remodelers-prescott', 'top-cabinet-installers-prescott'],
 };
 
 const changed = new Map();

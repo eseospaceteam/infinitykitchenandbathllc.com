@@ -1,4 +1,8 @@
 import { applyBlockedSenders } from '../lib/blocked-senders.js';
+import { cleanLeadSource, leadSourceRows, leadSourceText } from '../lib/lead-source.js';
+// Replaced after applyBlockedSenders with the lead-source panel (see below).
+const LEAD_SOURCE_MARK = '<!--LEAD-SOURCE-->';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -7,7 +11,7 @@ export default async function handler(req, res) {
   const {
     firstName, lastName, email, phone, address,
     service, 'consult-type': consultType, message,
-    source, company, elapsed,
+    source, company, elapsed, lead_source: rawLeadSource,
   } = req.body || {};
 
   // ── Spam gate ─────────────────────────────────────────────
@@ -138,6 +142,7 @@ export default async function handler(req, res) {
       <tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;vertical-align:top;">Message</td><td style="padding:9px 14px;border-bottom:1px solid #e8e8e8;">${esc(message) || '—'}</td></tr>
       ${source ? `<tr><td style="padding:9px 14px;background:#f4f4f4;font-weight:700;">Came from</td><td style="padding:9px 14px;">${esc(source)}</td></tr>` : ''}
     </table>
+    ${LEAD_SOURCE_MARK}
   `;
 
   const text = [
@@ -164,6 +169,19 @@ export default async function handler(req, res) {
 
   // Known bulk solicitor: re-route away from the client, never deliver to them.
   applyBlockedSenders(body);
+  // Where the visitor came from (js/main.js -> lib/lead-source.js), added only
+  // AFTER screening: a referrer or campaign name is our data, not the sender's
+  // words, and must never be what re-routes a real lead.
+  try {
+    const leadSource = cleanLeadSource(rawLeadSource, { headers: { get: (k) => req.headers?.[k] || null } });
+    const rows = leadSourceRows(leadSource);
+    const panel = rows.filter(([l]) => l).map(([l, v]) => `<tr><td style="padding:7px 14px;background:#f4f4f4;font-weight:700;width:140px;vertical-align:top;">${esc(l)}</td><td style="padding:7px 14px;border-bottom:1px solid #e8e8e8;word-break:break-all;">${esc(v)}</td></tr>`).join('');
+    body.set('html', String(body.get('html') || '').split(LEAD_SOURCE_MARK).join(panel ? `<h3 style="margin:22px 0 8px;color:#1B4332;font-family:sans-serif;font-size:15px;">Where this lead came from</h3><table style="border-collapse:collapse;width:100%;max-width:580px;font-family:sans-serif;font-size:13px;">${panel}</table>` : ''));
+    body.set('text', `${body.get('text') || ''}\n${leadSourceText(rows)}`);
+  } catch (err) {
+    console.error('lead source not added:', err?.message);
+    body.set('html', String(body.get('html') || '').split(LEAD_SOURCE_MARK).join(''));
+  }
   const mgRes = await fetch(`https://api.mailgun.net/v3/${DOMAIN}/messages`, {
     method: 'POST',
     headers: {

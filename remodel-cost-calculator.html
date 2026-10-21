@@ -439,7 +439,7 @@
       service:state.type==='kitchen'?'kitchen':'bathroom',
       'consult-type':'','message':summary+(data.email?'':' (no email provided)')};
     var orig=submit.innerHTML;submit.textContent='Sending\u2026';submit.disabled=true;
-    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(window.__leadSourcePayload?Object.assign(payload,{lead_source:window.__leadSourcePayload('cost_calculator')}):payload)})
       .then(function(res){
         if(res.ok){
           if(typeof gtag!=='undefined'){gtag('event','generate_lead',{form_location:'cost_calculator',form_id:'calcForm',value_estimate:rangeEl.textContent});}

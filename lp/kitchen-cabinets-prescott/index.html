@@ -302,7 +302,7 @@
       message:d.project||'',service:"Kitchen Cabinets — Prescott (Ads LP)",address:(d.city||'').trim(),'consult-type':'',company:d.company||'',elapsed:Date.now()-shown};
     var orig=btn.innerHTML;btn.textContent='Sending\u2026';btn.disabled=true;
     try{
-      var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(window.__leadSourcePayload?Object.assign(payload,{lead_source:window.__leadSourcePayload('ads_lp')}):payload)});
       if(res.ok){
         if(typeof gtag!=='undefined')gtag('event','generate_lead',{form_location:'ads_lp_hero',form_id:'lpForm'});
         if(window.ikbAdsConv)window.ikbAdsConv('form');

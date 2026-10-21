@@ -152,6 +152,8 @@ if (contactForm) {
     try {
       const payload = Object.fromEntries(new FormData(contactForm));
       payload.elapsed = Date.now() - contactShownAt;
+      // where the visitor came from (bottom of this file); never throws
+      if (window.__leadSourcePayload) payload.lead_source = window.__leadSourcePayload('contact');
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -286,3 +288,93 @@ if (new URLSearchParams(location.search).get('promo') === '15for15') {
     }
   }
 }
+
+;/* Lead source, browser half (added 2026-10-20). Same scheme as
+   hopecenterforbehaviorchange / quotemypolicy.com, as a plain script for pages
+   that are not a React app.
+
+   Remembers how this visitor arrived so the lead email can say where the lead
+   came from. Runs on every full page load:
+     f = first touch (kept 90 days)
+     l = the latest touch that came in from outside again (a second ad click,
+         a later search); an internal click has our own referrer and no tags,
+         so it is not counted as an arrival
+     n = pages viewed
+     p = the last few pages, ending on the one with the form
+   localStorage only, no cookie, no personal data. Every step is wrapped so a
+   blocked store can never stop a form from sending.
+
+   window.__leadSourcePayload(form) returns what travels with a submission.
+   Forms that post normally get it in a hidden "lead_source" field, filled in
+   on submit. */
+(function () {
+  var KEY = 'ikb_src';
+  var KEEP_MS = 90 * 24 * 60 * 60 * 1000;
+  var CLICK_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'gbraid', 'wbraid', 'msclkid', 'fbclid'];
+  var memory = null;
+
+  function read() {
+    try {
+      var s = JSON.parse(window.localStorage.getItem(KEY) || 'null');
+      if (s && typeof s === 'object') return s;
+    } catch (e) {}
+    return memory;
+  }
+  function write(s) {
+    memory = s;
+    try { window.localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+  }
+  function bare(h) { return String(h || '').replace(/^www\./, ''); }
+
+  try {
+    var s = read();
+    if (s && s.f && Date.now() - Number(s.f.t) > KEEP_MS) s = null;
+    var q = {}, tagged = false;
+    var params = new URLSearchParams(location.search);
+    for (var i = 0; i < CLICK_KEYS.length; i++) {
+      var v = params.get(CLICK_KEYS[i]);
+      if (v) { q[CLICK_KEYS[i]] = v.slice(0, 120); tagged = true; }
+    }
+    var ref = document.referrer || '';
+    try { if (ref && bare(new URL(ref).hostname) === bare(location.hostname)) ref = ''; } catch (e) { ref = ''; }
+    var touch = { t: Date.now(), lp: (location.pathname + location.search).slice(0, 200), ref: ref.slice(0, 200), q: q };
+    if (!s || !s.f) s = { f: touch, n: 0, p: [] };
+    else if (tagged || ref) s.l = touch;
+    s.n = (s.n || 0) + 1;
+    var trail = Array.isArray(s.p) ? s.p : [];
+    var here = location.pathname.slice(0, 80);
+    if (trail[trail.length - 1] !== here) trail.push(here);
+    s.p = trail.slice(-6);
+    write(s);
+  } catch (e) {}
+
+  window.__leadSourcePayload = function (form) {
+    var out = { form: form || '' };
+    try {
+      var s = read() || {};
+      for (var k in s) if (Object.prototype.hasOwnProperty.call(s, k)) out[k] = s[k];
+      out.page = (location.pathname + location.search).slice(0, 200);
+      var g = document.cookie.match(/(?:^|; )_gcl_(?:aw|gb)=([^;]*)/);
+      if (g && g[1]) out.gcl = decodeURIComponent(g[1]).split('.').slice(2).join('.').slice(0, 200);
+    } catch (e) {}
+    return out;
+  };
+
+  /* Normal (non-fetch) form posts: drop the payload into a hidden field. */
+  try {
+    document.addEventListener('submit', function (e) {
+      try {
+        var f = e.target;
+        if (!f || !f.matches || !f.matches('form[data-lead-source-field]')) return;
+        var input = f.querySelector('input[name="lead_source"]');
+        if (!input) {
+          input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'lead_source';
+          f.appendChild(input);
+        }
+        input.value = JSON.stringify(window.__leadSourcePayload(f.getAttribute('data-lead-form') || 'contact')).slice(0, 4000);
+      } catch (err) {}
+    }, true);
+  } catch (e) {}
+})();

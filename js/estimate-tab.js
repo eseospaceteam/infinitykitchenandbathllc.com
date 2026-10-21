@@ -535,6 +535,8 @@
       company: data.company || '',
       elapsed: Date.now() - formShownAt,
     };
+    // where the visitor came from (js/main.js); never throws
+    if (window.__leadSourcePayload) payload.lead_source = window.__leadSourcePayload('estimate_tab');
 
     const original = submitBtn.innerHTML;
     submitBtn.textContent = 'Sending…';

@@ -378,3 +378,16 @@ if (new URLSearchParams(location.search).get('promo') === '15for15') {
     }, true);
   } catch (e) {}
 })();
+
+/* Phone-tap counter for the eSEOspace leads dashboard (/eseo-calls.js listens
+   only; no cookies, no personal data). Loaded from here so every page that
+   carries main.js gets it without editing each HTML file. */
+(function () {
+  try {
+    if (document.querySelector('script[src^="/eseo-calls.js"]')) return;
+    var s = document.createElement('script');
+    s.src = '/eseo-calls.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  } catch (e) {}
+})();

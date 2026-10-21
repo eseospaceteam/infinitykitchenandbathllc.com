@@ -1,5 +1,6 @@
 import { applyBlockedSenders } from '../lib/blocked-senders.js';
 import { cleanLeadSource, leadSourceRows, leadSourceText } from '../lib/lead-source.js';
+import { countLead, leadCountFields } from '../lib/eseo-leads.js';
 // Replaced after applyBlockedSenders with the lead-source panel (see below).
 const LEAD_SOURCE_MARK = '<!--LEAD-SOURCE-->';
 
@@ -168,7 +169,14 @@ export default async function handler(req, res) {
   });
 
   // Known bulk solicitor: re-route away from the client, never deliver to them.
-  applyBlockedSenders(body);
+  const blocked = applyBlockedSenders(body);
+  // Count it on the eSEOspace leads dashboard only when it still goes to the
+  // client, before the send so a failed send still counts. Never throws.
+  if (!blocked) {
+    let src = null;
+    try { src = cleanLeadSource(rawLeadSource, { headers: { get: (k) => req.headers?.[k] || null } }); } catch {}
+    await countLead(leadCountFields(src));
+  }
   // Where the visitor came from (js/main.js -> lib/lead-source.js), added only
   // AFTER screening: a referrer or campaign name is our data, not the sender's
   // words, and must never be what re-routes a real lead.

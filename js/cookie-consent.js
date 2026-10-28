@@ -1,22 +1,54 @@
 /*!
  * Infinity Kitchens and Baths — Cookie consent banner
- * Works with Google Consent Mode v2 (defaults set inline in <head>).
- * - Every visitor: analytics + ads DENIED by default (opt-in), so no _ga/_gcl cookie is
- *   set until Accept. Accepting grants both; Declining keeps them denied and removes any
- *   Google cookies left from an earlier Accept.
- * Choice is stored in localStorage under "ikb_consent" ("granted" | "denied").
+ * STRICT opt-in (27 Oct 2026, owner's instruction, California CIPA exposure): the Google
+ * tag (GA4 G-EK9HSW7F90 + Google Ads AW-17095449186) is NOT in the page <head> any more.
+ * It is loaded by loadGoogleTag() below only after the visitor clicks Accept, or on later
+ * visits once they have. Decline, or a browser sending Global Privacy Control, loads
+ * nothing at all (Consent Mode "denied" still sent cookieless pings, so it was replaced).
+ * Choice is stored in localStorage under "site_consent" ("granted" | "denied"); an older
+ * "ikb_consent" choice is honoured and migrated.
+ * Site code calls gtag only behind `typeof gtag !== 'undefined'`, so nothing breaks
+ * while the tag is not loaded.
  */
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'ikb_consent';
-  var gtag = window.gtag || function () { (window.dataLayer = window.dataLayer || []).push(arguments); };
+  var STORAGE_KEY = 'site_consent';
+  var OLD_KEY = 'ikb_consent';
+  var GA_ID = 'G-EK9HSW7F90';
+  var ADS_ID = 'AW-17095449186';
 
   function getChoice() {
-    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+    try {
+      var v = localStorage.getItem(STORAGE_KEY);
+      if (v === 'granted' || v === 'denied') return v;
+      v = localStorage.getItem(OLD_KEY);
+      if (v === 'granted' || v === 'denied') { localStorage.setItem(STORAGE_KEY, v); return v; }
+    } catch (e) {}
+    return null;
   }
   function setChoice(v) {
-    try { localStorage.setItem(STORAGE_KEY, v); } catch (e) {}
+    try { localStorage.setItem(STORAGE_KEY, v); localStorage.removeItem(OLD_KEY); } catch (e) {}
+  }
+  function clearChoice() {
+    try { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(OLD_KEY); } catch (e) {}
+  }
+
+  // Same tag, IDs and config the <head> used to carry; runs only after Accept.
+  var tagLoaded = false;
+  function loadGoogleTag() {
+    if (tagLoaded) return;
+    tagLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+    window.gtag('js', new Date());
+    window.gtag('config', GA_ID);
+    window.gtag('config', ADS_ID);
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
   }
 
   // Remove Google Analytics / Ads cookies already set (someone who accepted earlier and
@@ -35,13 +67,12 @@
   }
 
   function applyConsent(state) {
-    // state: "granted" | "denied"
-    gtag('consent', 'update', {
-      analytics_storage: state,
-      ad_storage: state,
-      ad_user_data: state,
-      ad_personalization: state
-    });
+    // state: "granted" | "denied". Granted loads the tag; if it was already loaded this
+    // visit (Accept, then Decline via Cookie Preferences), denied stops it storing.
+    if (state === 'granted') { loadGoogleTag(); return; }
+    if (tagLoaded && typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    }
   }
 
   function injectStyles() {
@@ -57,10 +88,10 @@
       '#ikb-cc .ikb-cc-btns{display:flex;gap:.6rem;flex:0 0 auto;flex-wrap:wrap;}' +
       '#ikb-cc button{font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;border-radius:8px;' +
       'padding:.6rem 1.15rem;border:1px solid transparent;transition:opacity .15s,background .15s;}' +
-      '#ikb-cc .ikb-cc-accept{background:#E9C46A;color:#1B4332;}' +
-      '#ikb-cc .ikb-cc-accept:hover{opacity:.9;}' +
-      '#ikb-cc .ikb-cc-decline{background:transparent;color:#fff;border-color:rgba(255,255,255,.4);}' +
-      '#ikb-cc .ikb-cc-decline:hover{background:rgba(255,255,255,.1);}' +
+      // Accept and Decline carry the same size and weight (no nudging toward Accept).
+      '#ikb-cc .ikb-cc-accept,#ikb-cc .ikb-cc-decline{background:#E9C46A;color:#1B4332;min-width:110px;}' +
+      '#ikb-cc .ikb-cc-accept:hover,#ikb-cc .ikb-cc-decline:hover{opacity:.9;}' +
+      '#ikb-cc button:focus-visible{outline:2px solid #fff;outline-offset:2px;}' +
       '@media(max-width:560px){#ikb-cc .ikb-cc-btns{width:100%;}#ikb-cc button{flex:1 1 auto;}}' +
       // Below 768px the sticky action bar from estimate-tab.js occupies the
       // bottom 58px. At bottom:1rem this notice sat on top of it, so Call Now
@@ -138,8 +169,8 @@
     bar.setAttribute('aria-live', 'polite');
     bar.setAttribute('aria-label', 'Cookie consent');
     bar.innerHTML =
-      '<p>With your permission, we use Google Analytics and Google Ads cookies to see how ' +
-      'the site is used and whether our ads work. Nothing is set until you click Accept. ' +
+      '<p>We use cookies from Google Analytics and Google Ads to measure visits and ads. ' +
+      'Nothing loads unless you click Accept. ' +
       'See our <a href="/cookie-policy.html">Cookie Policy</a> and ' +
       '<a href="/privacy-policy.html">Privacy Policy</a>.</p>' +
       '<div class="ikb-cc-btns">' +
@@ -158,17 +189,19 @@
 
   // Let visitors reopen the banner to change their choice (wired to the footer "Cookie Preferences" link).
   window.ikbCookieSettings = function () {
+    clearChoice();
     removeBanner();
     showBanner();
+    var b = document.querySelector('#ikb-cc button');
+    if (b) b.focus();
   };
 
   function init() {
     var choice = getChoice();
-    if (choice === 'granted' || choice === 'denied') {
-      // Re-affirm prior choice (the inline <head> snippet already applied it before GA config).
-      applyConsent(choice);
-      return;
-    }
+    if (choice === 'granted') { loadGoogleTag(); return; }
+    if (choice === 'denied') return;
+    // Global Privacy Control = the California opt-out signal: treat as Decline, no banner.
+    if (navigator.globalPrivacyControl === true) return;
     showBanner();
   }
 

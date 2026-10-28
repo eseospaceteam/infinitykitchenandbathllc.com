@@ -25,8 +25,7 @@ function slice(start, endMarker, opts = {}) {
 // The GA/Ads head block is two <script> tags (loader + config), so run past the
 // first closing tag to the second.
 const gtagStart = SOURCE.indexOf('<!-- Google tag (gtag.js) -->');
-const gtagEnd =
-  SOURCE.indexOf('</script>', SOURCE.indexOf('</script>', gtagStart) + 9) + '</script>'.length;
+const gtagEnd = SOURCE.indexOf('<!-- /Google tag -->', gtagStart) + '<!-- /Google tag -->'.length; // marker only since 27 Oct 2026 (tag loads after Accept)
 if (gtagStart === -1 || gtagEnd < gtagStart) throw new Error('gtag head block not found');
 const GTAG = SOURCE.slice(gtagStart, gtagEnd);
 

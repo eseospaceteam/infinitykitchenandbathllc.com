@@ -11,7 +11,8 @@ const PHONE = {
   avondale: { raw: "6028856998", display: "(602) 885-6998" },
   prescott: { raw: "9288001998", display: "(928) 800-1998" },
 };
-const GTAG = REF.slice(REF.indexOf("<!-- Google tag"), REF.indexOf("</script>", REF.indexOf("gtag('config'")) + 9);
+// Since 27 Oct 2026 the head block is only a marker: js/cookie-consent.js loads the tag after Accept.
+const GTAG = REF.slice(REF.indexOf("<!-- Google tag"), REF.indexOf("<!-- /Google tag -->") + "<!-- /Google tag -->".length);
 
 const rootAbs = (h) => h.replace(/(href|src)="(?!https?:|\/|#|tel:|mailto:|data:)([^"]+)"/g, '$1="/$2"');
 const NAV_ABS = rootAbs(REF.slice(REF.indexOf('<nav id="navbar"'), REF.indexOf('<section class="page-hero"')));

@@ -9,12 +9,16 @@
  * "ikb_consent" choice is honoured and migrated.
  * Site code calls gtag only behind `typeof gtag !== 'undefined'`, so nothing breaks
  * while the tag is not loaded.
+ * The x button (and Escape) hides the banner for this browser session only (2 Nov 2026):
+ * sessionStorage "site_consent_dismissed" = "1", no choice is stored and nothing loads,
+ * so the banner asks again on the next visit. Cookie Preferences clears the flag.
  */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'site_consent';
   var OLD_KEY = 'ikb_consent';
+  var DISMISS_KEY = 'site_consent_dismissed';
   var GA_ID = 'G-EK9HSW7F90';
   var ADS_ID = 'AW-17095449186';
 
@@ -32,6 +36,16 @@
   }
   function clearChoice() {
     try { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(OLD_KEY); } catch (e) {}
+  }
+
+  function readDismissed() {
+    try { return sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; }
+  }
+  function writeDismissed(v) {
+    try {
+      if (v) sessionStorage.setItem(DISMISS_KEY, '1');
+      else sessionStorage.removeItem(DISMISS_KEY);
+    } catch (e) {}
   }
 
   // Same tag, IDs and config the <head> used to carry; runs only after Accept.
@@ -82,6 +96,11 @@
       'background:#1B4332;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:12px;' +
       'box-shadow:0 12px 40px rgba(0,0,0,.35);padding:1.15rem 1.35rem;font-family:inherit;' +
       'display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.25rem;animation:ikbccin .35s ease both;}' +
+      // Room on the right for the close (x) button so it never sits over text or buttons.
+      '#ikb-cc{padding-right:2.9rem;}' +
+      '#ikb-cc button.ikb-cc-close{position:absolute;top:4px;right:4px;width:36px;height:36px;padding:0;min-width:0;' +
+      'display:grid;place-items:center;background:transparent;border:0;color:#fff;font-size:22px;line-height:1;}' +
+      '#ikb-cc button.ikb-cc-close:hover{opacity:.8;}' +
       '@keyframes ikbccin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}' +
       '#ikb-cc p{margin:0;flex:1 1 320px;font-size:.88rem;line-height:1.55;color:rgba(255,255,255,.88);}' +
       '#ikb-cc a{color:#E9C46A;text-decoration:underline;}' +
@@ -154,7 +173,18 @@
     if (reserveObserver) { reserveObserver.disconnect(); reserveObserver = null; }
   }
 
+  function onKey(e) {
+    if (e.key === 'Escape' || e.key === 'Esc') dismissBanner();
+  }
+
+  // Close without choosing: nothing loads, and the banner asks again next visit.
+  function dismissBanner() {
+    writeDismissed(true);
+    removeBanner();
+  }
+
   function removeBanner() {
+    document.removeEventListener('keydown', onKey);
     var el = document.getElementById('ikb-cc');
     if (el && el.parentNode) el.parentNode.removeChild(el);
     releaseSpace();
@@ -169,6 +199,7 @@
     bar.setAttribute('aria-live', 'polite');
     bar.setAttribute('aria-label', 'Cookie consent');
     bar.innerHTML =
+      '<button type="button" class="ikb-cc-close" aria-label="Close cookie notice"><span aria-hidden="true">&times;</span></button>' +
       '<p>We use cookies from Google Analytics and Google Ads to measure visits and ads. ' +
       'Nothing loads unless you click Accept. ' +
       'See our <a href="/cookie-policy.html">Cookie Policy</a> and ' +
@@ -184,15 +215,18 @@
     bar.querySelector('.ikb-cc-decline').addEventListener('click', function () {
       setChoice('denied'); applyConsent('denied'); clearGoogleCookies(); removeBanner();
     });
+    bar.querySelector('.ikb-cc-close').addEventListener('click', dismissBanner);
+    document.addEventListener('keydown', onKey);
     reserveSpace();
   }
 
   // Let visitors reopen the banner to change their choice (wired to the footer "Cookie Preferences" link).
   window.ikbCookieSettings = function () {
     clearChoice();
+    writeDismissed(false);
     removeBanner();
     showBanner();
-    var b = document.querySelector('#ikb-cc button');
+    var b = document.querySelector('#ikb-cc .ikb-cc-decline');
     if (b) b.focus();
   };
 
@@ -202,6 +236,8 @@
     if (choice === 'denied') return;
     // Global Privacy Control = the California opt-out signal: treat as Decline, no banner.
     if (navigator.globalPrivacyControl === true) return;
+    // Closed with x earlier this session: no banner, nothing loads.
+    if (readDismissed()) return;
     showBanner();
   }
 

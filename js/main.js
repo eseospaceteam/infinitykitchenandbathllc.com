@@ -151,6 +151,11 @@ if (contactForm) {
 
     try {
       const payload = Object.fromEntries(new FormData(contactForm));
+      // One name field on the page; the endpoint still reads first and last.
+      const nameParts = String(payload.name || '').trim().split(/\s+/);
+      payload.firstName = nameParts[0] || '';
+      payload.lastName = nameParts.slice(1).join(' ');
+      delete payload.name;
       payload.elapsed = Date.now() - contactShownAt;
       // where the visitor came from (bottom of this file); never throws
       if (window.__leadSourcePayload) payload.lead_source = window.__leadSourcePayload('contact');

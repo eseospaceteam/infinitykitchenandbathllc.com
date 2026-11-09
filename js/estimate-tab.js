@@ -364,12 +364,8 @@
              and it disappears as soon as the visitor starts typing. -->
         <input class="ikb-field" type="text"  name="name"    placeholder="Your Name"           required autocomplete="name" aria-label="Your name">
         <input class="ikb-field" type="tel"   name="phone"   placeholder="Phone Number"        required autocomplete="tel" aria-label="Phone number">
-        <input class="ikb-field" type="email" name="email"   placeholder="Email (optional)"             autocomplete="email" aria-label="Email address (optional)">
+        <input class="ikb-field" type="email" name="email"   placeholder="Email"          required autocomplete="email" aria-label="Email address">
         <input class="ikb-field" type="text"   name="city"    placeholder="Enter Your Location" required autocomplete="address-level2" aria-label="Enter your location — city or address">
-        <select class="ikb-field" name="service" required aria-label="Service you need">
-          <option value="" disabled selected>What Do You Need?…</option>
-          ${SERVICE_OPTIONS}
-        </select>
         <textarea class="ikb-field"           name="project" placeholder="Anything else about the project? (optional)" aria-label="Anything else about the project? (optional)"></textarea>
         <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" value="">
 
@@ -510,7 +506,7 @@
       ['name',    (v) => v.trim().length >= 2,                   'Please enter your name.'],
       ['phone',   (v) => v.replace(/\D/g, '').length >= 7,       'Please enter a phone number we can reach you on.'],
       ['city',    (v) => v.trim().length >= 2,                   'Please enter the project location.'],
-      ['service', (v) => v !== '',                               'Please choose what you need done.'],
+      ['email',   (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()), 'Please enter your email address.'],
     ];
     for (const [field, ok, msg] of need) {
       if (!ok(String(data[field] || ''))) {
@@ -528,7 +524,6 @@
       phone: data.phone || '',
       email: data.email || '',
       message: data.project || '',
-      service: data.service || '',
       address: (data.city || '').trim(),
       'consult-type': '',
       source: 'Quick Estimate (slide-out tab)',

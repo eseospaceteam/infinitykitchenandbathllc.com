@@ -611,49 +611,20 @@
           <form id="contactForm">
             <div class="form-grid">
               <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+                <label for="name">Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" autocomplete="name" required>
               </div>
               <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+                <label for="email">Email Address <span aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" placeholder="jane@email.com" autocomplete="email" required>
               </div>
               <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="(928) 555-0000" required>
+                <label for="phone">Phone Number <span aria-hidden="true">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="(928) 555-0000" autocomplete="tel" required>
               </div>
               <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="jane@email.com">
-              </div>
-              <div class="form-group full">
-                <label for="address">City or Home Address</label>
+                <label for="address">City or Home Address <span aria-hidden="true">*</span></label>
                 <input type="text" id="address" name="address" placeholder="Prescott, or 123 Main St, Prescott, AZ" required>
-              </div>
-              <div class="form-group full">
-                <label for="service">Service Interested In</label>
-                <select id="service" name="service">
-                  <option value="">Select a service...</option>
-                  <option value="kitchen">Kitchen Remodeling</option>
-                  <option value="bathroom">Bathroom Remodeling</option>
-                  <option value="whole-house">Whole House Remodeling</option>
-                  <option value="countertops">Custom Countertops</option>
-                  <option value="flooring">Luxury Vinyl Plank Flooring</option>
-                  <option value="tub-shower">Tub-to-Shower Conversion</option>
-                  <option value="groutless">Groutless Shower System</option>
-                  <option value="walk-in-shower">Walk-In Shower</option>
-                  <option value="other">Other / Not Sure Yet</option>
-                </select>
-              </div>
-              <div class="form-group full">
-                <label for="consult-type">Preferred Consultation Type</label>
-                <select id="consult-type" name="consult-type">
-                  <option value="">Select preference...</option>
-                  <option value="in-home" selected>In-Home Consultation (we come to you)</option>
-                  <option value="showroom-prescott">Showroom Visit — Prescott</option>
-                  <option value="showroom-avondale">Showroom Visit — Avondale (Coming Soon)</option>
-                  <option value="either">Either Works for Me</option>
-                </select>
               </div>
               <div class="form-group full">
                 <label for="message">Tell Us About Your Project</label>

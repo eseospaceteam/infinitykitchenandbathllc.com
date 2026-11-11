@@ -1,15 +1,14 @@
 // Generates rich PPC landing pages in the live-site design: full nav + footer,
 // a lead FORM in the hero (up top), services, gallery of work, real reviews,
 // GBP map embed, FAQ. noindex. Nav/footer pulled from a live page at build time
-// and root-absolutized (pages live in /lp/). Region phone swapped for Prescott.
+// and root-absolutized (pages live in /lp/). Avondale only since Nov 2026.
 // Output: lp/<slug>/index.html  ->  /lp/<slug>/
 import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
 
-const REF = readFileSync("bathroom-remodeling-avondale.html", "utf8");
+const REF = readFileSync("bathroom-remodeling.html", "utf8");
 const IMG = "https://www.infinitykitchenandbathllc.com/wp-content/uploads";
 const PHONE = {
   avondale: { raw: "6028856998", display: "(602) 885-6998" },
-  prescott: { raw: "9288001998", display: "(928) 800-1998" },
 };
 // Since 27 Oct 2026 the head block is only a marker: js/cookie-consent.js loads the tag after Accept.
 const GTAG = REF.slice(REF.indexOf("<!-- Google tag"), REF.indexOf("<!-- /Google tag -->") + "<!-- /Google tag -->".length);
@@ -17,9 +16,7 @@ const GTAG = REF.slice(REF.indexOf("<!-- Google tag"), REF.indexOf("<!-- /Google
 const rootAbs = (h) => h.replace(/(href|src)="(?!https?:|\/|#|tel:|mailto:|data:)([^"]+)"/g, '$1="/$2"');
 const NAV_ABS = rootAbs(REF.slice(REF.indexOf('<nav id="navbar"'), REF.indexOf('<section class="page-hero"')));
 const FOOTER_ABS = rootAbs(REF.slice(REF.indexOf("<footer>"), REF.indexOf("</footer>") + 9));
-const navFor = (region) => region === "avondale" ? NAV_ABS : NAV_ABS
-  .replace(/tel:6028856998/g, "tel:9288001998").replace(/\(602\) 885-6998/g, "(928) 800-1998")
-  .replace(/602-885-6998/g, "928-800-1998").replace(/West Valley &bull; Maricopa County/g, "Prescott &bull; Yavapai County");
+const navFor = () => NAV_ABS;
 
 // Real Google reviews (verbatim, from reviews.html).
 const REVIEWS = [
@@ -129,7 +126,7 @@ const faq = (items) => items.map((f) => `<div class="pillar-faq-item"><p class="
 function page(cfg) {
   const ph = PHONE[cfg.region];
   const svc = cfg.kind === "bathroom" ? BATH : KITCHEN;
-  const gmap = `https://www.google.com/maps?q=${encodeURIComponent("Infinity Kitchens and Baths " + cfg.city + " AZ")}&output=embed`;
+  const gmap = `https://www.google.com/maps?q=${encodeURIComponent("Infinity Kitchens and Baths, 316 N Central Ave, Avondale, AZ 85323")}&output=embed`;
   const title = `${cfg.city} ${cfg.service} | Free Estimate | Infinity Kitchens and Baths`;
   return `<!DOCTYPE html>
 <html lang="en">
@@ -170,7 +167,7 @@ ${navFor(cfg.region)}
       <form id="lpForm" novalidate>
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="tel" name="phone" placeholder="Phone Number" required autocomplete="tel">
-        <input type="text" name="city" placeholder="Your City (e.g., Prescott)" required autocomplete="address-level2" aria-label="Your city">
+        <input type="text" name="city" placeholder="Your City (e.g., Avondale)" required autocomplete="address-level2" aria-label="Your city">
         <input type="email" name="email" placeholder="Email" required autocomplete="email">
         <textarea name="project" placeholder="Tell us about your ${cfg.serviceLower} project (optional)"></textarea>
         <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -221,7 +218,7 @@ ${navFor(cfg.region)}
     <div>
       <span class="eyebrow">Serving ${cfg.city} &amp; Nearby</span>
       <h2>Your local ${cfg.serviceLower} team</h2><div class="gold-divider"></div>
-      <p style="margin-top:1rem;">We're a licensed Arizona contractor (AZ ROC #339999) serving ${cfg.area}. Family-owned, factory-direct, and 5-star rated. Book a free in-home or showroom consultation.</p>
+      <p style="margin-top:1rem;">We're a licensed Arizona contractor (AZ ROC #339999) serving ${cfg.area}. Family-owned, factory-direct, and 5-star rated. Book a free in-home consultation.</p>
       <p style="margin-top:1.25rem;"><a href="tel:${ph.raw}" class="btn btn-gold">${PHONE_SVG} Call ${ph.display}</a></p>
     </div>
     <iframe loading="lazy" title="Infinity Kitchens and Baths ${cfg.city}, AZ" src="${gmap}" data-track-map></iframe>
@@ -277,10 +274,9 @@ ${FOOTER_ABS}
 </html>`;
 }
 
-const CITIES = { avondale: { city: "Avondale", region: "avondale", area: "Avondale and the West Valley" },
-                 prescott: { city: "Prescott", region: "prescott", area: "Prescott and the Quad Cities" } };
+const CITIES = { avondale: { city: "Avondale", region: "avondale", area: "Avondale, AZ" } };
 const PAGES = [];
-for (const key of ["avondale", "prescott"]) {
+for (const key of ["avondale"]) {
   const c = CITIES[key]; const ph = PHONE[c.region];
   PAGES.push({ slug: `bathroom-remodeling-${key}`, kind: "bathroom", service: "Bathroom Remodeling", serviceLower: "bathroom remodeling", city: c.city, region: c.region, area: c.area,
     metaDesc: `${c.city}, AZ bathroom remodeling — walk-in showers, tub-to-shower conversions, vanities, and tile. Factory-direct, licensed AZ ROC #339999. Free estimate. Call ${ph.display}.`,
@@ -294,7 +290,7 @@ for (const key of ["avondale", "prescott"]) {
       [`Do you remodel bathrooms in ${c.city}?`, `Yes — ${c.city} is part of our service area. We handle everything from walk-in showers to full primary-bath renovations. Call ${ph.display} for a free consultation.`],
       ["Can you do a tub-to-shower conversion?", "Yes — it's one of our most requested projects. We remove the old tub, waterproof the area properly, and install a low-threshold or curbless walk-in shower, usually in about a week to ten days."],
       ["Are you licensed and insured?", "Yes. We're a licensed Arizona contractor, AZ ROC #339999, and fully bonded and insured."],
-      ["Is the estimate free?", `Yes. We offer a free in-home or showroom consultation with an honest, written estimate and no pressure. Call ${ph.display} to book.`],
+      ["Is the estimate free?", `Yes. We offer a free in-home consultation with an honest, written estimate and no pressure. Call ${ph.display} to book.`],
     ],
     ctaHead: `Ready to Remodel Your ${c.city} Bathroom?`,
     ctaSub: "Book a free in-home consultation. We'll measure, talk through your ideas, and give you a clear written estimate — no pressure." });

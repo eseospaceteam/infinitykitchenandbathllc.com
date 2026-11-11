@@ -26,28 +26,22 @@ const ORIGIN = 'https://www.infinitykitchenandbathllc.com';
 
 const BRAND = 'Infinity Kitchens and Baths';
 const SUMMARY =
-  'Family-owned kitchen and bathroom remodeling contractor based in Prescott, ' +
-  'Arizona, serving Yavapai County and the West Valley of Phoenix. Building ' +
-  'since 2011. Arizona ROC #339999. Free in-home consultations.';
+  'Family-owned kitchen and bathroom remodeling contractor in Avondale, Arizona ' +
+  '(316 N Central Ave, Avondale, AZ 85323), serving Avondale homeowners. In ' +
+  'business since 2011. Arizona ROC #339999. Free in-home consultations.';
 
 // ---------------------------------------------------------------------------
 // Category rules, evaluated in order. First match wins.
 // ---------------------------------------------------------------------------
-const CITIES = [
-  'prescott-valley', 'chino-valley', 'dewey-humboldt', 'cordes-lakes',
-  'williamson-valley', 'camp-verde', 'cottonwood', 'sedona', 'mayer',
-  'sun-city-west', 'sun-city', 'avondale', 'buckeye', 'goodyear',
-  'glendale', 'peoria', 'surprise', 'prescott',
-  // Aug-2026 territory additions
-  'litchfield-park', 'el-mirage',
-];
-const NEIGHBORHOODS = ['downtown-prescott', 'south-prescott', 'prescott-lakes', 'yavapai-hills'];
-
-const SUPPORTING_LISTS = new Set(
-  readdirSync(path.join(ROOT, 'listicles'))
-    .filter((f) => f.endsWith('.mjs') && /kind:\s*'supporting'/.test(readFileSync(path.join(ROOT, 'listicles', f), 'utf8')))
-    .map((f) => f.replace(/\.mjs$/, '.html')),
-);
+// The best-* "ideas & materials" lists (formerly built from listicles/*.mjs, retired Nov 2026).
+const SUPPORTING_LISTS = new Set([
+  'best-accessible-kitchen-features-for-aging-in-place', 'best-bathroom-storage-ideas',
+  'best-bathroom-ventilation-and-moisture-fixes', 'best-cabinet-colors', 'best-cabinet-hardware-styles',
+  'best-faucets-and-fixtures-for-hard-water', 'best-grab-bars-that-dont-look-clinical',
+  'best-kitchen-countertop-materials', 'best-kitchen-flooring-options', 'best-kitchen-layouts-for-small-homes',
+  'best-kitchen-sink-types', 'best-kitchen-storage-and-pantry-ideas', 'best-low-maintenance-materials-for-arizona-homes',
+  'best-shower-niche-and-bench-ideas',
+].map((s) => `${s}.html`));
 const RULES = [
   // accessible-remodeling.html sits here rather than under a service bucket:
   // it is the parent of the site's largest and most differentiated cluster,
@@ -56,31 +50,21 @@ const RULES = [
     'accessible-remodeling.html'].includes(s)],
   ['Company & trust', (s) => [
     'about.html', 'our-team.html', 'reviews.html', 'gallery.html', 'featured-in.html',
-    'faq.html', 'prescott-remodeling-faq.html', 'financing.html', 'warranties.html',
-    'licensing-insurance.html', 'community.html', 'remodel-cost-calculator.html',
+    'faq.html', 'financing.html', 'warranties.html',
+    'licensing-insurance.html', 'remodel-cost-calculator.html',
     'our-process.html',
   ].includes(s)],
   ['Legal & accessibility', (s) => [
     'privacy-policy.html', 'terms-of-service.html', 'cookie-policy.html', 'accessibility.html',
   ].includes(s)],
-  ['Neighborhood pages (Prescott)', (s) => NEIGHBORHOODS.some((n) => s === `${n}-remodeling.html`)],
-  ['Service areas — all areas', (s) => s === 'locations.html'],
-  ['Service areas — regional hub', (s) => ['west-valley.html', 'yavapai-county-remodeling.html'].includes(s)],
   ['Guide categories', (s) => [
     'choosing-a-contractor.html', 'accessibility-guides.html', 'cost-guides.html',
     'comparison-guides.html', 'shower-guides.html', 'kitchen-guides.html',
     'bathroom-guides.html', 'planning-guides.html',
     'guides.html', // the parent hub; uncategorised since it shipped in Aug 2026
   ].includes(s)],
-  // Matched against the real city list so aging-in-place-guide.html etc. fall through.
-  ['Accessibility service in a specific city', (s) =>
-    ['walk-in-showers', 'tub-to-shower', 'ada-bathroom', 'aging-in-place']
-      .some((sv) => CITIES.some((c) => s === `${sv}-${c}.html`))],
-  ['Service in a specific city', (s) => /^(kitchen|bathroom)-remodeling-[a-z-]+\.html$/.test(s)],
-  ['Service areas — city hubs', (s) => CITIES.some((c) => s === `${c}-remodeling.html`)],
-  // Listicles built by build-listicles.mjs: ranked local-contractor lists use top-*;
-  // the "ideas" lists share the best-* prefix with the how-to-choose guides, so they
-  // are matched by their data file's kind, not by slug.
+  // The "ideas" lists share the best-* prefix with the how-to-choose guides,
+  // so they are matched by the SUPPORTING_LISTS set above, not by slug.
   ['Best-of lists — local contractors', (s) => /^top-/.test(s)],
   ['Best-of lists — ideas & materials', (s) => SUPPORTING_LISTS.has(s)],
   ['Choosing a contractor', (s) => /^best-/.test(s)],
@@ -165,7 +149,7 @@ const ORDER = [...new Set(RULES.map((r) => r[0]))];
 
 // --------------------------- llms.txt --------------------------------------
 let idx = `# ${BRAND}\n\n> ${SUMMARY}\n\n`;
-idx += `Prescott showroom: 928-800-1998 · West Valley: 602-885-6998\n`;
+idx += `Avondale, AZ: 602-885-6998 · 316 N Central Ave, Avondale, AZ 85323 (by appointment)\n`;
 idx += `Free in-home consultation: ${ORIGIN}/contact.html\n\n`;
 idx += `This site uses flat URLs; the hierarchy below is the real information\n`;
 idx += `architecture, and matches the BreadcrumbList markup on every page.\n\n`;

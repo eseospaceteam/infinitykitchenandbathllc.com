@@ -4,8 +4,8 @@ Disallow: /api/
 
 # ---------------------------------------------------------------------------
 # AI / answer-engine crawlers — explicitly allowed.
-# We want Infinity Kitchens and Baths cited in AI answers about Prescott and
-# West Valley remodeling. /api/ is the Mailgun lead endpoint (POST only), so
+# We want Infinity Kitchens and Baths cited in AI answers about Avondale, AZ
+# remodeling. /api/ is the Mailgun lead endpoint (POST only), so
 # it is excluded for every agent: a GET returns 405 and reads as a crawl error.
 # /lp/ is deliberately NOT disallowed — those pages carry <meta noindex>, and a
 # blocked crawler can never read the noindex it needs to honour.

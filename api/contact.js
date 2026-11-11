@@ -121,7 +121,6 @@ export default async function handler(req, res) {
 
   const consultLabels = {
     'in-home': 'In-Home Consultation',
-    'showroom-prescott': 'Showroom Visit — Prescott',
     'showroom-avondale': 'Showroom Visit — Avondale',
     either: 'Either Works',
   };

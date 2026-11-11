@@ -324,8 +324,8 @@
 
   // Detect West Valley pages to use correct phone number
   const isWestValley = /avondale|buckeye|glendale|goodyear|peoria|sun-city|surprise/.test(window.location.pathname);
-  const PHONE_NUM = isWestValley ? '6028856998' : '9288001998';
-  const PHONE_DISPLAY = isWestValley ? '(602) 885-6998' : '(928) 800-1998';
+  const PHONE_NUM = isWestValley ? '6028856998' : '6028856998';
+  const PHONE_DISPLAY = isWestValley ? '(602) 885-6998' : '(602) 885-6998';
 
   // ── Service ───────────────────────────────────────────────────────────────
   // Values mirror contact.html exactly, because api/contact.js maps them to the

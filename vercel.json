@@ -12,22 +12,22 @@
     },
     {
       "source": "/services/bathroom-remodeling-in-prescott-valley-az",
-      "destination": "/bathroom-remodeling-prescott-valley.html",
+      "destination": "/bathroom-remodeling.html",
       "permanent": true
     },
     {
       "source": "/services/bathroom-remodeling-in-prescott-valley-az/",
-      "destination": "/bathroom-remodeling-prescott-valley.html",
+      "destination": "/bathroom-remodeling.html",
       "permanent": true
     },
     {
       "source": "/services/whole-house-remodeling-in-prescott-valley-az",
-      "destination": "/prescott-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/services/whole-house-remodeling-in-prescott-valley-az/",
-      "destination": "/prescott-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -302,102 +302,102 @@
     },
     {
       "source": "/locations/prescott",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/prescott/",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/prescott-valley",
-      "destination": "/prescott-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/prescott-valley/",
-      "destination": "/prescott-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/chino-valley",
-      "destination": "/chino-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/chino-valley/",
-      "destination": "/chino-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/dewey-humboldt",
-      "destination": "/dewey-humboldt-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/dewey-humboldt/",
-      "destination": "/dewey-humboldt-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/sedona",
-      "destination": "/sedona-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/sedona/",
-      "destination": "/sedona-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/cottonwood",
-      "destination": "/cottonwood-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/cottonwood/",
-      "destination": "/cottonwood-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/camp-verde",
-      "destination": "/camp-verde-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/camp-verde/",
-      "destination": "/camp-verde-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/mayer",
-      "destination": "/mayer-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/mayer/",
-      "destination": "/mayer-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/cordes-lakes",
-      "destination": "/cordes-lakes-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/cordes-lakes/",
-      "destination": "/cordes-lakes-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/williamson-valley",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/williamson-valley/",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -417,32 +417,32 @@
     },
     {
       "source": "/service-areas",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/service-areas/",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/service-areas/:path*",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/locations/:path*",
-      "destination": "/prescott-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -532,32 +532,32 @@
     },
     {
       "source": "/service-areas/kitchen-remodeling-in-williamson-az",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/service-areas/kitchen-remodeling-in-williamson-az/",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/services/bathroom-remodeling-in-williamson-az",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/services/bathroom-remodeling-in-williamson-az/",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/services/remodeling-in-williamson-az",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/services/remodeling-in-williamson-az/",
-      "destination": "/williamson-valley-remodeling.html",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -662,82 +662,722 @@
     },
     {
       "source": "/top-ada-bathroom-remodelers-west-valley.html",
-      "destination": "/best-ada-bathroom-remodeler-prescott.html",
+      "destination": "/best-ada-bathroom-remodeler-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-ada-bathroom-remodelers-west-valley",
-      "destination": "/best-ada-bathroom-remodeler-prescott.html",
+      "destination": "/best-ada-bathroom-remodeler-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-aging-in-place-remodelers-sun-city.html",
-      "destination": "/aging-in-place-sun-city.html",
+      "destination": "/aging-in-place.html",
       "permanent": true
     },
     {
       "source": "/top-aging-in-place-remodelers-sun-city",
-      "destination": "/aging-in-place-sun-city.html",
+      "destination": "/aging-in-place.html",
       "permanent": true
     },
     {
       "source": "/top-bathroom-remodelers-prescott.html",
-      "destination": "/best-bathroom-remodeler-prescott.html",
+      "destination": "/best-bathroom-remodeler-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-bathroom-remodelers-prescott",
-      "destination": "/best-bathroom-remodeler-prescott.html",
+      "destination": "/best-bathroom-remodeler-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-bathroom-remodelers-surprise.html",
-      "destination": "/bathroom-remodeling-surprise.html",
+      "destination": "/bathroom-remodeling.html",
       "permanent": true
     },
     {
       "source": "/top-bathroom-remodelers-surprise",
-      "destination": "/bathroom-remodeling-surprise.html",
+      "destination": "/bathroom-remodeling.html",
       "permanent": true
     },
     {
       "source": "/top-cabinet-installers-prescott.html",
-      "destination": "/best-cabinet-maker-prescott.html",
+      "destination": "/best-cabinet-maker-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-cabinet-installers-prescott",
-      "destination": "/best-cabinet-maker-prescott.html",
+      "destination": "/best-cabinet-maker-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-kitchen-bath-remodelers-prescott-valley.html",
-      "destination": "/best-remodeling-contractor-prescott-valley.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-kitchen-bath-remodelers-prescott-valley",
-      "destination": "/best-remodeling-contractor-prescott-valley.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-kitchen-remodelers-peoria-glendale.html",
-      "destination": "/kitchen-remodeling-peoria.html",
+      "destination": "/kitchen-remodeling.html",
       "permanent": true
     },
     {
       "source": "/top-kitchen-remodelers-peoria-glendale",
-      "destination": "/kitchen-remodeling-peoria.html",
+      "destination": "/kitchen-remodeling.html",
       "permanent": true
     },
     {
       "source": "/top-kitchen-remodelers-prescott.html",
-      "destination": "/best-kitchen-remodeler-prescott.html",
+      "destination": "/best-kitchen-remodeler-avondale.html",
       "permanent": true
     },
     {
       "source": "/top-kitchen-remodelers-prescott",
-      "destination": "/best-kitchen-remodeler-prescott.html",
+      "destination": "/best-kitchen-remodeler-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-avondale.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-buckeye.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-el-mirage.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-glendale.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-goodyear.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-litchfield-park.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-peoria.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-sun-city-west.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-sun-city.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom-surprise.html",
+      "destination": "/ada-bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-avondale.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-buckeye.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-el-mirage.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-glendale.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-goodyear.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-litchfield-park.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-peoria.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-sun-city-west.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-sun-city.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-surprise.html",
+      "destination": "/aging-in-place.html",
+      "permanent": true
+    },
+    {
+      "source": "/avondale-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-avondale.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-buckeye.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-chino-valley.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-cottonwood.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-dewey-humboldt.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-el-mirage.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-glendale.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-goodyear.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-litchfield-park.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-peoria.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-prescott-valley.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-sedona.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-sun-city-west.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-sun-city.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-surprise.html",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-ada-bathroom-remodeler-prescott.html",
+      "destination": "/best-ada-bathroom-remodeler-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-aging-in-place-remodeler-yavapai-county.html",
+      "destination": "/best-aging-in-place-remodeler-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-bathroom-remodeler-prescott.html",
+      "destination": "/best-bathroom-remodeler-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-cabinet-maker-prescott.html",
+      "destination": "/best-cabinet-maker-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-countertop-installer-prescott.html",
+      "destination": "/best-countertop-installer-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-flooring-contractor-prescott.html",
+      "destination": "/best-flooring-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-home-remodeling-contractor-prescott.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-kitchen-remodeler-prescott.html",
+      "destination": "/best-kitchen-remodeler-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-outdoor-kitchen-builder-prescott.html",
+      "destination": "/best-outdoor-kitchen-builder-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-remodeling-contractor-chino-valley.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-remodeling-contractor-cottonwood.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-remodeling-contractor-dewey-humboldt.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-remodeling-contractor-prescott-valley.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-remodeling-contractor-sedona.html",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-time-to-remodel-prescott.html",
+      "destination": "/best-time-to-remodel-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/best-walk-in-shower-installer-prescott.html",
+      "destination": "/best-walk-in-shower-installer-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/buckeye-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/camp-verde-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/chino-valley-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/community.html",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/cordes-lakes-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cottonwood-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dewey-humboldt-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/downtown-prescott-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/el-mirage-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/glendale-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/goodyear-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-avondale.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-buckeye.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-chino-valley.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-cottonwood.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-dewey-humboldt.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-el-mirage.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-glendale.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-goodyear.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-litchfield-park.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-peoria.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-prescott-valley.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-sedona.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-sun-city-west.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-sun-city.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-surprise.html",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/litchfield-park-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/locations.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/mayer-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/peoria-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/permit-costs-yavapai-county.html",
+      "destination": "/permit-costs-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/prescott-lakes-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/prescott-remodeling-faq.html",
+      "destination": "/faq.html",
+      "permanent": true
+    },
+    {
+      "source": "/prescott-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/prescott-valley-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sedona-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/south-prescott-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sun-city-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sun-city-west-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/surprise-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-avondale.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-buckeye.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-el-mirage.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-glendale.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-goodyear.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-litchfield-park.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-peoria.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-sun-city-west.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-sun-city.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-surprise.html",
+      "destination": "/tub-to-shower.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-avondale.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-buckeye.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-el-mirage.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-glendale.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-goodyear.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-litchfield-park.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-peoria.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-sun-city-west.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-sun-city.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers-surprise.html",
+      "destination": "/walk-in-showers.html",
+      "permanent": true
+    },
+    {
+      "source": "/west-valley.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/williamson-valley-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/yavapai-county-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/yavapai-hills-remodeling.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/bathroom-remodeling-prescott/",
+      "destination": "/lp/bathroom-remodeling-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/bathroom-remodeling-prescott",
+      "destination": "/lp/bathroom-remodeling-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/bathroom-remodeling-prescott/index.html",
+      "destination": "/lp/bathroom-remodeling-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-cabinets-prescott/",
+      "destination": "/lp/kitchen-cabinets-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-cabinets-prescott",
+      "destination": "/lp/kitchen-cabinets-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-cabinets-prescott/index.html",
+      "destination": "/lp/kitchen-cabinets-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-countertops-prescott/",
+      "destination": "/lp/kitchen-countertops-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-countertops-prescott",
+      "destination": "/lp/kitchen-countertops-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-countertops-prescott/index.html",
+      "destination": "/lp/kitchen-countertops-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-remodeling-prescott/",
+      "destination": "/lp/kitchen-remodeling-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-remodeling-prescott",
+      "destination": "/lp/kitchen-remodeling-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/lp/kitchen-remodeling-prescott/index.html",
+      "destination": "/lp/kitchen-remodeling-avondale/",
       "permanent": true
     }
   ],

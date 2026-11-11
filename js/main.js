@@ -183,7 +183,7 @@ if (contactForm) {
       } else {
         btn.textContent = 'Something went wrong — please call us';
         setStatus(
-          'Sorry, your request could not be sent. Please call us at (928) 800-1998.',
+          'Sorry, your request could not be sent. Please call us at (602) 885-6998.',
           'error'
         );
         setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
@@ -191,7 +191,7 @@ if (contactForm) {
     } catch {
       btn.textContent = 'Something went wrong — please call us';
       setStatus(
-        'Sorry, your request could not be sent. Please call us at (928) 800-1998.',
+        'Sorry, your request could not be sent. Please call us at (602) 885-6998.',
         'error'
       );
       setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);

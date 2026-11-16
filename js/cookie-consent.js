@@ -1,16 +1,21 @@
 /*!
- * Infinity Kitchens and Baths — Cookie consent banner
- * STRICT opt-in (27 Oct 2026, owner's instruction, California CIPA exposure): the Google
- * tag (GA4 G-EK9HSW7F90 + Google Ads AW-17095449186) is NOT in the page <head> any more.
- * It is loaded by loadGoogleTag() below only after the visitor clicks Accept, or on later
- * visits once they have. Decline, or a browser sending Global Privacy Control, loads
- * nothing at all (Consent Mode "denied" still sent cookieless pings, so it was replaced).
+ * Infinity Kitchens and Baths: cookie banner + Google tag loader
+ * 16 Nov 2026: the Google tag (GA4 G-EK9HSW7F90 + Google Ads AW-17095449186) loads for
+ * every visitor on the live site, so visits and ad results are counted whether or not the
+ * banner is answered. Google Consent Mode is set before the tag loads.
+ *   - No choice yet, or Accept: analytics and ad measurement cookies are on.
+ *     Ad personalisation is never on.
+ *   - Decline, or a browser sending Global Privacy Control (with no stored Accept):
+ *     Consent Mode is switched to denied, the Google cookies already set are removed and
+ *     Google only receives cookieless pings.
+ * (From 27 Oct to 16 Nov 2026 this file was strict opt-in: nothing loaded before Accept.)
+ * The tag is loaded here, not in the page <head>. Same ids and events as before.
  * Choice is stored in localStorage under "site_consent" ("granted" | "denied"); an older
  * "ikb_consent" choice is honoured and migrated.
  * Site code calls gtag only behind `typeof gtag !== 'undefined'`, so nothing breaks
- * while the tag is not loaded.
+ * where the tag is not loaded (preview and local hosts).
  * The x button (and Escape) hides the banner for this browser session only (2 Nov 2026):
- * sessionStorage "site_consent_dismissed" = "1", no choice is stored and nothing loads,
+ * sessionStorage "site_consent_dismissed" = "1", no choice is stored and nothing changes,
  * so the banner asks again on the next visit. Cookie Preferences clears the flag.
  */
 (function () {
@@ -21,6 +26,8 @@
   var DISMISS_KEY = 'site_consent_dismissed';
   var GA_ID = 'G-EK9HSW7F90';
   var ADS_ID = 'AW-17095449186';
+  // The tag runs on the live site only, so previews and local copies send nothing.
+  var LIVE_HOSTS = ['www.infinitykitchenandbathllc.com', 'infinitykitchenandbathllc.com'];
 
   function getChoice() {
     try {
@@ -34,9 +41,6 @@
   function setChoice(v) {
     try { localStorage.setItem(STORAGE_KEY, v); localStorage.removeItem(OLD_KEY); } catch (e) {}
   }
-  function clearChoice() {
-    try { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(OLD_KEY); } catch (e) {}
-  }
 
   function readDismissed() {
     try { return sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; }
@@ -48,17 +52,35 @@
     } catch (e) {}
   }
 
-  // Same tag, IDs and config the <head> used to carry; runs only after Accept.
+  // True when cookies must stay off: the visitor declined, or the browser sends Global
+  // Privacy Control and the visitor has not accepted.
+  function cookiesOff() {
+    var choice = getChoice();
+    return choice === 'denied' || (choice === null && navigator.globalPrivacyControl === true);
+  }
+  function consentState(off) {
+    return off
+      ? { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' }
+      : { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'denied', analytics_storage: 'granted' };
+  }
+
+  // Same tag and ids the <head> used to carry. Loads for every visitor on the live site;
+  // Consent Mode (set first) decides whether Google may use cookies.
   var tagLoaded = false;
   function loadGoogleTag() {
     if (tagLoaded) return;
+    if (LIVE_HOSTS.indexOf(location.hostname) === -1) return;
     tagLoaded = true;
+    var off = cookiesOff();
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
-    window.gtag('consent', 'default', { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' });
+    window.gtag('consent', 'default', consentState(off));
+    window.gtag('set', 'url_passthrough', true);
+    window.gtag('set', 'ads_data_redaction', off);
     window.gtag('js', new Date());
-    window.gtag('config', GA_ID);
+    window.gtag('config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false });
     window.gtag('config', ADS_ID);
+    if (off) clearGoogleCookies();
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
@@ -81,12 +103,14 @@
   }
 
   function applyConsent(state) {
-    // state: "granted" | "denied". Granted loads the tag; if it was already loaded this
-    // visit (Accept, then Decline via Cookie Preferences), denied stops it storing.
-    if (state === 'granted') { loadGoogleTag(); return; }
+    // state: "granted" | "denied". The tag is already running; this only switches whether
+    // Google may use cookies. Denied also removes the Google cookies already set.
+    var off = state === 'denied';
     if (tagLoaded && typeof window.gtag === 'function') {
-      window.gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+      window.gtag('consent', 'update', consentState(off));
+      window.gtag('set', 'ads_data_redaction', off);
     }
+    if (off) clearGoogleCookies();
   }
 
   function injectStyles() {
@@ -177,7 +201,7 @@
     if (e.key === 'Escape' || e.key === 'Esc') dismissBanner();
   }
 
-  // Close without choosing: nothing loads, and the banner asks again next visit.
+  // Close without choosing: nothing changes, and the banner asks again next visit.
   function dismissBanner() {
     writeDismissed(true);
     removeBanner();
@@ -200,8 +224,8 @@
     bar.setAttribute('aria-label', 'Cookie consent');
     bar.innerHTML =
       '<button type="button" class="ikb-cc-close" aria-label="Close cookie notice"><span aria-hidden="true">&times;</span></button>' +
-      '<p>We use cookies from Google Analytics and Google Ads to measure visits and ads. ' +
-      'Nothing loads unless you click Accept. ' +
+      '<p>We use Google Analytics and Google Ads cookies to count visits and see which pages and ads help. ' +
+      'Choose Decline to turn the cookies off. ' +
       'See our <a href="/cookie-policy.html">Cookie Policy</a> and ' +
       '<a href="/privacy-policy.html">Privacy Policy</a>.</p>' +
       '<div class="ikb-cc-btns">' +
@@ -213,7 +237,7 @@
       setChoice('granted'); applyConsent('granted'); removeBanner();
     });
     bar.querySelector('.ikb-cc-decline').addEventListener('click', function () {
-      setChoice('denied'); applyConsent('denied'); clearGoogleCookies(); removeBanner();
+      setChoice('denied'); applyConsent('denied'); removeBanner();
     });
     bar.querySelector('.ikb-cc-close').addEventListener('click', dismissBanner);
     document.addEventListener('keydown', onKey);
@@ -221,8 +245,9 @@
   }
 
   // Let visitors reopen the banner to change their choice (wired to the footer "Cookie Preferences" link).
+  // The stored choice stays in force until a button is pressed, so reopening the banner
+  // never switches cookies back on for someone who declined.
   window.ikbCookieSettings = function () {
-    clearChoice();
     writeDismissed(false);
     removeBanner();
     showBanner();
@@ -232,14 +257,16 @@
 
   function init() {
     var choice = getChoice();
-    if (choice === 'granted') { loadGoogleTag(); return; }
-    if (choice === 'denied') return;
-    // Global Privacy Control = the California opt-out signal: treat as Decline, no banner.
+    if (choice !== null) return;
+    // Global Privacy Control = the California opt-out signal: treated as Decline, no banner.
     if (navigator.globalPrivacyControl === true) return;
-    // Closed with x earlier this session: no banner, nothing loads.
+    // Closed with x earlier this session: no banner.
     if (readDismissed()) return;
     showBanner();
   }
+
+  // The tag does not wait for the page or the banner.
+  loadGoogleTag();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

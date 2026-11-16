@@ -10,7 +10,7 @@ const IMG = "https://www.infinitykitchenandbathllc.com/wp-content/uploads";
 const PHONE = {
   avondale: { raw: "6028856998", display: "(602) 885-6998" },
 };
-// Since 27 Oct 2026 the head block is only a marker: js/cookie-consent.js loads the tag after Accept.
+// Since 27 Oct 2026 the head block is only a marker: js/cookie-consent.js loads the tag (for every visitor since 16 Nov 2026).
 const GTAG = REF.slice(REF.indexOf("<!-- Google tag"), REF.indexOf("<!-- /Google tag -->") + "<!-- /Google tag -->".length);
 
 const rootAbs = (h) => h.replace(/(href|src)="(?!https?:|\/|#|tel:|mailto:|data:)([^"]+)"/g, '$1="/$2"');

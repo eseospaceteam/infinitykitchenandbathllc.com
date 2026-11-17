@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 const Q = "Do you install a backsplash on its own, without a kitchen remodel?";
 const A = "A tile backsplash is included in the design whenever we remodel a kitchen, and that is how most of our backsplash work happens. If a backsplash is genuinely all you need, we will usually refer you straight to our trusted tile installer rather than schedule a full remodeling estimate — it gets you a faster answer and a better price on a small job. Send us a couple of photos of the space and we will point you in the right direction either way.";
 
-for (const f of ["kitchen-backsplash.html", "backsplash-installation.html"]) {
+for (const f of ["kitchen-backsplash.html"]) {
   let h = readFileSync(f, "utf8");
   if (h.includes("Do you install a backsplash on its own")) {
     console.log(`${f}: already present`);

@@ -202,12 +202,12 @@
     },
     {
       "source": "/services/backsplash-installation",
-      "destination": "/backsplash-installation.html",
+      "destination": "/kitchen-backsplash.html",
       "permanent": true
     },
     {
       "source": "/services/backsplash-installation/",
-      "destination": "/backsplash-installation.html",
+      "destination": "/kitchen-backsplash.html",
       "permanent": true
     },
     {
@@ -1378,6 +1378,76 @@
     {
       "source": "/lp/kitchen-remodeling-prescott/index.html",
       "destination": "/lp/kitchen-remodeling-avondale/",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-cabinet-costs.html",
+      "destination": "/kitchen-cabinet-cost.html",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-cabinet-costs",
+      "destination": "/kitchen-cabinet-cost.html",
+      "permanent": true
+    },
+    {
+      "source": "/backsplash-installation.html",
+      "destination": "/kitchen-backsplash.html",
+      "permanent": true
+    },
+    {
+      "source": "/backsplash-installation",
+      "destination": "/kitchen-backsplash.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/kitchen-remodeling-in-prescott-valley-az",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/kitchen-remodeling-in-prescott-valley-az/",
+      "destination": "/kitchen-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/bathroom-remodeling-in-chino-valley-az",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/bathroom-remodeling-in-chino-valley-az/",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/bathroom-remodeling-in-dewey-humboldt-az",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/bathroom-remodeling-in-dewey-humboldt-az/",
+      "destination": "/bathroom-remodeling.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/7-5-tips-on-choosing-a-qualified-reputable-remodeler-in-prescott-az",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/7-5-tips-on-choosing-a-qualified-reputable-remodeler-in-prescott-az/",
+      "destination": "/best-home-remodeling-contractor-avondale.html",
+      "permanent": true
+    },
+    {
+      "source": "/chino-valley-remodeling",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/cordes-remodeling.html",
+      "destination": "/",
       "permanent": true
     }
   ],

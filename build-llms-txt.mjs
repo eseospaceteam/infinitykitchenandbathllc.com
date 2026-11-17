@@ -73,7 +73,7 @@ const RULES = [
   ['Kitchen services', (s) => [
     'kitchen-remodeling.html', 'kitchen-cabinets.html', 'cabinet-refinishing-refacing.html',
     'custom-countertops.html', 'countertops.html', 'kitchen-backsplash.html',
-    'backsplash-installation.html', 'small-kitchen-remodeling.html', 'outdoor-kitchen.html',
+    'small-kitchen-remodeling.html', 'outdoor-kitchen.html',
   ].includes(s)],
   ['Bathroom & shower services', (s) => [
     'bathroom-remodeling.html', 'master-bathroom.html', 'small-bathroom.html',

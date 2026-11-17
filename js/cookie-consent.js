@@ -1,14 +1,10 @@
 /*!
  * Infinity Kitchens and Baths: cookie banner + Google tag loader
- * 16 Nov 2026: the Google tag (GA4 G-EK9HSW7F90 + Google Ads AW-17095449186) loads for
- * every visitor on the live site, so visits and ad results are counted whether or not the
- * banner is answered. Google Consent Mode is set before the tag loads.
- *   - No choice yet, or Accept: analytics and ad measurement cookies are on.
- *     Ad personalisation is never on.
+ * The Google tag (GA4 G-EK9HSW7F90 + Google Ads AW-17095449186) is loaded by this file on
+ * the live site, with Google Consent Mode set before the tag.
+ *   - Consent Mode default (no choice yet, or Accept): all four signals granted.
  *   - Decline, or a browser sending Global Privacy Control (with no stored Accept):
- *     Consent Mode is switched to denied, the Google cookies already set are removed and
- *     Google only receives cookieless pings.
- * (From 27 Oct to 16 Nov 2026 this file was strict opt-in: nothing loaded before Accept.)
+ *     all four signals denied and the Google cookies already set are removed.
  * The tag is loaded here, not in the page <head>. Same ids and events as before.
  * Choice is stored in localStorage under "site_consent" ("granted" | "denied"); an older
  * "ikb_consent" choice is honoured and migrated.
@@ -61,11 +57,11 @@
   function consentState(off) {
     return off
       ? { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' }
-      : { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'denied', analytics_storage: 'granted' };
+      : { ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted', analytics_storage: 'granted' };
   }
 
-  // Same tag and ids the <head> used to carry. Loads for every visitor on the live site;
-  // Consent Mode (set first) decides whether Google may use cookies.
+  // Same tag and ids the <head> used to carry. Consent Mode (set first) decides whether
+  // Google may use cookies.
   var tagLoaded = false;
   function loadGoogleTag() {
     if (tagLoaded) return;
@@ -78,7 +74,7 @@
     window.gtag('set', 'url_passthrough', true);
     window.gtag('set', 'ads_data_redaction', off);
     window.gtag('js', new Date());
-    window.gtag('config', GA_ID, { allow_google_signals: false, allow_ad_personalization_signals: false });
+    window.gtag('config', GA_ID);
     window.gtag('config', ADS_ID);
     if (off) clearGoogleCookies();
     var s = document.createElement('script');
@@ -224,8 +220,8 @@
     bar.setAttribute('aria-label', 'Cookie consent');
     bar.innerHTML =
       '<button type="button" class="ikb-cc-close" aria-label="Close cookie notice"><span aria-hidden="true">&times;</span></button>' +
-      '<p>We use Google Analytics and Google Ads cookies to count visits and see which pages and ads help. ' +
-      'Choose Decline to turn the cookies off. ' +
+      '<p>We use cookies from Google Analytics and Google Ads to measure visits and ads. ' +
+      'Google may use them to personalize ads. Choose Decline to turn the cookies off. ' +
       'See our <a href="/cookie-policy.html">Cookie Policy</a> and ' +
       '<a href="/privacy-policy.html">Privacy Policy</a>.</p>' +
       '<div class="ikb-cc-btns">' +

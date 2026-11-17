@@ -2190,3 +2190,20 @@ footer button:focus-visible,
   }
   .fade-up, .fade-in { opacity: 1 !important; transform: none !important; }
 }
+
+/* ---- Links inside body copy (WCAG 1.4.1) ----
+   The reset above gives every link the text colour and no underline, so
+   links in running text looked like plain words. Links in paragraphs, lists,
+   table cells and FAQ answers inside <main> now use the brand green and an
+   underline. Buttons, cards, pills and other classed links are untouched, as
+   are the hero, breadcrumb, author box, table of contents, hub up-link and
+   the dark CTA / forest sections and any nav or footer. Links that set their own inline colour
+   keep it. */
+main :is(p, li, td, dd, .pillar-faq-a) a:not([class]):not([style*="display"]):not(:is(nav, footer, .page-hero, .breadcrumb, .author-box, .lst-toc, .hub-uplink, .cta-banner, .section-forest) a) {
+  color: var(--green-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+main :is(p, li, td, dd, .pillar-faq-a) a:not([class]):not([style*="display"]):not(:is(nav, footer, .page-hero, .breadcrumb, .author-box, .lst-toc, .hub-uplink, .cta-banner, .section-forest) a):hover {
+  color: var(--green-500);
+}

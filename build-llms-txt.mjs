@@ -72,7 +72,7 @@ const RULES = [
   ['Comparisons', (s) => /-vs-/.test(s)],
   ['Kitchen services', (s) => [
     'kitchen-remodeling.html', 'kitchen-cabinets.html', 'cabinet-refinishing-refacing.html',
-    'custom-countertops.html', 'countertops.html', 'kitchen-backsplash.html',
+    'custom-countertops.html', 'kitchen-backsplash.html',
     'small-kitchen-remodeling.html', 'outdoor-kitchen.html',
   ].includes(s)],
   ['Bathroom & shower services', (s) => [

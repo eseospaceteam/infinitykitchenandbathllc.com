@@ -1449,6 +1449,16 @@
       "source": "/cordes-remodeling.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/countertops.html",
+      "destination": "/custom-countertops.html",
+      "permanent": true
+    },
+    {
+      "source": "/countertops",
+      "destination": "/custom-countertops.html",
+      "permanent": true
     }
   ],
   "headers": [

@@ -191,7 +191,7 @@
         <input type="text" name="city" placeholder="Your City (e.g., Avondale)" required autocomplete="address-level2" aria-label="Your city">
         <input type="email" name="email" placeholder="Email" required autocomplete="email">
         <textarea name="project" placeholder="Tell us about your bathroom remodeling project (optional)"></textarea>
-        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="hp" aria-hidden="true"><label>Leave this field blank <input type="text" name="hp_reference" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore="true"></label></div>
         <button type="submit" id="lpSubmit">Request My Free Estimate</button>
         <p class="disc">By submitting you agree to be contacted by phone, text, or email. Msg &amp; data rates may apply.</p>
       </form>
@@ -288,7 +288,7 @@
     var d=Object.fromEntries(new FormData(f)),p=(d.name||'').trim().split(/\s+/);
     var ef=f.querySelector('[name=email]');if(!ef.checkValidity()){ef.reportValidity();ef.focus();return;}var cf=f.querySelector('[name=city]');if(!(d.city||'').trim()){cf.setCustomValidity('Please enter your city.');cf.reportValidity();cf.focus();return;}
     var payload={firstName:p[0]||'',lastName:p.slice(1).join(' ')||'',phone:d.phone||'',email:d.email||'',
-      message:d.project||'',service:"Bathroom Remodeling — Avondale (Ads LP)",address:(d.city||'').trim(),'consult-type':'',company:d.company||'',elapsed:Date.now()-shown};
+      message:d.project||'',service:"Bathroom Remodeling — Avondale (Ads LP)",address:(d.city||'').trim(),'consult-type':'',hp_reference:d.hp_reference||'',elapsed:Date.now()-shown};
     var orig=btn.innerHTML;btn.textContent='Sending\u2026';btn.disabled=true;
     try{
       var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(window.__leadSourcePayload?Object.assign(payload,{lead_source:window.__leadSourcePayload('ads_lp')}):payload)});

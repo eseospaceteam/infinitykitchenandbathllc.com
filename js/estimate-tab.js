@@ -367,7 +367,7 @@
         <input class="ikb-field" type="email" name="email"   placeholder="Email"          required autocomplete="email" aria-label="Email address">
         <input class="ikb-field" type="text"   name="city"    placeholder="Enter Your Location" required autocomplete="address-level2" aria-label="Enter your location — city or address">
         <textarea class="ikb-field"           name="project" placeholder="Anything else about the project? (optional)" aria-label="Anything else about the project? (optional)"></textarea>
-        <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" value="">
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden;"><label>Leave this field blank <input type="text" name="hp_reference" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore="true" value=""></label></div>
 
         <button class="ikb-btn" type="submit" id="ikbSubmit">${SEND_ICON} Request Free Estimate</button>
         <p class="ikb-error" id="ikbError" role="alert" aria-live="assertive"></p>
@@ -527,7 +527,7 @@
       address: (data.city || '').trim(),
       'consult-type': '',
       source: 'Quick Estimate (slide-out tab)',
-      company: data.company || '',
+      hp_reference: data.hp_reference || '',
       elapsed: Date.now() - formShownAt,
     };
     // where the visitor came from (js/main.js); never throws

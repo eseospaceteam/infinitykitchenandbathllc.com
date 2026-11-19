@@ -1,4 +1,4 @@
-import { applyBlockedSenders } from '../lib/blocked-senders.js';
+import { applyBlockedSenders, reviewInbox } from '../lib/blocked-senders.js';
 import { cleanLeadSource, leadSourceRows, leadSourceText } from '../lib/lead-source.js';
 import { countLead, leadCountFields } from '../lib/eseo-leads.js';
 // Replaced after applyBlockedSenders with the lead-source panel (see below).
@@ -12,32 +12,40 @@ export default async function handler(req, res) {
   const {
     firstName, lastName, email, phone, address,
     service, 'consult-type': consultType, message,
-    source, company, elapsed, lead_source: rawLeadSource,
+    source, company, hp_reference: hpReference, elapsed, lead_source: rawLeadSource,
   } = req.body || {};
 
   // ── Spam gate ─────────────────────────────────────────────
   // Bots bypass client-side validation, so every check must live here.
-  // On any spam signal we return a fake 200 so bots think they succeeded
-  // and don't adapt/retry — no email is sent.
+  // Checks 3-5 return a fake 200 so bots think they succeeded and don't
+  // adapt/retry — no email is sent. Checks 1-2 only mark the send (below).
   const fakeOk = () => res.status(200).json({ success: true });
 
-  // 1) Honeypot: a hidden field real users never see. BUT browser autofill will
-  //    legitimately fill a field named "company", which was silently dropping
-  //    real leads (autofilled company name -> looked like a bot). So only treat
-  //    it as spam when the value carries a link/URL — the signature of link-spam
-  //    bots, never of an autofilled company name. Blank and keyboard-mash bots
-  //    are still caught by the required-field and gibberish checks below.
+  // Bot signals (1) and (2) only MARK a submission; they never discard it.
+  // Until 18 Nov 2026 either one returned the fake 200 and emailed nobody, so a
+  // real customer whose browser filled the hidden field vanished without a
+  // trace. Now a suspect goes to eSEOspace's review inbox only, tagged [SPAM?]
+  // so it is held for the evening spam report; Steve never sees it. The visitor
+  // sees the normal success message either way.
+  const suspect = [];
+
+  // 1) Honeypot: a hidden field real users never see. It is `hp_reference` now
+  //    (any value counts). Browser autofill legitimately fills the old name,
+  //    "company", which silently dropped real leads in July, so pages cached
+  //    from before the rename are only marked when that value carries a
+  //    link/URL — the signature of link-spam bots, never of an autofilled
+  //    company name.
   const hp = String(company || '');
-  if (/https?:\/\/|www\.|<a\s|\[url|\.(ru|cn|top|xyz|info|link)\b/i.test(hp)) {
-    return fakeOk();
+  if (String(hpReference || '').trim() || /https?:\/\/|www\.|<a\s|\[url|\.(ru|cn|top|xyz|info|link)\b/i.test(hp)) {
+    suspect.push('hidden field filled');
   }
 
   // 2) Time-to-submit: humans take several seconds; bots submit near-instantly.
   //    `elapsed` = ms between the form appearing and submission (sent by the client).
-  //    Only enforce when present, so a missing value never blocks a real lead.
+  //    Only enforce when present, so a missing value never marks a real lead.
   const elapsedMs = Number(elapsed);
   if (Number.isFinite(elapsedMs) && elapsedMs < 1200) {
-    return fakeOk();
+    suspect.push(`sent ${(elapsedMs / 1000).toFixed(1)}s after the form appeared`);
   }
 
   // 3) Required fields. A real lead has a name AND a callable phone number.
@@ -167,11 +175,22 @@ export default async function handler(req, res) {
     text,
   });
 
+  // A bot-signal submission: review inbox only, tagged so holdForReport
+  // (inside applyBlockedSenders) holds it for the evening report. Never Steve.
+  if (suspect.length) {
+    body.set('to', reviewInbox());
+    body.delete('bcc');
+    body.delete('cc');
+    body.set('subject', `[SPAM?] ${String(body.get('subject') ?? '')} (${suspect.join('; ')})`);
+  }
   // Known bulk solicitor: re-route away from the client, never deliver to them.
   const blocked = applyBlockedSenders(body);
+  // append, not set: holdForReport has just tagged held mail "held-spam", and
+  // the evening report finds it by that tag.
+  if (suspect.length) body.append('o:tag', 'suspected-bot');
   // Count it on the eSEOspace leads dashboard only when it still goes to the
   // client, before the send so a failed send still counts. Never throws.
-  if (!blocked) {
+  if (!blocked && !suspect.length) {
     let src = null;
     try { src = cleanLeadSource(rawLeadSource, { headers: { get: (k) => req.headers?.[k] || null } }); } catch {}
     await countLead(leadCountFields(src));

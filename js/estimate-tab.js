@@ -567,8 +567,11 @@
           close();
         }, 4000);
       } else {
+        // 400 = a required field the server could not accept; say which one.
+        let fix = '';
+        if (res.status === 400) { try { fix = (await res.json()).error || ''; } catch {} }
         submitBtn.textContent = 'Error — please call us';
-        showError();
+        showError(fix || undefined);
         setTimeout(() => { submitBtn.innerHTML = original; submitBtn.disabled = false; }, 3500);
       }
     } catch {

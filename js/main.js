@@ -181,9 +181,12 @@ if (contactForm) {
         contactForm.reset();
         setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);
       } else {
-        btn.textContent = 'Something went wrong — please call us';
+        // 400 = a required field the server could not accept; say which one.
+        let fix = '';
+        if (res.status === 400) { try { fix = (await res.json()).error || ''; } catch {} }
+        btn.textContent = fix ? 'Please check the form' : 'Something went wrong — please call us';
         setStatus(
-          'Sorry, your request could not be sent. Please call us at (602) 885-6998.',
+          fix || 'Sorry, your request could not be sent. Please call us at (602) 885-6998.',
           'error'
         );
         setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 4000);

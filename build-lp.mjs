@@ -247,11 +247,11 @@ ${FOOTER_ABS}
 (function(){
   var f=document.getElementById('lpForm'),ok=document.getElementById('lpOk'),btn=document.getElementById('lpSubmit'),shown=Date.now();
   if(!f)return;
-  f.querySelector('[name=city]').addEventListener('input',function(){this.setCustomValidity('');});
+  ['city','name','phone'].forEach(function(n){f.querySelector('[name='+n+']').addEventListener('input',function(){this.setCustomValidity('');});});
   f.addEventListener('submit',async function(e){
     e.preventDefault();
     var d=Object.fromEntries(new FormData(f)),p=(d.name||'').trim().split(/\\s+/);
-    var ef=f.querySelector('[name=email]');if(!ef.checkValidity()){ef.reportValidity();ef.focus();return;}var cf=f.querySelector('[name=city]');if(!(d.city||'').trim()){cf.setCustomValidity('Please enter your city.');cf.reportValidity();cf.focus();return;}
+    var nf=f.querySelector('[name=name]');if((d.name||'').trim().length<2){nf.setCustomValidity('Please enter your name.');nf.reportValidity();nf.focus();return;}var pf=f.querySelector('[name=phone]'),pd=(d.phone||'').replace(/[^0-9]/g,'').length;if(pd<7||pd>15){pf.setCustomValidity('Please enter a phone number we can reach you on.');pf.reportValidity();pf.focus();return;}var ef=f.querySelector('[name=email]');if(!ef.checkValidity()){ef.reportValidity();ef.focus();return;}var cf=f.querySelector('[name=city]');if(!(d.city||'').trim()){cf.setCustomValidity('Please enter your city.');cf.reportValidity();cf.focus();return;}
     var payload={firstName:p[0]||'',lastName:p.slice(1).join(' ')||'',phone:d.phone||'',email:d.email||'',
       message:d.project||'',service:${JSON.stringify(cfg.service + " — " + cfg.city + " (Ads LP)")},address:(d.city||'').trim(),'consult-type':'',hp_reference:d.hp_reference||'',elapsed:Date.now()-shown};
     var orig=btn.innerHTML;btn.textContent='Sending\\u2026';btn.disabled=true;

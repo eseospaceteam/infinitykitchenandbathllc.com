@@ -430,11 +430,14 @@
   // Lead form
   var form=document.getElementById('calcForm'),submit=document.getElementById('calcSubmit'),
       success=document.getElementById('calcSuccess');
-  form.querySelector('[name=address]').addEventListener('input',function(){this.setCustomValidity('');});
+  ['address','name','phone'].forEach(function(n){form.querySelector('[name='+n+']').addEventListener('input',function(){this.setCustomValidity('');});});
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var data=Object.fromEntries(new FormData(form));
     var cityField=form.querySelector('[name=address]');
+    var nameField=form.querySelector('[name=name]'),phoneField=form.querySelector('[name=phone]'),pd=(data.phone||'').replace(/[^0-9]/g,'').length;
+    if((data.name||'').trim().length<2){nameField.setCustomValidity('Please enter your name.');nameField.reportValidity();nameField.focus();return;}
+    if(pd<7||pd>15){phoneField.setCustomValidity('Please enter a phone number we can reach you on.');phoneField.reportValidity();phoneField.focus();return;}
     if(!(data.address||'').trim()){cityField.setCustomValidity('Please enter your city.');cityField.reportValidity();cityField.focus();return;}
     var picks=ADDONS[state.type].filter(function(a){return state.addons[a.id];}).map(function(a){return a.label;});
     var summary='Calculator estimate: '+rangeEl.textContent+' for a '+summaryEl.textContent+

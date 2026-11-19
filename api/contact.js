@@ -17,9 +17,12 @@ export default async function handler(req, res) {
 
   // ── Spam gate ─────────────────────────────────────────────
   // Bots bypass client-side validation, so every check must live here.
-  // Checks 3-5 return a fake 200 so bots think they succeeded and don't
-  // adapt/retry — no email is sent. Checks 1-2 only mark the send (below).
-  const fakeOk = () => res.status(200).json({ success: true });
+  // No check discards a send (19 Nov 2026). Until then checks 3-5 returned a
+  // fake 200 and emailed nobody, so a real visitor who tripped one (a short
+  // phone number, a long unbroken message) saw "Request Sent!" and vanished.
+  // Now: a bot-looking send is MARKED (below) and goes to the review inbox
+  // only, held for the evening spam report; a real browser that left out a
+  // required field gets a visible 400 it can fix. The scoring is unchanged.
 
   // Bot signals (1) and (2) only MARK a submission; they never discard it.
   // Until 18 Nov 2026 either one returned the fake 200 and emailed nobody, so a
@@ -49,12 +52,20 @@ export default async function handler(req, res) {
   }
 
   // 3) Required fields. A real lead has a name AND a callable phone number.
-  //    This alone drops the all-blank and no-name/no-phone gibberish spam.
+  //    The all-blank and no-name/no-phone gibberish spam fails this. A send from
+  //    one of our own pages in a real browser (same-origin fetch, see
+  //    fromOwnPage) with no other bot signal is told what to fix; anything else
+  //    is marked and goes to review.
   const nameOk = typeof firstName === 'string' && firstName.trim().length >= 2;
   const phoneDigits = String(phone || '').replace(/\D/g, '');
   const phoneOk = phoneDigits.length >= 7 && phoneDigits.length <= 15;
   if (!nameOk || !phoneOk) {
-    return fakeOk();
+    if (!suspect.length && fromOwnPage(req)) {
+      return res.status(400).json({
+        error: !nameOk ? 'Please enter your name.' : 'Please enter a phone number we can reach you on.',
+      });
+    }
+    suspect.push(!nameOk && !phoneOk ? 'no name or phone' : !nameOk ? 'no name' : 'no callable phone');
   }
 
   // 3b) Location is mandatory on every form (client direction, 22 Sep 2026).
@@ -85,7 +96,7 @@ export default async function handler(req, res) {
   };
   const fullName = `${firstName || ''} ${lastName || ''}`.trim();
   if (looksRandom(fullName) || looksRandom(message)) {
-    return fakeOk();
+    suspect.push('random-looking name or message');
   }
 
   // 5) Light gibberish heuristic on longer free-text — keyboard-mash spam has
@@ -103,7 +114,7 @@ export default async function handler(req, res) {
     return vowelRatio < 0.2 || avgWordLen > 18;
   };
   if (looksLikeGibberish(message) || looksLikeGibberish(email)) {
-    return fakeOk();
+    suspect.push('gibberish message or email');
   }
   // ──────────────────────────────────────────────────────────
 
@@ -156,8 +167,8 @@ export default async function handler(req, res) {
   const text = [
     'New lead from infinitykitchenandbathllc.com',
     '',
-    `Name: ${firstName} ${lastName}`,
-    `Phone: ${phone}`,
+    `Name: ${firstName || ''} ${lastName || ''}`,
+    `Phone: ${phone || ''}`,
     `Email: ${email || 'Not provided'}`,
     `City / Address: ${address}`,
     `Service: ${serviceLabel}`,
@@ -170,7 +181,7 @@ export default async function handler(req, res) {
     from: `Infinity Kitchens and Baths <noreply@send.infinitykitchenandbathllc.com>`,
     to: 'stevehuntkitchens@gmail.com',
     bcc: 'hello@eseospace.com',
-    subject: `New Lead: ${firstName} ${lastName} — ${serviceLabel}`,
+    subject: `New Lead: ${firstName || ''} ${lastName || ''} — ${serviceLabel}`,
     html,
     text,
   });
@@ -224,4 +235,20 @@ export default async function handler(req, res) {
   const errText = await mgRes.text();
   console.error('Mailgun error:', mgRes.status, errText);
   return res.status(500).json({ error: 'Failed to send email' });
+}
+
+// True when the POST came from one of this site's own pages in a browser.
+// Browsers send Sec-Fetch-Site on every fetch (same-origin from our forms) and
+// an Origin/Referer on our host; a script posting straight at the endpoint
+// usually sends none of them. Only used to choose between "tell the visitor
+// what to fix" and "hold for review"; it never discards anything.
+function fromOwnPage(req) {
+  const h = req.headers || {};
+  const get = (k) => String(h[k] || '');
+  if (get('sec-fetch-site') === 'same-origin') return true;
+  const host = get('x-forwarded-host') || get('host');
+  for (const k of ['origin', 'referer']) {
+    try { if (host && new URL(get(k)).host === host) return true; } catch {}
+  }
+  return false;
 }

@@ -58,7 +58,7 @@ const long = new Date(`${LAST_REVIEWED}T12:00:00Z`).toLocaleDateString('en-US', 
   month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC',
 });
 const dated = `Last reviewed <time datetime="${LAST_REVIEWED}">${long}</time>`;
-const HERO_STYLE = 'font-size:0.9rem;color:rgba(255,255,255,0.85);margin:0.75rem 0 0;';
+const HERO_STYLE = 'max-width:none;font-size:0.9rem;color:rgba(255,255,255,0.85);margin:0.75rem 0 0;';
 const heroLine = `<p class="post-reviewed top10-reviewed" style="${HERO_STYLE}">Reviewed by <a href="our-team.html" style="color:#fff;text-decoration:underline;text-underline-offset:2px;"><strong>Steve Hunt</strong></a>, Owner &middot; Arizona ROC #339999 &middot; ${dated}</p>`;
 const homeLine = `<p class="post-reviewed top10-reviewed" style="margin:2rem 0 0;font-size:0.9rem;color:var(--gray-600);text-align:center;">Reviewed by <a href="our-team.html"><strong>Steve Hunt</strong></a>, Owner &middot; Arizona ROC #339999 &middot; ${dated}</p>`;
 
@@ -72,7 +72,9 @@ function visibleLine(file, mode, h) {
   if (mode === 'extend') {
     const re = /(<p class="post-reviewed"[^>]*>Reviewed by <strong>Steve Hunt<\/strong>, Owner &amp; Lead Designer &middot; AZ ROC #339999)(?: &middot; Last reviewed <time datetime="[^"]*">[^<]*<\/time>)?<\/p>/;
     if (!re.test(h)) fail(file, 'existing reviewed line not found');
-    return h.replace(re, (_, head) => `${head} &middot; ${dated}</p>`);
+    // max-width:none: .page-hero p caps lines at 600px, which pushed the date onto its own line.
+    const wide = (s) => (s.includes('max-width:none;') ? s : s.replace('style="', 'style="max-width:none;'));
+    return h.replace(re, (_, head) => `${wide(head)} &middot; ${dated}</p>`);
   }
   const existing = /<p class="post-reviewed top10-reviewed"[^>]*>[\s\S]*?<\/p>/;
   if (existing.test(h)) return h.replace(existing, mode === 'hero' ? heroLine : homeLine);

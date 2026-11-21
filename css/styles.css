@@ -2207,3 +2207,96 @@ main :is(p, li, td, dd, .pillar-faq-a) a:not([class]):not([style*="display"]):no
 main :is(p, li, td, dd, .pillar-faq-a) a:not([class]):not([style*="display"]):not(:is(nav, footer, .page-hero, .breadcrumb, .author-box, .lst-toc, .hub-uplink, .cta-banner, .section-forest) a):hover {
   color: var(--green-500);
 }
+
+/* ---- Reviewer box ----
+   The "Reviewed by" line sits at the top of the content body (not in the
+   hero) as a compact grey box. */
+.reviewed-box {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--gray-100);
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 0.85rem 1.15rem;
+  margin: 0 0 1.5rem;
+}
+.reviewed-box p {
+  margin: 0;
+  max-width: none;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--gray-700);
+}
+.reviewed-box strong { color: var(--green-800); }
+.section-gray .reviewed-box,
+.section-cream .reviewed-box { background: var(--white); box-shadow: var(--shadow-sm); }
+
+/* ---- Expandable FAQ rows (pillar-faq look, native details) ---- */
+details.pillar-faq-item { padding: 0; }
+details.pillar-faq-item > summary.pillar-faq-q {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.4rem 0;
+}
+details.pillar-faq-item > summary.pillar-faq-q::-webkit-details-marker { display: none; }
+details.pillar-faq-item > summary.pillar-faq-q::after {
+  content: '+';
+  flex-shrink: 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--green-500);
+}
+details.pillar-faq-item[open] > summary.pillar-faq-q::after { content: '\2212'; }
+details.pillar-faq-item > summary.pillar-faq-q:hover { color: var(--green-600); }
+details.pillar-faq-item > .pillar-faq-a { margin: 0; padding: 0 2.5rem 1.5rem 0; }
+
+/* ---- Lead cards: bold-lead lists shown as a card grid ---- */
+.lead-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+.lead-cards.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lead-card {
+  background: var(--white);
+  border: 1px solid var(--green-100);
+  border-top: 3px solid var(--green-500);
+  border-radius: 10px;
+  padding: 1.4rem 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+.lead-card h3 {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--green-800);
+  margin: 0 0 0.5rem;
+}
+.lead-card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--gray-600);
+  margin: 0;
+}
+/* Bold-lead list that reads as sentences: keep it a list, with visible markers. */
+ul.lead-list {
+  list-style: disc;
+  padding-left: 1.4rem;
+  margin: 1rem 0 1.75rem;
+  color: var(--gray-600);
+  line-height: 1.8;
+}
+ul.lead-list li { padding-left: 0.3rem; margin-bottom: 0.75rem; }
+ul.lead-list li::marker { color: var(--green-500); }
+ul.lead-list strong { color: var(--green-800); }
+@media (max-width: 760px) {
+  .lead-cards, .lead-cards.cols-3 { grid-template-columns: 1fr; }
+  details.pillar-faq-item > .pillar-faq-a { padding-right: 0; }
+}

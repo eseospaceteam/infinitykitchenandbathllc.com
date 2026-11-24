@@ -10,10 +10,14 @@
  * Skips featured-in.html (a press page, its Article nodes are other outlets' stories)
  * and any page that ranks companies. Re-run after a builder regenerates an article.
  *
+ * reviewedBy is written next to the Article's author, then moved onto the page's WebPage node
+ * (moveReviewToWebPage, fix-schema-nov24.mjs): schema.org defines it on WebPage, not Article.
+ *
  * Usage: node add-reviewed-by.mjs
  */
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
+import { moveReviewToWebPage } from './fix-schema-nov24.mjs';
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SKIP = new Set(['featured-in.html']);
@@ -58,7 +62,7 @@ for (const f of readdirSync(ROOT).filter((n) => n.endsWith('.html') && !SKIP.has
   const reviewed = JSON.stringify(REVIEWER, null, 2).split('\n').map((l, i) => (i ? indent + l : l)).join('\n');
   h = h.replace(schema[1], () => `${schema[1].replace(/,$/, '')},\n${indent}"reviewedBy": ${reviewed}${hadComma ? ',' : ''}`);
 
-  writeFileSync(file, h);
+  writeFileSync(file, moveReviewToWebPage(h));
   changed++;
 }
 console.log(`stamped ${changed} pages; skipped: ${skipped.join(', ') || 'none'}`);

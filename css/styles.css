@@ -2300,3 +2300,17 @@ ul.lead-list strong { color: var(--green-800); }
   .lead-cards, .lead-cards.cols-3 { grid-template-columns: 1fr; }
   details.pillar-faq-item > .pillar-faq-a { padding-right: 0; }
 }
+
+/* ---- Topic "next step" card + mid-article prompt on guides (cta-topic-2026-11-23.mjs) ---- */
+.ik-next { background: var(--white); border: 1px solid var(--green-100); border-radius: 12px; box-shadow: var(--shadow-sm); padding: 1.25rem 1.5rem; margin: 0 0 2rem; }
+.ik-next-label { display: inline-block; background: var(--green-50); color: var(--green-700); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 999px; padding: 0.35rem 0.8rem; margin-bottom: 0.75rem; }
+.ik-next p { margin: 0 0 1rem; color: var(--gray-700); }
+.ik-next-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+.ik-next-btns .btn { justify-content: center; }
+.ik-mid { background: var(--green-25); border: 1px solid var(--green-100); border-radius: 12px; padding: 1rem 1.25rem; margin: 2rem 0; color: var(--gray-700); }
+.ik-mid a { color: var(--green-600); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 600px) {
+  .ik-next { padding: 1rem 1.1rem; }
+  .ik-next-btns .btn { flex: 1 1 100%; }
+  .ik-mid { padding: 0.9rem 1rem; }
+}
